@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!-- Configuration of the Ant build system to generate a Jar file --> 
-<project name="TorontoJar" default="BuildJar">
+<project name="2018_TorontoJar" default="BuildJar">
 	  
 <!-- set global properties for this build -->
   <property name="src" location="src"/>
