@@ -1,5 +1,14 @@
 #FRC Build files
 
+/.classpath
+
+/build.xml
+
+/.project
+
+/build.properties
+
+/sysProps.xml
 
 #Bin, Build, and Dist directories
 
