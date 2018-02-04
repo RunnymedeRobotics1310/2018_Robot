@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!-- Configuration of the Ant build system to generate a Jar file --> 
+<project name="TorontoJar" default="BuildJar">
+	  
+<!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="bin"/>
+  <property name="dist" location="${user.home}/wpilib/user/java/lib"/>
+
+  <target name="BuildJar" description="Build Jar file">
+  	<jar destfile="${dist}/toronto-v0.1.jar">
+  	    <fileset dir="${build}/"/>
+  	    <fileset dir="${src}/"/>
+  	  </jar>
+  </target>
+	
+</project>
