@@ -14,7 +14,9 @@ import robot.RobotConst;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
+	
+	public AutoSelector autoSelector = new AutoSelector();
+	
 	private TGameController gameController = new TGameController_Logitech(0);
 	private TGameController operatorController = new TGameController_Logitech(1);
 
@@ -83,6 +85,7 @@ public class OI {
 		}
 		return false;
 	}
+
 
 
 	public void updatePeriodic() {

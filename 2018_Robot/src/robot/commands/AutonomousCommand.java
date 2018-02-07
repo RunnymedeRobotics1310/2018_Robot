@@ -1,9 +1,11 @@
 package robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import robot.Robot;
 import robot.commands.drive.ArcCommand;
 import robot.commands.drive.DriveDistanceCommand;
 import robot.commands.drive.DriveTankCommand;
+import robot.commands.drive.RotateToAngleCommand;
 import robot.oi.AutoSelector;
 import robot.oi.GameData;
 
@@ -31,6 +33,7 @@ public class AutonomousCommand extends CommandGroup {
 		char closeSwitch 			= GameData.getCloseSwitch();
 		char scale 					= GameData.getScale();
 
+
 		// Print out the user selection and Game config for debug later
 		System.out.println("Auto Command Configuration");
 		System.out.println("--------------------------");
@@ -41,15 +44,17 @@ public class AutonomousCommand extends CommandGroup {
 		System.out.println("Scale		   : " + scale);
 
 		//overrides
+		//System.out.println("Statring Overrides");
+
 		if (robotStartPosition.equals(ROBOT_CENTER) && !firstAction.equals(SWITCH)) {
 			firstAction = SWITCH;
 			System.out.println("Center start must do switch as first action. Overriding first action to SWITCH");
 		}
-		if (robotStartPosition.equals(ROBOT_RIGHT) && secondAction.equals(SWITCH) && firstAction.equals(SWITCH) && closeSwitch == LEFT) {
+		if (robotStartPosition.equals(ROBOT_RIGHT) && firstAction.equals(SWITCH) && closeSwitch == LEFT) {
 			firstAction = CROSS;
 			System.out.println("Switch is not on our side.  Overriding first action to CROSS");
 		}
-		if (robotStartPosition.equals(ROBOT_LEFT) && secondAction.equals(SWITCH) && firstAction.equals(SWITCH) && closeSwitch == RIGHT) {
+		if (robotStartPosition.equals(ROBOT_LEFT) && firstAction.equals(SWITCH) && closeSwitch == RIGHT){
 			firstAction = CROSS;
 			System.out.println("Switch is not on our side. Overriding first action to CROSS");
 		}
@@ -60,9 +65,8 @@ public class AutonomousCommand extends CommandGroup {
 			//first action
 			if (firstAction.equals(SWITCH)) {
 				//switch action is selected
-				addSequential(new ArcCommand(80, 0, 45, 1.0));
-				addSequential(new DriveDistanceCommand(25, 310, 1.0, 3.0, false));
-				addSequential(new ArcCommand(120, 45, 0, 1.0));
+				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+				addSequential(new RotateToAngleCommand(90, 0.5));
 			}
 
 			else if (firstAction.equals(SCALE)) {
@@ -70,17 +74,22 @@ public class AutonomousCommand extends CommandGroup {
 
 				if (scale == LEFT){
 					//scale is on the left side
+					addSequential(new DriveDistanceCommand(320, 0, 1.0, 3.0, false));
 				}
 				else{
-					//scale is on the right side	
+					System.out.println("scale is on the right side");
+					addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+					addSequential(new ArcCommand(100, 0, 80, 1.0));
+					addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
+					addSequential(new ArcCommand(100, 80, 10, 1.0));
 				}
 			}
 
 			else{
 				//cross action is selected
-				addSequential(new DriveDistanceCommand(160, 310, 1.0, 3.0, false));
+				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
 			}
-			
+
 			//System.out.println("Starting second action");
 
 			if (secondAction.equals(SWITCH)) {
@@ -98,13 +107,17 @@ public class AutonomousCommand extends CommandGroup {
 			else if (secondAction.equals(SCALE)) {
 				if (scale == LEFT){
 					//System.out.println("Executing left scale command");
+					addSequential(new DriveDistanceCommand(320, 0, 1.0, 3.0, false));
 				}
 				else{
 					//System.out.println("Executing right scale command");	
+					addSequential(new ArcCommand(100, 0, 80, 1.0));
+					addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
+					addSequential(new ArcCommand(100, 80, 10, 1.0));
 				}
 			}
 			else{
-				//System.out.println("No second action");
+				System.out.println("No second action");
 			}
 		}
 
@@ -114,21 +127,28 @@ public class AutonomousCommand extends CommandGroup {
 			if (firstAction.equals(SWITCH)) {
 				//switch action is selected
 
+				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+				addSequential(new RotateToAngleCommand(270, 0.5));
 			}
 
 			else if (firstAction.equals(SCALE)) {
 				//scale action is selected
 
 				if (scale == RIGHT){
-					//scale is on the left side
+					//scale is on the right side
+					addSequential(new DriveDistanceCommand(320, 0, 1.0, 3.0, false));
 				}
 				else{
-					//scale is on the right side	
+					//scale is on the left side
+					addSequential(new ArcCommand(100, 0, 280, 1.0));
+					addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
+					addSequential(new ArcCommand(100, 280, 350, 1.0));
 				}
 			}
 
 			else{
 				//cross action is selected
+				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
 			}
 
 			//System.out.println("Starting second action");
@@ -137,20 +157,23 @@ public class AutonomousCommand extends CommandGroup {
 
 				//System.out.println("Switch action selected");
 
-				if (closeSwitch == LEFT){
-					//System.out.println("Executing left switch command");
+				if (closeSwitch == RIGHT){
+					//System.out.println("Executing right switch command");
 				}
 				else{
-					//System.out.println("Executing right switch command");	
+					//System.out.println("Executing left switch command");	
 				}
 			}
 
 			else if (secondAction.equals(SCALE)) {
-				if (scale == LEFT){
+				if (scale == RIGHT){
 					//System.out.println("Executing left scale command");
 				}
 				else{
 					//System.out.println("Executing right scale command");	
+					addSequential(new ArcCommand(100, 0, 280, 1.0));
+					addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
+					addSequential(new ArcCommand(100, 280, 350, 1.0));
 				}
 			}
 			else{
@@ -202,9 +225,25 @@ public class AutonomousCommand extends CommandGroup {
 			else if (secondAction.equals(SCALE)) {
 				if (scale == LEFT){
 					//System.out.println("Executing left scale command");
+					if (closeSwitch == LEFT) {
+						addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+					}
+					else{
+						addSequential(new ArcCommand(100, 0, 280, 1.0));
+						addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
+						addSequential(new ArcCommand(100, 280, 350, 1.0));
+					}
 				}
 				else{
 					//System.out.println("Executing right scale command");	
+					if (closeSwitch == RIGHT) {
+						addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+					}
+					else{
+						addSequential(new ArcCommand(100, 0, 80, 1.0));
+						addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
+						addSequential(new ArcCommand(100, 80, 10, 1.0));
+					}
 				}
 			}
 			else{
