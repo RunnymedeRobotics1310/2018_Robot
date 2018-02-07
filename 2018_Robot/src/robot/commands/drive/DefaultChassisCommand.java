@@ -107,8 +107,9 @@ public class DefaultChassisCommand extends Command {
 		//System.out.println(turn);
 		
 		Robot.chassisSubsystem.setSpeed(leftSpeed, rightSpeed);
-
+		
 	}
+	
 
 	// This routine scales a joystick value to make the 
 	// acceleration and turning more smooth.  All values that are
