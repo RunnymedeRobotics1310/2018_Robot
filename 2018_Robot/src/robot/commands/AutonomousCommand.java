@@ -172,16 +172,16 @@ public class AutonomousCommand extends CommandGroup {
 
 					//System.out.println("Executing left switch command");
 					//addSequential(new DriveTankCommand(50, 0.25, 1.0, 2, false));
-					addSequential(new ArcCommand(100, 0, 310, 0.89));
-					addSequential(new DriveDistanceCommand(20, 310, 0.89, 3.0, false));
+					addSequential(new ArcCommand(100, 0, 310, 1.0));
+					addSequential(new DriveDistanceCommand(20, 310, 1.0, 3.0, false));
 					//addSequential(new DriveTankCommand(50, 1.0, 0.25, 2, true));
-					addSequential(new ArcCommand(140, 310, 350, 0.89));
+					addSequential(new ArcCommand(140, 310, 350, 1.0));
 				}
 				else{
 					//System.out.println("Executing right switch command");	
-					addSequential(new ArcCommand(80, 0, 45, 0.89));
-					addSequential(new DriveDistanceCommand(25, 310, 0.89, 3.0, false));
-					addSequential(new ArcCommand(120, 45, 0, 0.89));
+					addSequential(new ArcCommand(80, 0, 45, 1.0));
+					addSequential(new DriveDistanceCommand(25, 310, 1.0, 3.0, false));
+					addSequential(new ArcCommand(120, 45, 0, 1.0));
 				}
 			}
 
