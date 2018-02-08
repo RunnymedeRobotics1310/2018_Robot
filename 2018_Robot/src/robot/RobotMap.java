@@ -21,4 +21,6 @@ public class RobotMap {
 	public static int RIGHT_MOTOR_CAN_ADDRESS = 1;
 	public static int LEFT_FOLLOWER_CAN_ADDRESS = 2;
 	public static int RIGHT_FOLLOWER_CAN_ADDRESS = 3;
+	
+	public static int ULTRASONIC_SENSOR_ANALOG_PORT = 1;
 }
