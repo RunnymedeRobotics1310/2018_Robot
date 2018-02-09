@@ -89,11 +89,12 @@ public class OI {
 		return - operatorController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev
 	public void updatePeriodic() {
 		pneumaticsToggle.updatePeriodic();
 		pidToggle.updatePeriodic();
 	}
-
-
 }
