@@ -83,12 +83,8 @@ public class OI {
 		}
 		return false;
 	}
-
-
 	public void updatePeriodic() {
 		pneumaticsToggle.updatePeriodic();
 		pidToggle.updatePeriodic();
 	}
-
-
 }
