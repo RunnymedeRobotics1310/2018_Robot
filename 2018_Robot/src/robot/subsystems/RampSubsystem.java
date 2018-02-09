@@ -29,7 +29,6 @@ public class RampSubsystem extends TSubsystem {
 	}
 
 
-	// Should deny bad speeds while at limit whilst still allowing for movement in the opposite direction
 	public void setLeftRampSpeed(double speed) {
 		if (atLimit(leftTopLimit))
 		{
