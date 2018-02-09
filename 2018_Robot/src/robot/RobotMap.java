@@ -8,6 +8,7 @@ package robot;
  */
 public class RobotMap {
 
+
 	// Speed Controllers (CAN addresses)
 	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS     = 0;
 	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS    = 1;
@@ -33,6 +34,16 @@ public class RobotMap {
 	public static int RIGHT_TOP_LIMIT_DIO_PORT    = 2;
 	public static int RIGHT_BOTTOM_LIMIT_DIO_PORT = 3;
 	
+	// Ultrasonic Sensor Analog Port
+	public static int ULTRASONIC_SENSOR_ANALOG_PORT = 1;
 	
+
+	// For example to map the left and right motors, you could define the
+	// following variables to use with your drivetrain subsystem.
+	public static int LEFT_MOTOR_CAN_ADDRESS  = 0;
+	public static int RIGHT_MOTOR_CAN_ADDRESS = 1;
+	public static int LEFT_FOLLOWER_CAN_ADDRESS = 2;
+	public static int RIGHT_FOLLOWER_CAN_ADDRESS = 3;
 	
+
 }
