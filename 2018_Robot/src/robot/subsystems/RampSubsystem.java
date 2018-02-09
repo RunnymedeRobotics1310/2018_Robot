@@ -7,20 +7,23 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotConst;
+import robot.RobotMap;
 import robot.commands.ramp.DefaultRampCommand;
 
 public class RampSubsystem extends TSubsystem {
 
-	TPwmSpeedController leftRampMotor = new TPwmSpeedController(TPwmSpeedControllerType.VICTOR, 0, RobotConst.INVERTED, 1);
+	// Speed Controllers
+	TPwmSpeedController leftRampMotor  = new TPwmSpeedController(TPwmSpeedControllerType.VICTOR, 0, RobotConst.INVERTED, 1);
 	TPwmSpeedController rightRampMotor = new TPwmSpeedController(TPwmSpeedControllerType.VICTOR, 2, RobotConst.INVERTED, 3);
-	DigitalInput leftTopLimit = new DigitalInput(0);
-	DigitalInput leftBottomLimit = new DigitalInput(1);
-	DigitalInput rightTopLimit = new DigitalInput(2);
-	DigitalInput rightBottomLimit = new DigitalInput(3);
+	
+	// Limit Switches
+	DigitalInput leftTopLimit     = new DigitalInput(RobotMap.LEFT_TOP_LIMIT_DIO_PORT);
+	DigitalInput leftBottomLimit  = new DigitalInput(RobotMap.LEFT_BOTTOM_LIMIT_DIO_PORT);
+	DigitalInput rightTopLimit    = new DigitalInput(RobotMap.RIGHT_TOP_LIMIT_DIO_PORT);
+	DigitalInput rightBottomLimit = new DigitalInput(RobotMap.RIGHT_BOTTOM_LIMIT_DIO_PORT);
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 
 	}
 

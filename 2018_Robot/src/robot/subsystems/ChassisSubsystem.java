@@ -37,10 +37,16 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		super(	
 				(RobotConst.robot == 1311 ? new TNavXGyro() : new TAnalogGyro(0)),
 				//			new TAnalogGyro(0),
-				new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_MOTOR_CAN_ADDRESS,  
-						RobotConst.LEFT_MOTOR_ORIENTATION,  RobotMap.LEFT_FOLLOWER_CAN_ADDRESS), 
-				new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_MOTOR_CAN_ADDRESS, 
-						RobotConst.RIGHT_MOTOR_ORIENTATION, RobotMap.RIGHT_FOLLOWER_CAN_ADDRESS),
+				new TCanSpeedController(
+						TCanSpeedControllerType.TALON_SRX, 
+						RobotMap.LEFT_DRIVE_MOTOR_CAN_ADDRESS,  
+						RobotConst.LEFT_MOTOR_ORIENTATION,  
+						RobotMap.LEFT_DRIVE_FOLLOWER_CAN_ADDRESS), 
+				new TCanSpeedController(
+						TCanSpeedControllerType.TALON_SRX, 
+						RobotMap.RIGHT_DRIVE_MOTOR_CAN_ADDRESS, 
+						RobotConst.RIGHT_MOTOR_ORIENTATION, 
+						RobotMap.RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS),
 				RobotConst.DRIVE_GYRO_PID_KP,
 				RobotConst.DRIVE_GYRO_PID_KI);
 
@@ -54,17 +60,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 				RobotConst.DRIVE_SPEED_PID_KP,
 				RobotConst.MAX_LOW_GEAR_SPEED);
 
-		// Uncomment this constructor to use PWM based Speed controllers
-		//		super(
-		//				new TAnalogGyro(0, RobotConst.INVERTED),
-		//				new TPwmSpeedController(TPwmSpeedControllerType.VICTOR, RobotMap.LEFT_MOTOR_PWM_PORT,  RobotConst.LEFT_MOTOR_ORIENTATION, RobotMap.LEFT_FOLLOWER_PWM_PORT), 
-		//				new TPwmSpeedController(TPwmSpeedControllerType.VICTOR, RobotMap.RIGHT_MOTOR_PWM_PORT, RobotConst.RIGHT_MOTOR_ORIENTATION,RobotMap.RIGHT_FOLLOWER_PWM_PORT), 
-		//				new TPwmEncoder(0, 1, RobotConst.LEFT_ENCODER_ORIENTATION),
-		//				new TPwmEncoder(2, 3, RobotConst.RIGHT_ENCODER_ORIENTATION),
-		//				RobotConst.DRIVE_SPEED_PID_KP,
-		//				RobotConst.MAX_LOW_GEAR_SPEED,
-		//				RobotConst.DRIVE_GYRO_PID_KP, 
-		//				RobotConst.DRIVE_GYRO_PID_KI);
 	}
 
 	@Override
