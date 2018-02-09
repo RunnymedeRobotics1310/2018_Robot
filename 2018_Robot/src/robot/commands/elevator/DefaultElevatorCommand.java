@@ -10,7 +10,7 @@ public class DefaultElevatorCommand extends Command {
 		requires(Robot.rampSubsystem);
 	}
 
-	double encoderCount=0;
+	
 	public void addHeight(int currentLevel){
 		if (currentLevel != 4){
 			setHeight(currentLevel, currentLevel+1);

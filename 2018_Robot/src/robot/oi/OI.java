@@ -23,7 +23,7 @@ public class OI {
 	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
 
-
+//Game Controller
 	public double getSpeed() {
 		return - gameController.getAxis(TStick.LEFT, TAxis.Y);
 	}
@@ -66,7 +66,7 @@ public class OI {
 	public void setSpeedPidToggle(boolean state) {
 		pidToggle.set(state);
 	}
-
+//Operator Controller
 	public boolean getRampUp(char side ) {
 		if (side == RobotConst.LEFT && operatorController.getPOV()==315) {
 			return true;
@@ -83,9 +83,11 @@ public class OI {
 		if (side == RobotConst.RIGHT && operatorController.getPOV() == 135) {
 			return true;
 		}
-		return false;
+		
+		}
+	public double getElevtorSpeed() {
+		return - operatorController.getAxis(TStick.LEFT, TAxis.Y);
 	}
-
 
 
 	public void updatePeriodic() {
