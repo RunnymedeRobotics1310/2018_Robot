@@ -4,31 +4,36 @@ import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 
 public class DefaultElevatorCommand extends Command {
-	
+
 	public DefaultElevatorCommand() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.rampSubsystem);
+		requires(Robot.elevatorSubsystem);
 	}
-
-	
-	public void addHeight(int currentLevel){
+	double setLevel;
+	public void addHeight(double currentLevel){
+		if (currentLevel % 1 != 0) {
+			new SetElevatorHeightCommand(currentLevel + 0.5);
+		}
 		if (currentLevel != 4){
-			setHeight(currentLevel, currentLevel+1);
+			new SetElevatorHeightCommand(currentLevel + 1.0);
 		}
 
 	}
 	public void subtractHeight(int currentLevel){
+		if (currentLevel % 1 != 0) {
+			new SetElevatorHeightCommand(currentLevel - 0.5);
+		}
 		if (currentLevel != 1){
-			setHeight(currentLevel, currentLevel-1);
+			new SetElevatorHeightCommand(currentLevel-1.0);
 		}
 	}
 	
-	public void setHeight(int currentLevel, int setLevel){
-
+	public void testElevator() {
+		Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevtorSpeed());
 	}
+
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

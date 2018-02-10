@@ -1,22 +1,24 @@
 package robot.subsystems;
 
 import com.torontocodingcollective.sensors.encoder.TEncoder;
-import com.torontocodingcollective.sensors.encoder.TPwmEncoder;
-import com.torontocodingcollective.speedcontroller.TPwmSpeedController;
-import com.torontocodingcollective.speedcontroller.TPwmSpeedControllerType;
-import com.torontocodingcollective.speedcontroller.TSpeedController;
+import com.torontocodingcollective.speedcontroller.TCanSpeedController;
+import com.torontocodingcollective.speedcontroller.TCanSpeedControllerType;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import robot.RobotConst;
+import robot.RobotMap;
 import robot.commands.elevator.DefaultElevatorCommand;
 
 public class ElevatorSubsystem extends TSubsystem {
-	double encoderCount=0;
-	TSpeedController elevatorMotor = new TPwmSpeedController(TPwmSpeedControllerType.VICTOR, 0, RobotConst.INVERTED, 1);
-	TEncoder encoder = new TPwmEncoder(pwmChannelA, pwmChannelB);
+	double encoderCount = 0;
+	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS);
+	TEncoder encoder = elevatorMotor.getEncoder();
 	
-	elevatorMotor.set("getElevtorSpeed");
+	DigitalInput bottom = new DigitalInput(RobotMap.ELEVATOR_BOTTOM_LIMIT_DIO_PORT);
+	DigitalInput top = new DigitalInput(RobotMap.ELEVATOR_TOP_LIMIT_DIO_PORT);
+	DigitalInput maxHeight = new DigitalInput(RobotMap.ELEVATOR_MAXHEIGHT_LIMIT_DIO_PORT);
+
 	
 	public double getLevel(){
 		if (encoderCount <= 2) {
@@ -42,6 +44,30 @@ public class ElevatorSubsystem extends TSubsystem {
 		}
 		return 0;
 	}
+	
+	private boolean atLimit (DigitalInput limit) {
+		return !limit.get();
+	}
+	
+	public double getElevatorEncoder() {
+		return encoder.get();
+	}
+	
+	public void setSpeed(double speed) {
+		elevatorMotor.set(speed);
+	} 
+	
+	public boolean getBottomProx() {
+		return atLimit(bottom); // bottom prox. sensor value	
+	}
+	
+	public boolean getTopProx() {
+		return atLimit(top); // top prox. sensor value	
+	}
+	
+	public boolean getMaxHeightProx() {
+		return atLimit(maxHeight); // Max height prox. sensor value	
+	}
 
 
 	@Override
@@ -59,6 +85,7 @@ public class ElevatorSubsystem extends TSubsystem {
 	public void updatePeriodic() {
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("Elevator Level", getLevel());
+		SmartDashboard.putNumber("Elevator Encoder Count", getElevatorEncoder());
 	}
 
 }

@@ -14,16 +14,16 @@ import robot.RobotConst;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
 	public AutoSelector autoSelector = new AutoSelector();
-	
+
 	private TGameController gameController = new TGameController_Logitech(0);
 	private TGameController operatorController = new TGameController_Logitech(1);
 
 	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
 
-//Game Controller
+	//Game Controller
 	public double getSpeed() {
 		return - gameController.getAxis(TStick.LEFT, TAxis.Y);
 	}
@@ -66,7 +66,7 @@ public class OI {
 	public void setSpeedPidToggle(boolean state) {
 		pidToggle.set(state);
 	}
-//Operator Controller
+	//Operator Controller
 	public boolean getRampUp(char side ) {
 		if (side == RobotConst.LEFT && operatorController.getPOV()==315) {
 			return true;
@@ -83,18 +83,18 @@ public class OI {
 		if (side == RobotConst.RIGHT && operatorController.getPOV() == 135) {
 			return true;
 		}
-		
-		}
+		return false;
+
+	}
 	public double getElevtorSpeed() {
 		return - operatorController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/dev
 	public void updatePeriodic() {
 		pneumaticsToggle.updatePeriodic();
 		pidToggle.updatePeriodic();
 	}
+
+
 }

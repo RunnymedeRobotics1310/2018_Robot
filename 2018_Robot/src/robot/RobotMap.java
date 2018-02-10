@@ -15,7 +15,7 @@ public class RobotMap {
 	public static int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS  = 2;
 	public static int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS = 3;
 	
-	public static int ELEVATOR_MOTOR_CAN_ADDRESS = 4;
+	public static int ELEVATOR_MOTOR_CAN_ADDRESS = 0;
 	
 	public static int LEFT_INTAKE_ARM_MOTOR_CAN_ADDRESS    = 5;
 	public static int RIGHT_INTAKE_ARM_MOTOR_CAN_ADDRESS   = 6;
@@ -28,10 +28,15 @@ public class RobotMap {
 	public static int RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS  = 12;
 	
 	// Limit Switches (RoboRio DIO ports)
-	public static int LEFT_TOP_LIMIT_DIO_PORT     = 0;
+	public static int LEFT_TOP_LIMIT_DIO_PORT     = 9;
 	public static int LEFT_BOTTOM_LIMIT_DIO_PORT  = 1;
 	public static int RIGHT_TOP_LIMIT_DIO_PORT    = 2;
 	public static int RIGHT_BOTTOM_LIMIT_DIO_PORT = 3;
+	
+	public static int ELEVATOR_BOTTOM_LIMIT_DIO_PORT = 4;
+	public static int ELEVATOR_TOP_LIMIT_DIO_PORT = 5;
+	public static int ELEVATOR_MAXHEIGHT_LIMIT_DIO_PORT = 6;
+
 	
 	
 	
