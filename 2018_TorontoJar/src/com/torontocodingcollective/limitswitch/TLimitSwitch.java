@@ -8,17 +8,17 @@ public class TLimitSwitch {
 		TRUE, FALSE
 	}
 
-	public final boolean DEFAULT_STATE = false;
+	private final boolean defaultState;
+	
 	public final DigitalInput limitSwitch;
 
 	public TLimitSwitch(int port, DefaultState defaultState) {
-		
+		this.defaultState = defaultState == DefaultState.TRUE ? true : false;
 		limitSwitch = new DigitalInput(port);
-//		this.DEFAULT_STATE = defaultState
 	}
 
 	public boolean atLimit() {
-		return limitSwitch.get() != DEFAULT_STATE;
+		return limitSwitch.get() != defaultState;
 	}
 
 }

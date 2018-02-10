@@ -24,8 +24,6 @@ public class RobotMap {
 	
 	
 	// Intake Map
-	public static int RIGHT_INTAKE_PWM_PORT = 0;
-	public static int LEFT_INTAKE_PWM_PORT = 0;
 	public static int RIGHT_INTAKE_CAN_ADDRESS = 0;
 	public static int LEFT_INTAKE_CAN_ADDRESS = 0;
 	
