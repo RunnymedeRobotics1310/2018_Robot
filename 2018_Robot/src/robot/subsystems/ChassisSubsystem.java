@@ -32,7 +32,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 
 	private boolean turboEnabled = false;
 
-
 	public ChassisSubsystem() {
 
 		// Uncomment this block to use CAN based speed controllers
@@ -53,9 +52,23 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 				RobotConst.DRIVE_GYRO_PID_KP,
 				RobotConst.DRIVE_GYRO_PID_KI);
 
+
+			(RobotConst.robot == 1311 ? new TNavXGyro() : new TAnalogGyro(0)),
+//			new TAnalogGyro(0),
+			new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_MOTOR_CAN_ADDRESS,  
+					RobotConst.LEFT_MOTOR_ORIENTATION,  RobotMap.LEFT_FOLLOWER_CAN_ADDRESS), 
+			new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_MOTOR_CAN_ADDRESS, 
+					RobotConst.RIGHT_MOTOR_ORIENTATION, RobotMap.RIGHT_FOLLOWER_CAN_ADDRESS),
+			RobotConst.DRIVE_GYRO_PID_KP,
+			RobotConst.DRIVE_GYRO_PID_KI);
+		
+		new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_MOTOR_CAN_ADDRESS,  
+				RobotConst.LEFT_MOTOR_ORIENTATION,  RobotMap.LEFT_FOLLOWER_CAN_ADDRESS), 
+		
 		// Get the encoders attached to the CAN bus speed controller.
 		TEncoder leftEncoder  = ((TCanSpeedController) super.leftMotor) .getEncoder();
 		TEncoder rightEncoder = ((TCanSpeedController) super.rightMotor).getEncoder();
+		
 
 		super.setEncoders(
 				leftEncoder,  RobotConst.LEFT_ENCODER_ORIENTATION,
@@ -71,8 +84,9 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		if (RobotConst.robot == 1321) {
 			TAnalogGyro gyro = (TAnalogGyro) super.gyro;
 			gyro.setSensitivity(0.0017);
-			
-			ultrasonicSensor.calibrate(RobotConst.ULTRASONIC_VOLTAGE_20IN, RobotConst.ULTRASONIC_VOLTAGE_40IN, RobotConst.ULTRASONIC_VOLTAGE_80IN);
+
+			ultrasonicSensor.calibrate(RobotConst.ULTRASONIC_VOLTAGE_20IN, RobotConst.ULTRASONIC_VOLTAGE_40IN,
+					RobotConst.ULTRASONIC_VOLTAGE_80IN);
 		}
 		disableTurbo();
 	};
@@ -83,9 +97,9 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		setDefaultCommand(new DefaultChassisCommand());
 	}
 
-	//********************************************************************************************************************
+	// ********************************************************************************************************************
 	// Turbo routines
-	//********************************************************************************************************************
+	// ********************************************************************************************************************
 	public void enableTurbo() {
 		turboEnabled = true;
 		setMaxEncoderSpeed(RobotConst.MAX_HIGH_GEAR_SPEED);
@@ -102,49 +116,43 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		return turboEnabled;
 	}
 
-	//********************************************************************************************************************
+	// ********************************************************************************************************************
 	// Limit Switch routines
-	//********************************************************************************************************************
+	// ********************************************************************************************************************
 	/**
 	 * At front limit
+	 * 
 	 * @return {@literal true} if at the limit, {@literal false} otherwise.
 	 */
 	public boolean atFrontLimit() {
-		// The limit switch we are using is wired to return true when 
+		// The limit switch we are using is wired to return true when
 		// not activated and false otherwise.
 		return !frontLimitSwitch.get();
 	}
 
-	//********************************************************************************************************************
+	// ********************************************************************************************************************
 	// Update the SmartDashboard
-	//********************************************************************************************************************
+	// ********************************************************************************************************************
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
-		//automatic high gear
-		/*double leftSpeed = super.leftMotor.get();
-		double rightSpeed = super.rightMotor.get();
-		//System.out.println(leftSpeed + " " + rightSpeed + " " + getEncoderSpeed());
-		/*if (Math.abs(getEncoderSpeed()) >= robot.RobotConst.MAX_LOW_GEAR_SPEED*0.6) {
-			if ((Math.abs(leftSpeed) > 0.9 || Math.abs(rightSpeed) > 0.9) 
-					&& ((leftSpeed >= 0 && rightSpeed >= 0) || (leftSpeed <= 0 && rightSpeed <= 0))) {
-				enableTurbo();
-				//System.out.println("enable turbo");
-			}
-		}
-		
-		if (Math.abs(getEncoderSpeed()) <= robot.RobotConst.MAX_LOW_GEAR_SPEED*0.4) {
-			disableTurbo();
-		//	System.out.println("disable turbo 1");
-		}
-		if (Math.abs(leftSpeed) < 0.9 && Math.abs(rightSpeed) < 0.9) {
-			disableTurbo();
-			//System.out.println("disable turbo 2");
-		}
-		if (!((leftSpeed >= 0 && rightSpeed >= 0) || (leftSpeed <= 0 && rightSpeed <= 0))) {
-			disableTurbo();
-			//System.out.println("disable turbo 3");
-		}*/
+		// automatic high gear
+		/*
+		 * double leftSpeed = super.leftMotor.get(); double rightSpeed =
+		 * super.rightMotor.get(); //System.out.println(leftSpeed + " " + rightSpeed +
+		 * " " + getEncoderSpeed()); /*if (Math.abs(getEncoderSpeed()) >=
+		 * robot.RobotConst.MAX_LOW_GEAR_SPEED*0.6) { if ((Math.abs(leftSpeed) > 0.9 ||
+		 * Math.abs(rightSpeed) > 0.9) && ((leftSpeed >= 0 && rightSpeed >= 0) ||
+		 * (leftSpeed <= 0 && rightSpeed <= 0))) { enableTurbo();
+		 * //System.out.println("enable turbo"); } }
+		 * 
+		 * if (Math.abs(getEncoderSpeed()) <= robot.RobotConst.MAX_LOW_GEAR_SPEED*0.4) {
+		 * disableTurbo(); // System.out.println("disable turbo 1"); } if
+		 * (Math.abs(leftSpeed) < 0.9 && Math.abs(rightSpeed) < 0.9) { disableTurbo();
+		 * //System.out.println("disable turbo 2"); } if (!((leftSpeed >= 0 &&
+		 * rightSpeed >= 0) || (leftSpeed <= 0 && rightSpeed <= 0))) { disableTurbo();
+		 * //System.out.println("disable turbo 3"); }
+		 */
 
 		super.updatePeriodic();
 

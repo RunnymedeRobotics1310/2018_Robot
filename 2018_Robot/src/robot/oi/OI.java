@@ -6,6 +6,7 @@ import com.torontocodingcollective.oi.TGameController;
 import com.torontocodingcollective.oi.TGameController_Logitech;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TToggle;
+import com.torontocodingcollective.oi.TTrigger;
 
 import robot.RobotConst;
 
@@ -14,18 +15,17 @@ import robot.RobotConst;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
 	public AutoSelector autoSelector = new AutoSelector();
-	
+
 	private TGameController gameController = new TGameController_Logitech(0);
 	private TGameController operatorController = new TGameController_Logitech(1);
 
 	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
 
-
 	public double getSpeed() {
-		return - gameController.getAxis(TStick.LEFT, TAxis.Y);
+		return -gameController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
 	public double getTurn() {
@@ -39,15 +39,16 @@ public class OI {
 	public boolean getStartDriveDirection() {
 		return gameController.getButton(TButton.B);
 	}
-	public int getArcCommand(){
+
+	public int getArcCommand() {
 		return gameController.getPOV();
 	}
 
-	public boolean getCancelCommand(){
+	public boolean getCancelCommand() {
 		return gameController.getButton(TButton.BACK);
 	}
 
-	public boolean reset(){
+	public boolean reset() {
 		return gameController.getButton(TButton.START);
 	}
 
@@ -67,8 +68,8 @@ public class OI {
 		pidToggle.set(state);
 	}
 
-	public boolean getRampUp(char side ) {
-		if (side == RobotConst.LEFT && operatorController.getPOV()==315) {
+	public boolean getRampUp(char side) {
+		if (side == RobotConst.LEFT && operatorController.getPOV() == 315) {
 			return true;
 		}
 		if (side == RobotConst.RIGHT && operatorController.getPOV() == 45) {
@@ -76,14 +77,34 @@ public class OI {
 		}
 		return false;
 	}
+
 	public boolean getRampDown(char side) {
-		if (side == RobotConst.LEFT && operatorController.getPOV()==225) {
+		if (side == RobotConst.LEFT && operatorController.getPOV() == 225) {
 			return true;
 		}
 		if (side == RobotConst.RIGHT && operatorController.getPOV() == 135) {
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	 * Intake Buttons
+	 */
+	public double getForeArmIntake() {
+		return gameController.getTrigger(TTrigger.LEFT);
+	}
+
+	public double getForeArmOuttake() {
+		return gameController.getTrigger(TTrigger.RIGHT);
+	}
+
+	public boolean getEjectForward() {
+		return gameController.getButton(TButton.Y);
+	}
+
+	public boolean getEjectRear() {
+		return gameController.getButton(TButton.A);
 	}
 
 	public void updatePeriodic() {

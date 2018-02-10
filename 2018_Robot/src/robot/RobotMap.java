@@ -45,5 +45,16 @@ public class RobotMap {
 	public static int LEFT_FOLLOWER_CAN_ADDRESS = 2;
 	public static int RIGHT_FOLLOWER_CAN_ADDRESS = 3;
 	
+// new code TO FIX!
+	
+	// Intake Map
+	public static int RIGHT_INTAKE_CAN_ADDRESS = 0;
+	public static int LEFT_INTAKE_CAN_ADDRESS = 0;
+	
+	
+	public static int LIMIT_SWITCH_CUBE_DETECT_DIO_PORT = 0;
+	public static int LIMIT_SWITCH_CUBE_INSIDE_DIO_PORT = 1;
+	public static int LIMIT_SWITCH_CUBE_LOADED_DIO_PORT = 2;
+	
 
 }
