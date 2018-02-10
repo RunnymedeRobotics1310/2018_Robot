@@ -34,6 +34,11 @@ public class RobotMap {
 	public static int RIGHT_TOP_LIMIT_DIO_PORT    = 2;
 	public static int RIGHT_BOTTOM_LIMIT_DIO_PORT = 3;
 	
+	// For Intake
+	public static int CUBE_DETECT_LIMIT_DIO_PORT = 0;
+	public static int CUBE_INSIDE_LIMIT_DIO_PORT = 1;
+	public static int CUBE_LOADED_LIMIT_DIO_PORT = 2;
+	
 	// Ultrasonic Sensor Analog Port
 	public static int ULTRASONIC_SENSOR_ANALOG_PORT = 1;
 	
@@ -44,17 +49,6 @@ public class RobotMap {
 	public static int RIGHT_MOTOR_CAN_ADDRESS = 1;
 	public static int LEFT_FOLLOWER_CAN_ADDRESS = 2;
 	public static int RIGHT_FOLLOWER_CAN_ADDRESS = 3;
-	
-// new code TO FIX!
-	
-	// Intake Map
-	public static int RIGHT_INTAKE_CAN_ADDRESS = 0;
-	public static int LEFT_INTAKE_CAN_ADDRESS = 0;
-	
-	
-	public static int LIMIT_SWITCH_CUBE_DETECT_DIO_PORT = 0;
-	public static int LIMIT_SWITCH_CUBE_INSIDE_DIO_PORT = 1;
-	public static int LIMIT_SWITCH_CUBE_LOADED_DIO_PORT = 2;
 	
 
 }

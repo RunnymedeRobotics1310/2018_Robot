@@ -35,46 +35,32 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	public ChassisSubsystem() {
 
 		// Uncomment this block to use CAN based speed controllers
-		// Uncomment this constructor to use PWM based Speed controllers
-		super(	
-				(RobotConst.robot == 1311 ? new TNavXGyro() : new TAnalogGyro(0)),
-				//			new TAnalogGyro(0),
-				new TCanSpeedController(
-						TCanSpeedControllerType.TALON_SRX, 
-						RobotMap.LEFT_DRIVE_MOTOR_CAN_ADDRESS,  
-						RobotConst.LEFT_MOTOR_ORIENTATION,  
-						RobotMap.LEFT_DRIVE_FOLLOWER_CAN_ADDRESS), 
-				new TCanSpeedController(
-						TCanSpeedControllerType.TALON_SRX, 
-						RobotMap.RIGHT_DRIVE_MOTOR_CAN_ADDRESS, 
-						RobotConst.RIGHT_MOTOR_ORIENTATION, 
-						RobotMap.RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS),
-				RobotConst.DRIVE_GYRO_PID_KP,
-				RobotConst.DRIVE_GYRO_PID_KI);
+				// Uncomment this constructor to use PWM based Speed controllers
+				super(	
+						(RobotConst.robot == 1311 ? new TNavXGyro() : new TAnalogGyro(0)),
+						//			new TAnalogGyro(0),
+						new TCanSpeedController(
+								TCanSpeedControllerType.TALON_SRX, 
+								RobotMap.LEFT_DRIVE_MOTOR_CAN_ADDRESS,  
+								RobotConst.LEFT_MOTOR_ORIENTATION,  
+								RobotMap.LEFT_DRIVE_FOLLOWER_CAN_ADDRESS), 
+						new TCanSpeedController(
+								TCanSpeedControllerType.TALON_SRX, 
+								RobotMap.RIGHT_DRIVE_MOTOR_CAN_ADDRESS, 
+								RobotConst.RIGHT_MOTOR_ORIENTATION, 
+								RobotMap.RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS),
+						RobotConst.DRIVE_GYRO_PID_KP,
+						RobotConst.DRIVE_GYRO_PID_KI);
 
+				// Get the encoders attached to the CAN bus speed controller.
+				TEncoder leftEncoder  = ((TCanSpeedController) super.leftMotor) .getEncoder();
+				TEncoder rightEncoder = ((TCanSpeedController) super.rightMotor).getEncoder();
 
-			(RobotConst.robot == 1311 ? new TNavXGyro() : new TAnalogGyro(0)),
-//			new TAnalogGyro(0),
-			new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_MOTOR_CAN_ADDRESS,  
-					RobotConst.LEFT_MOTOR_ORIENTATION,  RobotMap.LEFT_FOLLOWER_CAN_ADDRESS), 
-			new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_MOTOR_CAN_ADDRESS, 
-					RobotConst.RIGHT_MOTOR_ORIENTATION, RobotMap.RIGHT_FOLLOWER_CAN_ADDRESS),
-			RobotConst.DRIVE_GYRO_PID_KP,
-			RobotConst.DRIVE_GYRO_PID_KI);
-		
-		new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_MOTOR_CAN_ADDRESS,  
-				RobotConst.LEFT_MOTOR_ORIENTATION,  RobotMap.LEFT_FOLLOWER_CAN_ADDRESS), 
-		
-		// Get the encoders attached to the CAN bus speed controller.
-		TEncoder leftEncoder  = ((TCanSpeedController) super.leftMotor) .getEncoder();
-		TEncoder rightEncoder = ((TCanSpeedController) super.rightMotor).getEncoder();
-		
-
-		super.setEncoders(
-				leftEncoder,  RobotConst.LEFT_ENCODER_ORIENTATION,
-				rightEncoder, RobotConst.RIGHT_ENCODER_ORIENTATION,
-				RobotConst.DRIVE_SPEED_PID_KP,
-				RobotConst.MAX_LOW_GEAR_SPEED);
+				super.setEncoders(
+						leftEncoder,  RobotConst.LEFT_ENCODER_ORIENTATION,
+						rightEncoder, RobotConst.RIGHT_ENCODER_ORIENTATION,
+						RobotConst.DRIVE_SPEED_PID_KP,
+						RobotConst.MAX_LOW_GEAR_SPEED);
 
 	}
 
