@@ -6,6 +6,7 @@ import com.torontocodingcollective.oi.TGameController;
 import com.torontocodingcollective.oi.TGameController_Logitech;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TToggle;
+import com.torontocodingcollective.oi.TTrigger;
 
 import robot.RobotConst;
 
@@ -85,6 +86,31 @@ public class OI {
 	}
 
 
+	/**
+	 * INTAKE BUTTONS START
+	 */
+
+	public double getForeArmIntake() {
+		return gameController.getTrigger(TTrigger.LEFT);
+	}
+
+	public double getForeArmOuttake() {
+		return gameController.getTrigger(TTrigger.RIGHT);
+	}
+	
+	public boolean getEjectForward() {
+		return gameController.getButton(TButton.Y);
+	}
+	
+	public boolean getEjectRear() {
+		return gameController.getButton(TButton.A);
+	}
+
+
+	/*
+	 * INTAKE BUTTONS END
+	 */
+	
 	public void updatePeriodic() {
 		pneumaticsToggle.updatePeriodic();
 		pidToggle.updatePeriodic();

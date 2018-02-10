@@ -43,9 +43,14 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 			RobotConst.DRIVE_GYRO_PID_KP,
 			RobotConst.DRIVE_GYRO_PID_KI);
 		
+		new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_MOTOR_CAN_ADDRESS,  
+				RobotConst.LEFT_MOTOR_ORIENTATION,  RobotMap.LEFT_FOLLOWER_CAN_ADDRESS), 
+		
 		// Get the encoders attached to the CAN bus speed controller.
 		TEncoder leftEncoder  = ((TCanSpeedController) super.leftMotor) .getEncoder();
 		TEncoder rightEncoder = ((TCanSpeedController) super.rightMotor).getEncoder();
+		
+		
 
 		super.setEncoders(
 				leftEncoder,  RobotConst.LEFT_ENCODER_ORIENTATION,
