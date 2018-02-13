@@ -1,36 +1,64 @@
 package robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import robot.Robot;
+import robot.subsystems.ElevatorSubsystem;
 
 public class DefaultElevatorCommand extends Command {
 
 	public DefaultElevatorCommand() {
-		// Use requires() here to declare subsystem dependencies
 		requires(Robot.elevatorSubsystem);
 	}
-	double setLevel;
-	public void addHeight(double currentLevel){
-		if (currentLevel % 1 != 0) {
-			new SetElevatorHeightCommand(currentLevel + 0.5);
+	
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+
+		// Read the joystick 
+		// If the joystick is pressed, then 
+		// override the elevator movement.
+		if (Math.abs(Robot.oi.getElevatorSpeed()) > 0.1) {
+			Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevatorSpeed());
+			return;
 		}
-		if (currentLevel != 4){
-			new SetElevatorHeightCommand(currentLevel + 1.0);
+		
+		// Increment and decrement.
+		if (Robot.oi.getElevatorUp()) {
+			addHeight();
 		}
 
-	}
-	public void subtractHeight(int currentLevel){
-		if (currentLevel % 1 != 0) {
-			new SetElevatorHeightCommand(currentLevel - 0.5);
+		if (Robot.oi.getElevatorDown()) {
+			subtractHeight();
 		}
-		if (currentLevel != 1){
-			new SetElevatorHeightCommand(currentLevel-1.0);
-		}
+		
 	}
 	
-	public void testElevator() {
-		Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevtorSpeed());
+	public void addHeight() {
+		
+		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel()) + 1;
+		
+		if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
+			setLevel = ElevatorSubsystem.MAX_LEVEL;
+		}
+		
+		Scheduler.getInstance().add(
+				new SetElevatorHeightCommand(setLevel));
 	}
+	
+	
+	public void subtractHeight() {
+		
+		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel()) - 1;
+
+		if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
+			setLevel = ElevatorSubsystem.MIN_LEVEL;
+		}	
+
+		Scheduler.getInstance().add(
+				new SetElevatorHeightCommand(setLevel));
+	}
+	
 
 	@Override
 	protected boolean isFinished() {

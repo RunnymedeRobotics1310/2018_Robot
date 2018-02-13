@@ -68,6 +68,7 @@ public class OI {
 	public void setSpeedPidToggle(boolean state) {
 		pidToggle.set(state);
 	}
+	
 	//Operator Controller
 	public boolean getRampUp(char side) {
 		if (side == RobotConst.LEFT && operatorController.getPOV() == 315) {
@@ -89,8 +90,17 @@ public class OI {
 		return false;
 
 	}
-	public double getElevtorSpeed() {
+	
+	public double getElevatorSpeed() {
 		return - operatorController.getAxis(TStick.LEFT, TAxis.Y);
+	}
+
+	public boolean getElevatorUp() {
+		return operatorController.getButton(TButton.RIGHT_BUMPER);
+	}
+	
+	public boolean getElevatorDown() {
+		return operatorController.getButton(TButton.LEFT_BUMPER);
 	}
 
 

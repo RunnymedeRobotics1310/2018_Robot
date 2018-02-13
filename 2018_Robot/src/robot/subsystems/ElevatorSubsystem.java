@@ -11,6 +11,10 @@ import robot.RobotMap;
 import robot.commands.elevator.DefaultElevatorCommand;
 
 public class ElevatorSubsystem extends TSubsystem {
+	
+	public static double MIN_LEVEL = 1;
+	public static double MAX_LEVEL = 4;
+	
 	double encoderCount = 0;
 	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS);
 	TEncoder encoder = elevatorMotor.getEncoder();
@@ -19,8 +23,8 @@ public class ElevatorSubsystem extends TSubsystem {
 	DigitalInput top = new DigitalInput(RobotMap.ELEVATOR_TOP_LIMIT_DIO_PORT);
 	DigitalInput maxHeight = new DigitalInput(RobotMap.ELEVATOR_MAXHEIGHT_LIMIT_DIO_PORT);
 
-	
 	public double getLevel(){
+		
 		if (encoderCount <= 2) {
 			return 1;
 		}
@@ -42,7 +46,8 @@ public class ElevatorSubsystem extends TSubsystem {
 		if (encoderCount <=32) {
 			return 4;
 		}
-		return 0;
+		
+		return 4.5;
 	}
 	
 	private boolean atLimit (DigitalInput limit) {
@@ -54,6 +59,13 @@ public class ElevatorSubsystem extends TSubsystem {
 	}
 	
 	public void setSpeed(double speed) {
+		
+		// If the elevator is at the top and the
+		// speed is positive, then set the speed
+		// to zero.
+		
+		// If the elevator is at the bottom and the
+		// speed is negative, then do not go down
 		elevatorMotor.set(speed);
 	} 
 	
@@ -83,6 +95,11 @@ public class ElevatorSubsystem extends TSubsystem {
 
 	@Override
 	public void updatePeriodic() {
+		
+		// Safety check the elevator speed every loop and
+		// stop if on a limit.
+		
+		
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("Elevator Level", getLevel());
 		SmartDashboard.putNumber("Elevator Encoder Count", getElevatorEncoder());
