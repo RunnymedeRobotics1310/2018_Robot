@@ -95,13 +95,13 @@ public class DefaultChassisCommand extends Command {
 		}
 		
 		if ( speed < -0.1 && turn > 0.1) {
-			leftSpeed = scaledSpeed;
-			rightSpeed = scaledSpeed + (turn /2);
+			leftSpeed = scaledSpeed+ (turn /2);
+			rightSpeed = scaledSpeed ;
 		}
 		
 		if ( speed < -0.1 && turn < -0.1) {
-			leftSpeed = scaledSpeed - (turn / 2);
-			rightSpeed = scaledSpeed;
+			leftSpeed = scaledSpeed ;
+			rightSpeed = scaledSpeed - (turn / 2);
 		}
 		//System.out.println(speed);
 		//System.out.println(turn);
