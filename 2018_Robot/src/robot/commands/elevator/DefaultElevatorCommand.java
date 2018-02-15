@@ -36,7 +36,7 @@ public class DefaultElevatorCommand extends Command {
 	
 	public void addHeight() {
 		
-		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel()) + 1;
+		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel() + 1);
 		
 		if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
 			setLevel = ElevatorSubsystem.MAX_LEVEL;
@@ -49,7 +49,7 @@ public class DefaultElevatorCommand extends Command {
 	
 	public void subtractHeight() {
 		
-		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel()) - 1;
+		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel() - 1);
 
 		if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 			setLevel = ElevatorSubsystem.MIN_LEVEL;

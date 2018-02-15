@@ -6,19 +6,14 @@ import robot.subsystems.ElevatorSubsystem;
 
 public class SetElevatorHeightCommand extends TSafeCommand {
 	
-	double setLevel;
+	private double setLevel;
 	
-	boolean wasElevatorUpPreviouslyPressed = false;
-	boolean wasElevatorDownPreviouslyPressed = false;
-
 	public SetElevatorHeightCommand(double setLevel) {
 		super(5);
 		this.setLevel = setLevel;
 	}
 	
 	public void initialize() {
-		wasElevatorUpPreviouslyPressed = Robot.oi.getElevatorUp();
-		wasElevatorDownPreviouslyPressed = Robot.oi.getElevatorDown();
 	}
 	
 	protected void execute() {
@@ -26,29 +21,17 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 		// In Teleop you can adjust the setpoint within this command
 		
 		// Increment and decrement.
-		if (wasElevatorUpPreviouslyPressed) {
-			wasElevatorUpPreviouslyPressed = Robot.oi.getElevatorUp(); 
-		}
-		else {
-			if (Robot.oi.getElevatorUp()) {
-				setLevel++;
-				if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
-					setLevel = ElevatorSubsystem.MAX_LEVEL;
-				}
-				wasElevatorUpPreviouslyPressed = true;
+		if (Robot.oi.getElevatorUp()) {
+			setLevel++;
+			if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
+				setLevel = ElevatorSubsystem.MAX_LEVEL;
 			}
 		}
 
-		if (wasElevatorDownPreviouslyPressed) {
-			wasElevatorDownPreviouslyPressed = Robot.oi.getElevatorDown(); 
-		}
-		else {
-			if (Robot.oi.getElevatorDown()) {
-				setLevel--;
-				if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
-					setLevel = ElevatorSubsystem.MIN_LEVEL;
-				}
-				wasElevatorDownPreviouslyPressed = true;
+		if (Robot.oi.getElevatorDown()) {
+			setLevel--;
+			if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
+				setLevel = ElevatorSubsystem.MIN_LEVEL;
 			}
 		}
 

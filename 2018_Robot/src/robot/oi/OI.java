@@ -2,6 +2,7 @@ package robot.oi;
 
 import com.torontocodingcollective.oi.TAxis;
 import com.torontocodingcollective.oi.TButton;
+import com.torontocodingcollective.oi.TButtonPressDetector;
 import com.torontocodingcollective.oi.TGameController;
 import com.torontocodingcollective.oi.TGameController_Logitech;
 import com.torontocodingcollective.oi.TStick;
@@ -23,6 +24,12 @@ public class OI {
 
 	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
+	
+	private TButtonPressDetector elevatorUpButtonPress = 
+			new TButtonPressDetector(operatorController,TButton.RIGHT_BUMPER);
+
+	private TButtonPressDetector elevatorDownButtonPress = 
+			new TButtonPressDetector(operatorController,TButton.LEFT_BUMPER);
 
 	//Driver Controller
 	public double getSpeed() {
@@ -96,13 +103,12 @@ public class OI {
 	}
 
 	public boolean getElevatorUp() {
-		return operatorController.getButton(TButton.RIGHT_BUMPER);
+		return elevatorUpButtonPress.get();
 	}
 	
 	public boolean getElevatorDown() {
-		return operatorController.getButton(TButton.LEFT_BUMPER);
+		return elevatorDownButtonPress.get();
 	}
-
 
 	/*
 	 * Intake Buttons
