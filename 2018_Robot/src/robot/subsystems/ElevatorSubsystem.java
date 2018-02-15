@@ -21,7 +21,6 @@ public class ElevatorSubsystem extends TSubsystem {
 	
 	DigitalInput bottom = new DigitalInput(RobotMap.ELEVATOR_BOTTOM_LIMIT_DIO_PORT);
 	DigitalInput top = new DigitalInput(RobotMap.ELEVATOR_TOP_LIMIT_DIO_PORT);
-	DigitalInput maxHeight = new DigitalInput(RobotMap.ELEVATOR_MAXHEIGHT_LIMIT_DIO_PORT);
 
 	public double getLevel(){
 		
@@ -77,11 +76,6 @@ public class ElevatorSubsystem extends TSubsystem {
 		return atLimit(top); // top prox. sensor value	
 	}
 	
-	public boolean getMaxHeightProx() {
-		return atLimit(maxHeight); // Max height prox. sensor value	
-	}
-
-
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub

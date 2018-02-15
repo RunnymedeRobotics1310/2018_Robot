@@ -1,7 +1,7 @@
 package robot.subsystems;
 
-import com.torontocodingcollective.limitswitch.TLimitSwitch;
 import com.torontocodingcollective.sensors.encoder.TEncoder;
+import com.torontocodingcollective.sensors.limitSwitch.TLimitSwitch;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TCanSpeedControllerType;
 import com.torontocodingcollective.subsystem.TSubsystem;
