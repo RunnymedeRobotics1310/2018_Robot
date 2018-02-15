@@ -8,10 +8,8 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TCanSpeedControllerType;
 import com.torontocodingcollective.subsystem.TGryoDriveSubsystem;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import robot.Robot;
 import robot.RobotConst;
 import robot.RobotMap;
 import robot.commands.drive.DefaultChassisCommand;
@@ -21,11 +19,10 @@ import robot.commands.drive.DefaultChassisCommand;
  */
 public class ChassisSubsystem extends TGryoDriveSubsystem {
 
-	private DigitalInput frontLimitSwitch = new DigitalInput(4);
+	public TUltrasonicSensor ultrasonicSensor = 
+			new TUltrasonicSensor(RobotMap.ULTRASONIC_SENSOR_ANALOG_PORT);
 
-	public TUltrasonicSensor ultrasonicSensor = new TUltrasonicSensor(RobotMap.ULTRASONIC_SENSOR_ANALOG_PORT);
-
-	private Solenoid shifter = new Solenoid(0);
+	private Solenoid shifter = new Solenoid(RobotMap.SHIFTER_PNEUMATIC_PORT);
 
 	public boolean LOW_GEAR = false;
 	public boolean HIGH_GEAR = true;
@@ -103,20 +100,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	}
 
 	// ********************************************************************************************************************
-	// Limit Switch routines
-	// ********************************************************************************************************************
-	/**
-	 * At front limit
-	 * 
-	 * @return {@literal true} if at the limit, {@literal false} otherwise.
-	 */
-	public boolean atFrontLimit() {
-		// The limit switch we are using is wired to return true when
-		// not activated and false otherwise.
-		return !frontLimitSwitch.get();
-	}
-
-	// ********************************************************************************************************************
 	// Update the SmartDashboard
 	// ********************************************************************************************************************
 	// Periodically update the dashboard and any PIDs or sensors
@@ -143,8 +126,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		super.updatePeriodic();
 
 		SmartDashboard.putBoolean("Turbo Enabled", turboEnabled);
-		SmartDashboard.putBoolean("At Front Limit", atFrontLimit());
-
 	}
 
 }

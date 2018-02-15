@@ -7,10 +7,13 @@ import robot.Robot;
  */
 public class DriveTimeCommand extends TSafeCommand {
 
-    public DriveTimeCommand(double maxTimeSec) {
+	private final boolean brakeAtEnd;
+	
+    public DriveTimeCommand(double maxTimeSec, double speed, boolean brakeAtEnd) {
     	super(maxTimeSec);
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.chassisSubsystem);
+		this.brakeAtEnd = brakeAtEnd;
     }
 
     // Called just before this Command runs the first time
@@ -26,13 +29,15 @@ public class DriveTimeCommand extends TSafeCommand {
     protected boolean isFinished() {
     	
     	if (super.isFinished()) { return true; }
-    	
-    	return Robot.chassisSubsystem.atFrontLimit();
+
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassisSubsystem.setSpeed(0, 0);
+    	if (brakeAtEnd) {
+    		Robot.chassisSubsystem.setSpeed(0, 0);
+    	}
     }
 
     // Called when another command which requires one or more of the same

@@ -9,7 +9,9 @@ package robot;
 public class RobotMap {
 
 
+	//******************************************
 	// Speed Controllers (CAN addresses)
+	//******************************************
 	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS     = 0;
 	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS    = 1;
 
@@ -28,7 +30,9 @@ public class RobotMap {
 	public static int RIGHT_FRONT_RAMP_MOTOR_CAN_ADDRESS = 11;
 	public static int RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS  = 12;
 	
-	// Limit Switches (RoboRio DIO ports)
+	//******************************************
+	// DIO Ports
+	//******************************************
 	public static int LEFT_TOP_LIMIT_DIO_PORT     = 9;
 	public static int LEFT_BOTTOM_LIMIT_DIO_PORT  = 1;
 	public static int RIGHT_TOP_LIMIT_DIO_PORT    = 2;
@@ -38,18 +42,17 @@ public class RobotMap {
 	public static int ELEVATOR_TOP_LIMIT_DIO_PORT = 5;
 	public static int ELEVATOR_MAXHEIGHT_LIMIT_DIO_PORT = 6;
 
-	// For Intake
-	public static int CUBE_DETECT_LIMIT_DIO_PORT = 0;
-	public static int CUBE_INSIDE_LIMIT_DIO_PORT = 1;
-	public static int CUBE_LOADED_LIMIT_DIO_PORT = 2;
+	public static int CUBE_DETECT_LIMIT_DIO_PORT = 7;
+	public static int CUBE_INSIDE_LIMIT_DIO_PORT = 8;
+	public static int CUBE_LOADED_LIMIT_DIO_PORT = 9;
 	
-	// Ultrasonic Sensor Analog Port
+	//******************************************
+	// Analog Input Ports
+	//******************************************
 	public static int ULTRASONIC_SENSOR_ANALOG_PORT = 1;
 	
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	public static int LEFT_MOTOR_CAN_ADDRESS  = 0;
-	public static int RIGHT_MOTOR_CAN_ADDRESS = 1;
-	public static int LEFT_FOLLOWER_CAN_ADDRESS = 2;
-	public static int RIGHT_FOLLOWER_CAN_ADDRESS = 3;
+	//******************************************
+	// Pneumatics Ports
+	//******************************************
+	public static int SHIFTER_PNEUMATIC_PORT = 0;
 }
