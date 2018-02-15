@@ -12,20 +12,20 @@ import robot.RobotMap;
 public class IntakeSubsystem extends TSubsystem {
 
 	public TLimitSwitch cubeDetectedSwitch = new TLimitSwitch(RobotMap.CUBE_DETECT_LIMIT_DIO_PORT,
-			TLimitSwitch.DefaultState.FALSE);
+			TLimitSwitch.DefaultState.TRUE);
 	public TLimitSwitch cubeInsideSwitch = new TLimitSwitch(RobotMap.CUBE_INSIDE_LIMIT_DIO_PORT,
-			TLimitSwitch.DefaultState.FALSE);
+			TLimitSwitch.DefaultState.TRUE);
 	public TLimitSwitch cubeLoadedSwitch = new TLimitSwitch(RobotMap.CUBE_LOADED_LIMIT_DIO_PORT,
-			TLimitSwitch.DefaultState.FALSE);
+			TLimitSwitch.DefaultState.TRUE);
 
-	private TCanSpeedController rightIntakeArm = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
+	private TCanSpeedController rightIntakeArm = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
 			RobotMap.RIGHT_INTAKE_ARM_MOTOR_CAN_ADDRESS);
-	private TCanSpeedController leftIntakeArm = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
+	private TCanSpeedController leftIntakeArm = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
 			RobotMap.LEFT_INTAKE_ARM_MOTOR_CAN_ADDRESS);
 
-	private TCanSpeedController leftIntakeMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
+	private TCanSpeedController leftIntakeMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
 			RobotMap.LEFT_INTAKE_WHEEL_MOTOR_CAN_ADDRESS);
-	private TCanSpeedController rightIntakeMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
+	private TCanSpeedController rightIntakeMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
 			RobotMap.RIGHT_INTAKE_WHEEL_MOTOR_CAN_ADDRESS);
 
 	private TEncoder rightArmEncoder = ((TCanSpeedController) rightIntakeArm).getEncoder();
