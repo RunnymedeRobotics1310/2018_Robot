@@ -40,13 +40,12 @@ public class IntakeSubsystem extends TSubsystem {
 	private final double SAFE_ARM_OFFSET = 1800;
 
 	@Override
-	protected void init() {
-		// TODO Auto-generated method stub
+	public void init() {
 
 	}
 
 	@Override
-	protected void initDefaultCommand() {
+	public void initDefaultCommand() {
 		// TODO Auto-generated method stub
 
 	}
@@ -119,6 +118,11 @@ public class IntakeSubsystem extends TSubsystem {
 	public void outtakeCube() {
 		leftIntakeMotor.set(-0.8);
 		rightIntakeMotor.set(-0.8);
+	}
+	
+	public void resetEncooder() {
+		leftArmEncoder.reset();
+		rightArmEncoder.reset();
 	}
 
 	// Periodically update the dashboard and any PIDs or sensors
