@@ -43,6 +43,7 @@ public class Robot extends IterativeRobot {
 		chassisSubsystem.init();
 		pneumaticsSubsystem.init();
 		rampSubsystem.init();
+		elevatorSubsystem.init();
 		intakeSubsystem.init();
 	}
 
@@ -149,5 +150,7 @@ public class Robot extends IterativeRobot {
 		chassisSubsystem.updatePeriodic();
 		pneumaticsSubsystem.updatePeriodic();
 		rampSubsystem.updatePeriodic();
+		elevatorSubsystem.updatePeriodic();
+		intakeSubsystem.updatePeriodic();
 	}
 }
