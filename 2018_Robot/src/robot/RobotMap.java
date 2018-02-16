@@ -54,4 +54,5 @@ public class RobotMap {
 	// Pneumatics Ports
 	//******************************************
 	public static int SHIFTER_PNEUMATIC_PORT = 0;
+	public static int RAMP_RELEASE = 1;
 }

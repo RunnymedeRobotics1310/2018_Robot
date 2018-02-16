@@ -5,6 +5,7 @@ import com.torontocodingcollective.speedcontroller.TPwmSpeedControllerType;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotConst;
 import robot.RobotMap;
@@ -21,6 +22,8 @@ public class RampSubsystem extends TSubsystem {
 	DigitalInput leftBottomLimit  = new DigitalInput(RobotMap.LEFT_BOTTOM_LIMIT_DIO_PORT);
 	DigitalInput rightTopLimit    = new DigitalInput(RobotMap.RIGHT_TOP_LIMIT_DIO_PORT);
 	DigitalInput rightBottomLimit = new DigitalInput(RobotMap.RIGHT_BOTTOM_LIMIT_DIO_PORT);
+	
+	Solenoid rampRelease = new Solenoid(RobotMap.RAMP_RELEASE); 
 
 	@Override
 	public void init() {
@@ -30,7 +33,10 @@ public class RampSubsystem extends TSubsystem {
 	private boolean atLimit (DigitalInput limit) {
 		return !limit.get();
 	}
-
+	
+	public void setRampRelease(boolean direction) {
+		rampRelease.set(direction);
+	}
 
 	public void setLeftRampSpeed(double speed) {
 		if (atLimit(leftTopLimit))

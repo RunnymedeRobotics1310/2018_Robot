@@ -31,6 +31,9 @@ public class DefaultElevatorCommand extends Command {
 		if (Robot.oi.getElevatorDown()) {
 			subtractHeight();
 		}
+		if (Robot.oi.reset()){
+			Robot.elevatorSubsystem.resetEncoders();
+		}
 		
 	}
 	
