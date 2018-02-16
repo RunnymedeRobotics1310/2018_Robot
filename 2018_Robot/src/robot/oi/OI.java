@@ -28,22 +28,26 @@ import robot.RobotConst;
  * 		Back Button 		= Cancel any Command
  * 	Bumpers/Triggers:
  * 		Left Bumper			= High Gear
+ * 
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
- * 		Right Stick Press  	= Toggle PIDs
- * 		Left Stick Press 	= Toggle Compressor
  * 	Buttons:
  * 		Y Button 			= Eject Cube out Front of the Robot
  * 		A Button 			= Eject Cube out Back of the Robot
+ * 		X Button			= Deploy Ramps
  * 	Bumpers/Triggers:
  * 		Right Bumper		= Move Elevator Up One Level
  * 		Left Bumper			= Move Elevator Down One Level		
- * 		Right Trigger		=
+ * 		Right Trigger		= Move Intake Forearms to Inner Position 
+ * 		Left Trigger 		= Move Intake Forearms to Outer Position 
  *	POV
- *		45					= 
+ *		45					= Raise Right Ramp
+ *		315					= Raise Left Ramp
+ *		135					= Lower Right Ramp
+ *		225					= Lower Left Ramp
  *
- *elevtor subsystem 
+ *
  */
 public class OI {
 
@@ -64,7 +68,7 @@ public class OI {
 
 	//Driver Controller
 	public double getSpeed() {
-		return -gameController.getAxis(TStick.LEFT, TAxis.Y);
+		return - gameController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
 	public double getTurn() {

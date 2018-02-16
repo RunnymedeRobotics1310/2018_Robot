@@ -133,8 +133,8 @@ public class IntakeSubsystem extends TSubsystem {
 		SmartDashboard.putNumber("Right Intake Wheels", rightIntakeWheels.get());
 		SmartDashboard.putNumber("Left Intake Arm", leftIntakeArm.get());
 		SmartDashboard.putNumber("Right Intake Arm", rightIntakeArm.get());
-		SmartDashboard.putNumber("Left Intake Encoder", leftArmEncoder.get());
-		SmartDashboard.putNumber("Right Intake Encoder", rightArmEncoder.get());
+		//SmartDashboard.putNumber("Left Intake Encoder", leftArmEncoder.get());
+		//SmartDashboard.putNumber("Right Intake Encoder", rightArmEncoder.get());
 
 		SmartDashboard.putBoolean("Cube Loaded", isCubeLoaded());
 		SmartDashboard.putBoolean("Cube Detected", isCubeDetected());

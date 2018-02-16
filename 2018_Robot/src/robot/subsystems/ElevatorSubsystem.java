@@ -29,7 +29,7 @@ public class ElevatorSubsystem extends TSubsystem {
 		if (encoderCount <= 2) {
 			return 1;
 		}
-		if (encoderCount < 8) {
+		if (encoderCount < 3500) {
 			return 1.5;
 		}
 		if (encoderCount <=12) {
@@ -65,7 +65,7 @@ public class ElevatorSubsystem extends TSubsystem {
 		// If the elevator is at the top and the
 		// speed is positive, then set the speed
 		// to zero.
-		if (!top.atLimit() && speed > 0) {
+		if (top.atLimit() && speed > 0) {
 			elevatorMotor.set(0);
 		}
 		// If the elevator is at the bottom and the
@@ -107,6 +107,8 @@ public class ElevatorSubsystem extends TSubsystem {
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("Elevator Level", getLevel());
 		SmartDashboard.putNumber("Elevator Encoder Count", getElevatorEncoder());
+		SmartDashboard.putBoolean("Bottom Elevator Limit", getBottomProx());
+		SmartDashboard.putBoolean("Top Elevator Limit", getBottomProx());
 	}
 
 }
