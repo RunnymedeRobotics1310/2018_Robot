@@ -15,6 +15,36 @@ import robot.RobotConst;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
+
+/**Driver Controller
+ * 	Sticks:
+ * 		Right Stick X-axis 	= Drive Motor Turn 
+ * 		Left Stick Y-axis  	= Drive Motor Speed
+ * 		Right Stick Press  	= Toggle PIDs
+ * 		Left Stick Press 	= Toggle Compressor
+ * 	Buttons:
+ * 		Start Button 		= Reset Encoders and Gyro 
+ * 		Back Button 		= Cancel any Command
+ * 	Bumpers/Triggers:
+ * 		Left Bumper			= High Gear
+ * Operator Controller
+ * 	Sticks:
+ * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
+ * 		Right Stick Press  	= Toggle PIDs
+ * 		Left Stick Press 	= Toggle Compressor
+ * 	Buttons:
+ * 		Y Button 			= Eject Cube out Front of the Robot
+ * 		A Button 			= Eject Cube out Back of the Robot
+ * 	Bumpers/Triggers:
+ * 		Right Bumper		= Move Elevator Up One Level
+ * 		Left Bumper			= Move Elevator Down One Level		
+ * 		Right Trigger		=
+ *	POV
+ *		45					= 
+ *
+ *elevtor subsystem 
+ */
 public class OI {
 
 	public AutoSelector autoSelector = new AutoSelector();
@@ -24,6 +54,7 @@ public class OI {
 
 	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
+	private TToggle rampRelease = new TToggle(operatorController, TButton.X);
 	
 	private TButtonPressDetector elevatorUpButtonPress = 
 			new TButtonPressDetector(operatorController,TButton.RIGHT_BUMPER);
@@ -40,9 +71,9 @@ public class OI {
 		return gameController.getAxis(TStick.RIGHT, TAxis.X);
 	}
 
-	public boolean getForwardThrust() {
-		return gameController.getButton(TButton.A);
-	}
+	/*public boolean getForwardThrust() {
+	//	return gameController.getButton(TButton.A);
+	//}
 
 	public boolean getStartDriveDirection() {
 		return gameController.getButton(TButton.B);
@@ -50,7 +81,7 @@ public class OI {
 
 	public int getArcCommand() {
 		return gameController.getPOV();
-	}
+	}*/
 
 	public boolean getCancelCommand() {
 		return gameController.getButton(TButton.BACK);
@@ -108,6 +139,10 @@ public class OI {
 	
 	public boolean getElevatorDown() {
 		return elevatorDownButtonPress.get();
+	}
+	//ramp release
+	public boolean getRampRelease() {
+		return rampRelease.get();
 	}
 
 	/*

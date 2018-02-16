@@ -22,6 +22,12 @@ public class DefaultRampCommand extends Command{
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		if (Robot.oi.getRampRelease()) {
+			Robot.rampSubsystem.setRampRelease(true);
+		}
+		else {
+			Robot.rampSubsystem.setRampRelease(false);
+		}
 
 		if (Robot.oi.getRampUp(RobotConst.LEFT)) {
 			Robot.rampSubsystem.setLeftRampSpeed(0.3);

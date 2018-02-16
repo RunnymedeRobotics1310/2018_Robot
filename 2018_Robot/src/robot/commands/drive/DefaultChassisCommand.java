@@ -45,7 +45,7 @@ public class DefaultChassisCommand extends Command {
 		}
 
 
-		if (Robot.oi.getForwardThrust()) {
+		/*if (Robot.oi.getForwardThrust()) {
 			Scheduler.getInstance().add(new DriveDistanceCommand(50, Robot.chassisSubsystem.getGryoAngle(), 0.5, 5.0, true));
 		}
 
@@ -57,7 +57,7 @@ public class DefaultChassisCommand extends Command {
 		}
 		if (Robot.oi.getArcCommand() == 270){
 			Scheduler.getInstance().add(new ArcCommand(200, Robot.chassisSubsystem.getGryoAngle(), Robot.chassisSubsystem.getGryoAngle() - 90, 1));
-		}
+		}*/
 
 		double speed = Robot.oi.getSpeed();
 		double turn  = Robot.oi.getTurn();
