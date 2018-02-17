@@ -30,11 +30,11 @@ public class RobotMap {
 	public static int RIGHT_INTAKE_ARM_MOTOR_CAN_ADDRESS   = 10;  // VICTOR_SPX
 	
 	// The claw that pulls the cube in using the arms
-	public static int RIGHT_INTAKE_CLAW_WHEELS_CAN_ADDRESS = 12;  // VICTOR_SPX
-	public static int LEFT_INTAKE_CLAW_WHEELS_CAN_ADDRESS  = 13;  // VICTOR_SPX
+	public static int RIGHT_INTAKE_CLAW_WHEELS_CAN_ADDRESS = 11;  // VICTOR_SPX
+	public static int LEFT_INTAKE_CLAW_WHEELS_CAN_ADDRESS  = 12;  // VICTOR_SPX
 	
 	// The motor that slides the cube into the elevator
-	public static int LEFT_INTAKE_RAIL_WHEELS_CAN_ADDRESS  = 11;  // VICTOR_SPX
+	public static int LEFT_INTAKE_RAIL_WHEELS_CAN_ADDRESS  = 13;  // VICTOR_SPX
 	public static int RIGHT_INTAKE_RAIL_WHEELS_CAN_ADDRESS = 14;  // VICTOR_SPX
 
 	
