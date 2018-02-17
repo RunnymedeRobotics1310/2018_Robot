@@ -4,14 +4,9 @@ package robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import robot.commands.AutonomousCommand;
 import robot.oi.GameData;
 import robot.oi.OI;
-import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ElevatorSubsystem;
-import robot.subsystems.IntakeSubsystem;
-import robot.subsystems.PneumaticsSubsystem;
-import robot.subsystems.RampSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,11 +17,11 @@ import robot.subsystems.RampSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ChassisSubsystem chassisSubsystem = new ChassisSubsystem();
-	public static final PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
-	public static final RampSubsystem rampSubsystem = new RampSubsystem();
+//	public static final ChassisSubsystem chassisSubsystem = new ChassisSubsystem();
+//	public static final PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
+//	public static final RampSubsystem rampSubsystem = new RampSubsystem();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+//	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static OI oi;
 	
 	
@@ -40,11 +35,11 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		chassisSubsystem.init();
-		pneumaticsSubsystem.init();
-		rampSubsystem.init();
+//		chassisSubsystem.init();
+//		pneumaticsSubsystem.init();
+//		rampSubsystem.init();
 		elevatorSubsystem.init();
-		intakeSubsystem.init();
+//		intakeSubsystem.init();
 	}
 
 	/**
@@ -82,15 +77,15 @@ public class Robot extends IterativeRobot {
 
 		// Turn on the drive pids
 		Robot.oi.setSpeedPidToggle(true);
-		chassisSubsystem.enableSpeedPids();
+//		chassisSubsystem.enableSpeedPids();
 		
 		// Reset the gyro and the encoders
-		Robot.chassisSubsystem.setGyroAngle(0);
-		Robot.chassisSubsystem.resetEncoders();
+//		Robot.chassisSubsystem.setGyroAngle(0);
+//		Robot.chassisSubsystem.resetEncoders();
 				
 		// Initialize the robot command after initializing the game data
 		// because the game data will be used in the auto command.
-		autoCommand = new AutonomousCommand();
+//		autoCommand = new AutonomousCommand();
 		autoCommand.start();
 	}
 
@@ -120,7 +115,7 @@ public class Robot extends IterativeRobot {
 		// Save the battery in teleop by using the 
 		// SpeedController built in braking.
 		Robot.oi.setSpeedPidToggle(false);
-		chassisSubsystem.disableSpeedPids();
+//		chassisSubsystem.disableSpeedPids();
 
 	}
 
@@ -147,10 +142,10 @@ public class Robot extends IterativeRobot {
 	}
 	
 	private void updatePeriodic() {
-		chassisSubsystem.updatePeriodic();
-		pneumaticsSubsystem.updatePeriodic();
-		rampSubsystem.updatePeriodic();
+//		chassisSubsystem.updatePeriodic();
+//		pneumaticsSubsystem.updatePeriodic();
+//		rampSubsystem.updatePeriodic();
 		elevatorSubsystem.updatePeriodic();
-		intakeSubsystem.updatePeriodic();
+//		intakeSubsystem.updatePeriodic();
 	}
 }
