@@ -58,13 +58,15 @@ public class OI {
 	
 	private TButtonPressDetector elevatorUpButtonPress = 
 			new TButtonPressDetector(operatorController,TButton.RIGHT_BUMPER);
-
+	
 	private TButtonPressDetector elevatorDownButtonPress = 
 			new TButtonPressDetector(operatorController,TButton.LEFT_BUMPER);
 
+	
 	//Driver Controller
 	public double getSpeed() {
-		return -gameController.getAxis(TStick.LEFT, TAxis.Y);
+		return 0.0;
+//		return -gameController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
 	public double getTurn() {
@@ -148,19 +150,20 @@ public class OI {
 	/*
 	 * Intake Buttons
 	 */
-	public double getForeArmIntake() {
-		return gameController.getTrigger(TTrigger.LEFT);
+	public double getIntakeForeArm() {
+		return gameController.getAxis(TStick.LEFT, TAxis.Y);
+//		return gameController.getTrigger(TTrigger.LEFT);
 	}
 
-	public double getForeArmOuttake() {
+	public double getOuttakeForeArm() {
 		return gameController.getTrigger(TTrigger.RIGHT);
 	}
 
-	public boolean getEjectForward() {
+	public boolean getIntakeEjectForward() {
 		return gameController.getButton(TButton.Y);
 	}
 
-	public boolean getEjectRear() {
+	public boolean getIntakeEjectBackward() {
 		return gameController.getButton(TButton.A);
 	}
 

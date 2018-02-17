@@ -25,10 +25,20 @@ public class RobotMap {
 	public static int RIGHT_FRONT_RAMP_MOTOR_CAN_ADDRESS =  7;
 	public static int RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS  =  8;
 	
+	// The motor that pivots to open/close the claw
 	public static int LEFT_INTAKE_ARM_MOTOR_CAN_ADDRESS    =  9;
 	public static int RIGHT_INTAKE_ARM_MOTOR_CAN_ADDRESS   = 10;
-	public static int LEFT_INTAKE_WHEEL_MOTOR_CAN_ADDRESS  = 11;
-	public static int RIGHT_INTAKE_WHEEL_MOTOR_CAN_ADDRESS = 12;
+	
+	// The claw that pulls the cube in using the arms
+	public static int RIGHT_INTAKE_CLAW_MOTOR_CAN_ADDRESS  = 12;
+	public static int LEFT_INTAKE_CLAW_MOTOR_CAN_ADDRESS = 13;
+	
+	// The motor that slides the cube into the elevator
+	public static int LEFT_INTAKE_RAIL_WHEELS_CAN_ADDRESS  = 11;
+	public static int RIGHT_INTAKE_RAIL_WHEELS_CAN_ADDRESS = 14;
+
+	
+
 			
 	//******************************************
 	// DIO Ports
