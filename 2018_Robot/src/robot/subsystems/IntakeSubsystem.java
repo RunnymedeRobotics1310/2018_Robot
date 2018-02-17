@@ -27,8 +27,8 @@ public class IntakeSubsystem extends TSubsystem {
 	private TEncoder leftIntakeArmEncoder = leftIntakeArmMotor.getEncoder();
 
 	// The motors in the claw (arm) that "sucks" in the cube 
-	private TCanSpeedController rightIntakeClawMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_INTAKE_CLAW_MOTOR_CAN_ADDRESS);
-	private TCanSpeedController leftIntakeClawMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_INTAKE_CLAW_MOTOR_CAN_ADDRESS);
+	private TCanSpeedController rightIntakeClawMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_INTAKE_CLAW_WHEELS_CAN_ADDRESS);
+	private TCanSpeedController leftIntakeClawMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_INTAKE_CLAW_WHEELS_CAN_ADDRESS);
 	
 	// Intake wheels used to draw in or remove a cube (the wheels inside the robot)
 	private TCanSpeedController leftIntakeMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_INTAKE_RAIL_WHEELS_CAN_ADDRESS);
