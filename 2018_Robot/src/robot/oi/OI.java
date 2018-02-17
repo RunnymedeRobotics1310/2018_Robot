@@ -32,6 +32,8 @@ import robot.RobotConst;
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
+ * 		Right Stick Press  	= Toggle PIDs
+ * 		Left Stick Press 	= Toggle Compressor
  * 	Buttons:
  * 		Y Button 			= Eject Cube out Front of the Robot
  * 		A Button 			= Eject Cube out Back of the Robot
@@ -152,19 +154,20 @@ public class OI {
 	/*
 	 * Intake Buttons
 	 */
-	public double getForeArmIntake() {
-		return gameController.getTrigger(TTrigger.LEFT);
+	public double getIntakeForeArm() {
+		return gameController.getAxis(TStick.LEFT, TAxis.Y);
+//		return gameController.getTrigger(TTrigger.LEFT);
 	}
 
-	public double getForeArmOuttake() {
+	public double getOuttakeForeArm() {
 		return gameController.getTrigger(TTrigger.RIGHT);
 	}
 
-	public boolean getEjectForward() {
+	public boolean getIntakeEjectForward() {
 		return gameController.getButton(TButton.Y);
 	}
 
-	public boolean getEjectRear() {
+	public boolean getIntakeEjectBackward() {
 		return gameController.getButton(TButton.A);
 	}
 
