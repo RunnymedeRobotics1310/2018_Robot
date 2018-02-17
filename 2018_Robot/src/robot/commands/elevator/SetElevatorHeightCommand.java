@@ -36,10 +36,10 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 		}
 
 		if (Robot.elevatorSubsystem.getLevel() > setLevel) {
-			Robot.elevatorSubsystem.setSpeed(-0.5);
+			Robot.elevatorSubsystem.setSpeed(-0.2);
 		}
 		if (Robot.elevatorSubsystem.getLevel() < setLevel) {
-			Robot.elevatorSubsystem.setSpeed(0.5);
+			Robot.elevatorSubsystem.setSpeed(0.9);
 		}
 	}
 	
