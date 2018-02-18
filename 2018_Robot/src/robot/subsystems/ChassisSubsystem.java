@@ -105,23 +105,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
-		// automatic high gear
-		/*
-		 * double leftSpeed = super.leftMotor.get(); double rightSpeed =
-		 * super.rightMotor.get(); //System.out.println(leftSpeed + " " + rightSpeed +
-		 * " " + getEncoderSpeed()); /*if (Math.abs(getEncoderSpeed()) >=
-		 * robot.RobotConst.MAX_LOW_GEAR_SPEED*0.6) { if ((Math.abs(leftSpeed) > 0.9 ||
-		 * Math.abs(rightSpeed) > 0.9) && ((leftSpeed >= 0 && rightSpeed >= 0) ||
-		 * (leftSpeed <= 0 && rightSpeed <= 0))) { enableTurbo();
-		 * //System.out.println("enable turbo"); } }
-		 * 
-		 * if (Math.abs(getEncoderSpeed()) <= robot.RobotConst.MAX_LOW_GEAR_SPEED*0.4) {
-		 * disableTurbo(); // System.out.println("disable turbo 1"); } if
-		 * (Math.abs(leftSpeed) < 0.9 && Math.abs(rightSpeed) < 0.9) { disableTurbo();
-		 * //System.out.println("disable turbo 2"); } if (!((leftSpeed >= 0 &&
-		 * rightSpeed >= 0) || (leftSpeed <= 0 && rightSpeed <= 0))) { disableTurbo();
-		 * //System.out.println("disable turbo 3"); }
-		 */
+		
 
 		super.updatePeriodic();
 
