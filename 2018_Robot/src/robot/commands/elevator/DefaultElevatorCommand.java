@@ -20,8 +20,11 @@ public class DefaultElevatorCommand extends Command {
 		// override the elevator movement.
 		if (Math.abs(Robot.oi.getElevatorSpeed()) > 0.1) {
 			Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevatorSpeed());
-			return;
 		}
+		else {
+			Robot.elevatorSubsystem.setSpeed(0);
+		}
+			
 		
 		// Increment and decrement.
 		if (Robot.oi.getElevatorUp()) {
@@ -57,6 +60,9 @@ public class DefaultElevatorCommand extends Command {
 		if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 			setLevel = ElevatorSubsystem.MIN_LEVEL;
 		}	
+		else if (setLevel == ElevatorSubsystem.MIN_LEVEL) {
+			setLevel = ElevatorSubsystem.MIN_LEVEL + 1;
+		}
 
 		Scheduler.getInstance().add(
 				new SetElevatorHeightCommand(setLevel));

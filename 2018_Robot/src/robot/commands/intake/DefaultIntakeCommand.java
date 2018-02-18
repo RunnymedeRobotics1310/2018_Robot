@@ -1,10 +1,5 @@
 package robot.commands.intake;
 
-import javax.net.ssl.ExtendedSSLSession;
-
-import com.torontocodingcollective.oi.TButton;
-import com.torontocodingcollective.oi.TTrigger;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Robot;
@@ -45,7 +40,7 @@ public class DefaultIntakeCommand extends Command {
 
 		SmartDashboard.putNumber("Intake speed", speed);
 		
-		if (speed > 0.1 || speed < 0.1) {
+		if (speed > 0.1 || speed < 0.1) { // shouldn't this be math.abs?
 			Robot.intakeSubsystem.openForeArms(speed);
 		} else {
 			Robot.intakeSubsystem.stopClawMotors();
