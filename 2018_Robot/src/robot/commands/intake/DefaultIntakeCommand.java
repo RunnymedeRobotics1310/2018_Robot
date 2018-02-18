@@ -1,10 +1,5 @@
 package robot.commands.intake;
 
-import javax.net.ssl.ExtendedSSLSession;
-
-import com.torontocodingcollective.oi.TButton;
-import com.torontocodingcollective.oi.TTrigger;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Robot;

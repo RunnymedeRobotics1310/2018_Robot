@@ -26,8 +26,11 @@ public class DefaultRampCommand extends Command{
 		if (Robot.oi.getRampRelease()) {
 			double time;
 			time = DriverStation.getInstance().getMatchTime();
-			if (time <= 15) {
+			if (time <= 30) {
 				Robot.rampSubsystem.setRampRelease(true);
+			}
+			else {
+				System.out.println("Cannot release ramps at time: " + time);
 			}
 		}
 		else {
