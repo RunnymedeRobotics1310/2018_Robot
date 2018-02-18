@@ -1,5 +1,6 @@
 package robot.commands.ramp;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import robot.Robot;
 import robot.RobotConst;
@@ -23,7 +24,11 @@ public class DefaultRampCommand extends Command{
 	@Override
 	protected void execute() {
 		if (Robot.oi.getRampRelease()) {
-			Robot.rampSubsystem.setRampRelease(true);
+			double time;
+			time = DriverStation.getInstance().getMatchTime();
+			if (time <= 15) {
+				Robot.rampSubsystem.setRampRelease(true);
+			}
 		}
 		else {
 			Robot.rampSubsystem.setRampRelease(false);
