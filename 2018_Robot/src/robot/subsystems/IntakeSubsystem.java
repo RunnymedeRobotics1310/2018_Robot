@@ -40,8 +40,8 @@ public class IntakeSubsystem extends TSubsystem {
 	private final double RIGHT_ARM_MAX_SETPOINT = 3000;
 
 	// The encoder count at which it is safe for both arms to exit without
-	// interferring
-	private final double SAFE_ARM_OFFSET = 1800;
+	// Interfering
+	private final double SAFE_ARM_OFFSET = 1800; 
 
 	
 	@Override
@@ -78,6 +78,13 @@ public class IntakeSubsystem extends TSubsystem {
 	
 	public void openTestLeftClaw(double speed) {
 		leftIntakeArmMotor.set(speed);
+	}
+	
+	public boolean isIntakeExtended() {
+		if (rightIntakeArmEncoder.get() >= SAFE_ARM_OFFSET && leftIntakeArmEncoder.get() >= SAFE_ARM_OFFSET) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**

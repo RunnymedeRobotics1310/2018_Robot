@@ -26,38 +26,38 @@ public class ElevatorSubsystem extends TSubsystem {
 
 	public double getLevel(){
 		double encoderCount = encoder.get();
-		if (encoderCount <= 2) {
+		if (encoderCount <= 2) {//pickup level
 			return 0;
 		}
 
 		if (encoderCount < 1000) {
 			return 0.5;
 		}
-		if (encoderCount <= 1100) {
+		if (encoderCount <= 1100) {// resting intake level
 			return 1;
 		}
 		if (encoderCount < 3500) {
 			return 1.5;
 		}
-		if (encoderCount <= 3600) {
+		if (encoderCount <= 3600) {//switch deposit level
 			return 2;
 		}
 		if (encoderCount < 8500) {
 			return 2.5;
 		}
-		if (encoderCount <=8600) {
+		if (encoderCount <=8600) {//low scale level
 			return 3;
 		}
 		if (encoderCount < 11200) {
 			return 3.5;
 		}
-		if (encoderCount <=11300) {
+		if (encoderCount <=11300) {//normal scale level
 			return 4;
 		}
 		if (encoderCount < 13400) {
 			return 4.5;
 		}
-		if (encoderCount < 13500) {
+		if (encoderCount < 13500) {//high scale level
 			return 5;
 		}
 		
