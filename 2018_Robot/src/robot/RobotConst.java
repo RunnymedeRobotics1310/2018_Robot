@@ -63,7 +63,7 @@ public class RobotConst {
 			DRIVE_SPEED_PID_KP = 0.75;
 			ENCODER_COUNTS_PER_INCH = 51.5;
 			
-			 ELEVATOR_ENCODER_COUNTS_PER_INCH = 0;
+			 ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
 			break;
 			
 		case 1321:
@@ -83,7 +83,7 @@ public class RobotConst {
 			DRIVE_SPEED_PID_KP = 0.75;
 			ENCODER_COUNTS_PER_INCH = 51.5;
 			
-			ELEVATOR_ENCODER_COUNTS_PER_INCH = 0;
+			ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
 		
 			break;
 		}
