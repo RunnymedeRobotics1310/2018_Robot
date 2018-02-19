@@ -90,8 +90,59 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	// ********************************************************************************************************************
 	@Override
 	public void setSpeed(double leftSpeedSetpoint, double rightSpeedSetpoint) {
+
 		this.leftSpeedSetpoint = leftSpeedSetpoint;
 		this.rightSpeedSetpoint = rightSpeedSetpoint;
+		
+		updateSpeed();
+	}
+	
+	private void updateSpeed() {
+		
+		double leftSpeed = leftMotor.get();
+		double rightSpeed = rightMotor.get();
+		
+		if (Math.abs(leftSpeedSetpoint - leftSpeed) < .03) {
+			leftSpeed = leftSpeedSetpoint;
+		}
+		else if (Math.abs(leftSpeedSetpoint - leftSpeed) > .2) {
+			if (leftSpeedSetpoint > leftSpeed) {
+				leftSpeed += .05;
+			}
+			else {
+				leftSpeed -= .05;
+			}
+		}
+		else {
+			if (leftSpeedSetpoint > leftSpeed) {
+				leftSpeed += .03;
+			}
+			else {
+				leftSpeed -= .03;
+			}
+		}
+
+		if (Math.abs(rightSpeedSetpoint - rightSpeed) < .03) {
+			rightSpeed = rightSpeedSetpoint;
+		}
+		else if (Math.abs(rightSpeedSetpoint - rightSpeed) > .2) {
+			if (rightSpeedSetpoint > rightSpeed) {
+				rightSpeed += .05;
+			}
+			else {
+				rightSpeed -= .05;
+			}
+		}
+		else {
+			if (rightSpeedSetpoint > rightSpeed) {
+				rightSpeed += .03;
+			}
+			else {
+				rightSpeed -= .03;
+			}
+		}
+		
+		super.setSpeed(leftSpeed, rightSpeed);
 	}
 	
 	// ********************************************************************************************************************
@@ -119,38 +170,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
-
-		if (!super.speedPidsEnabled()) {
-
-			double leftSpeed = leftMotor.get();
-			double rightSpeed = rightMotor.get();
-			
-			if (Math.abs(leftSpeedSetpoint - leftSpeed) < .03) {
-				leftSpeed = leftSpeedSetpoint;
-			}
-			else {
-				if (leftSpeedSetpoint > leftSpeed) {
-					leftSpeed += .03;
-				}
-				else {
-					leftSpeed -= .03;
-				}
-			}
-	
-			if (Math.abs(rightSpeedSetpoint - rightSpeed) < .03) {
-				rightSpeed = rightSpeedSetpoint;
-			}
-			else {
-				if (rightSpeedSetpoint > rightSpeed) {
-					rightSpeed += .03;
-				}
-				else {
-					rightSpeed -= .03;
-				}
-			}
-			
-			super.setSpeed(leftSpeed, rightSpeed);
-		}
 
 		super.updatePeriodic();
 
