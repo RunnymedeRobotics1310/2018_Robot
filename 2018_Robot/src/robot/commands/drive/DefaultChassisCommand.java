@@ -109,27 +109,31 @@ public class DefaultChassisCommand extends Command {
 		//System.out.println(turn);
 
 		// automatic high gear
-		//System.out.println(leftSpeed + " " + rightSpeed + " " + getEncoderSpeed()); 
-		if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) >= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.6) { 
-			if ((Math.abs(leftSpeed) > 0.9 || Math.abs(rightSpeed) > 0.9) && ((leftSpeed >= 0 && rightSpeed >= 0) || (leftSpeed <= 0 && rightSpeed <= 0))) { 
+		if (Robot.oi.getTurboOn()) {
+
+			//System.out.println(leftSpeed + " " + rightSpeed + " " + getEncoderSpeed()); 
+			if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) >= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.4 
+				&& (   (leftSpeed >= 0 && rightSpeed >= 0) 
+					|| (leftSpeed <= 0 && rightSpeed <= 0) ) ) { 
 				Robot.chassisSubsystem.enableTurbo();
 			}
-			//System.out.println("enable turbo"); 
-		} 
+			 
 
+			if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) <= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.2) {
+				Robot.chassisSubsystem.disableTurbo(); 
+				// System.out.println("disable turbo 1"); 
+			} 
+			if (! ((leftSpeed >= 0 && rightSpeed >= 0) 
+				|| (leftSpeed <= 0 && rightSpeed <= 0))) { 
+				Robot.chassisSubsystem.disableTurbo();
+				//System.out.println("disable turbo 3"); 
+			}
 
-		if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) <= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.4) {
-			Robot.chassisSubsystem.disableTurbo(); 
-			// System.out.println("disable turbo 1"); 
-		} 
-		if (Math.abs(leftSpeed) < 0.9 && Math.abs(rightSpeed) < 0.9) { 
-			Robot.chassisSubsystem.disableTurbo();
-			//System.out.println("disable turbo 2"); 
-		} 
-		if (!((leftSpeed >= 0 && rightSpeed >= 0) || (leftSpeed <= 0 && rightSpeed <= 0))) { 
-			Robot.chassisSubsystem.disableTurbo();
-			//System.out.println("disable turbo 3"); 
 		}
+		else {
+			Robot.chassisSubsystem.disableTurbo(); 
+		}
+
 
 		Robot.chassisSubsystem.setSpeed(leftSpeed, rightSpeed);
 	}
