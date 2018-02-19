@@ -29,6 +29,9 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 
 	private boolean turboEnabled = false;
 
+	private double leftSpeedSetpoint = 0;
+	private double rightSpeedSetpoint = 0;
+	
 	public ChassisSubsystem() {
 
 		// Uncomment this block to use CAN based speed controllers
@@ -83,6 +86,15 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	}
 
 	// ********************************************************************************************************************
+	// Slew rate on acceleration (takes at least 1 second to stop)
+	// ********************************************************************************************************************
+	@Override
+	public void setSpeed(double leftSpeedSetpoint, double rightSpeedSetpoint) {
+		this.leftSpeedSetpoint = leftSpeedSetpoint;
+		this.rightSpeedSetpoint = rightSpeedSetpoint;
+	}
+	
+	// ********************************************************************************************************************
 	// Turbo routines
 	// ********************************************************************************************************************
 	public void enableTurbo() {
@@ -107,7 +119,38 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
-		
+
+		if (!super.speedPidsEnabled()) {
+			
+			double leftSpeed = leftMotor.get();
+			double rightSpeed = rightMotor.get();
+			
+			if (Math.abs(leftSpeedSetpoint - leftSpeed) < .025) {
+				leftSpeed = leftSpeedSetpoint;
+			}
+			else {
+				if (leftSpeedSetpoint > leftSpeed) {
+					leftSpeed += .025;
+				}
+				else {
+					leftSpeed -= .025;
+				}
+			}
+	
+			if (Math.abs(rightSpeedSetpoint - rightSpeed) < .025) {
+				leftSpeed = rightSpeedSetpoint;
+			}
+			else {
+				if (rightSpeedSetpoint > rightSpeed) {
+					rightSpeed += .025;
+				}
+				else {
+					rightSpeed -= .025;
+				}
+			}
+			
+			super.setSpeed(leftSpeed, rightSpeed);
+		}
 
 		super.updatePeriodic();
 
