@@ -68,6 +68,10 @@ public class OI {
 	private TButtonPressDetector elevatorDownButtonPress = 
 			new TButtonPressDetector(operatorController,TButton.LEFT_BUMPER);
 
+	public void init() {
+		pneumaticsToggle.set(true);
+	}
+	
 	//Driver Controller
 	public double getSpeed() {
 		return - gameController.getAxis(TStick.LEFT, TAxis.Y);
