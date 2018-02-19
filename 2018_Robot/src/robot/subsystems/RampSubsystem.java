@@ -18,9 +18,9 @@ public class RampSubsystem extends TSubsystem {
 
 	// Speed Controllers
 	TSpeedController leftFrontRampMotor  = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_FRONT_RAMP_MOTOR_CAN_ADDRESS, RobotConst.INVERTED);
-	TSpeedController leftRearRampMotor  = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
-	TSpeedController rightFrontRampMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_FRONT_RAMP_MOTOR_CAN_ADDRESS, RobotConst.INVERTED);
-	TSpeedController rightRearRampMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
+//	TSpeedController leftRearRampMotor  = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
+//	TSpeedController rightFrontRampMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_FRONT_RAMP_MOTOR_CAN_ADDRESS, RobotConst.INVERTED);
+//	TSpeedController rightRearRampMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
 
 	// Limit Switches
 	DigitalInput leftBottomLimit  = new DigitalInput(RobotMap.LEFT_BOTTOM_LIMIT_DIO_PORT);
@@ -45,24 +45,24 @@ public class RampSubsystem extends TSubsystem {
 		{
 			if (speed>0) {
 				leftFrontRampMotor.set(0);
-				leftRearRampMotor.set(0);
+//				leftRearRampMotor.set(0);
 			}
 			else {
 				leftFrontRampMotor.set(speed);
-				leftRearRampMotor.set(speed);
+//				leftRearRampMotor.set(speed);
 			}
 
 		}
 		else {
 			leftFrontRampMotor.set(speed);
-			leftRearRampMotor.set(speed);
+//			leftRearRampMotor.set(speed);
 		}
 	}
 
 
 	public void setRightRampSpeed(double speed) {
 
-		if (atLimit(rightBottomLimit))
+/*		if (atLimit(rightBottomLimit))
 		{
 			if (speed>0) {
 				rightFrontRampMotor.set(0);
@@ -77,13 +77,13 @@ public class RampSubsystem extends TSubsystem {
 			rightFrontRampMotor.set(speed);
 			rightRearRampMotor.set(speed);
 		}
-	}
+*/	}
 
 	@Override
 	public void updatePeriodic() {
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("left ramp motor", leftFrontRampMotor.get());
-		SmartDashboard.putNumber("right ramp motor", rightFrontRampMotor.get());
+//		SmartDashboard.putNumber("right ramp motor", rightFrontRampMotor.get());
 		SmartDashboard.putBoolean("left bottom limit switch", atLimit(leftBottomLimit));
 		SmartDashboard.putBoolean("right bottom limit switch", atLimit(rightBottomLimit));
 	}
