@@ -102,10 +102,10 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		double leftSpeed = leftMotor.get();
 		double rightSpeed = rightMotor.get();
 		
-		if (Math.abs(leftSpeedSetpoint - leftSpeed) < .03) {
+		if (Math.abs(leftSpeedSetpoint - leftSpeed) < .02) {
 			leftSpeed = leftSpeedSetpoint;
 		}
-		else if (Math.abs(leftSpeedSetpoint - leftSpeed) > .5) {
+		else if (Math.abs(leftSpeedSetpoint - leftSpeed) > .8) {
 			if (leftSpeedSetpoint > leftSpeed) {
 				leftSpeed += .05;
 			}
@@ -115,17 +115,17 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		}
 		else {
 			if (leftSpeedSetpoint > leftSpeed) {
-				leftSpeed += .03;
+				leftSpeed += .02;
 			}
 			else {
-				leftSpeed -= .03;
+				leftSpeed -= .02;
 			}
 		}
 
-		if (Math.abs(rightSpeedSetpoint - rightSpeed) < .03) {
+		if (Math.abs(rightSpeedSetpoint - rightSpeed) < .02) {
 			rightSpeed = rightSpeedSetpoint;
 		}
-		else if (Math.abs(rightSpeedSetpoint - rightSpeed) > .5) {
+		else if (Math.abs(rightSpeedSetpoint - rightSpeed) > .8) {
 			if (rightSpeedSetpoint > rightSpeed) {
 				rightSpeed += .05;
 			}
@@ -135,10 +135,10 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		}
 		else {
 			if (rightSpeedSetpoint > rightSpeed) {
-				rightSpeed += .03;
+				rightSpeed += .02;
 			}
 			else {
-				rightSpeed -= .03;
+				rightSpeed -= .02;
 			}
 		}
 		

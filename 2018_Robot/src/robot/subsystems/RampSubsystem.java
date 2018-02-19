@@ -45,18 +45,26 @@ public class RampSubsystem extends TSubsystem {
 		{
 			if (speed>0) {
 				leftFrontRampMotor.set(0);
-//				leftRearRampMotor.set(0);
+				leftRearRampMotor.set(0);
 			}
 			else {
 				leftFrontRampMotor.set(speed);
-//				leftRearRampMotor.set(speed);
+				leftRearRampMotor.set(speed+.1);
 			}
 
 		}
 		else {
 			leftFrontRampMotor.set(speed);
-//			leftRearRampMotor.set(speed);
+			leftRearRampMotor.set(speed-.1);
 		}
+	}
+
+	public void adjustRightRearRamp(double speed) {
+//		rightRearRampMotor.set(speed);
+	}
+
+	public void adjustLeftRearRamp(double speed) {
+		leftRearRampMotor.set(speed);
 	}
 
 

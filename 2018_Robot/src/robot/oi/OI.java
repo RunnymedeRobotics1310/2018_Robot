@@ -32,8 +32,10 @@ import robot.RobotConst;
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
- * 		Right Stick Press  	= Toggle PIDs
- * 		Left Stick Press 	= Toggle Compressor
+ * 		Right Stick X    	= Right Ramp Rear Adjust
+ * 		Right Stick Y    	= Left Ramp Rear Adjust
+ * 		Right Stick Press  	= 
+ * 		Left Stick Press 	= 
  * 	Buttons:
  * 		Y Button 			= Eject Cube out Front of the Robot
  * 		A Button 			= Eject Cube out Back of the Robot
@@ -136,7 +138,14 @@ public class OI {
 			return true;
 		}
 		return false;
-
+	}
+	
+	public double getRightRampRearAdjust() {
+		return operatorController.getAxis(TStick.RIGHT, TAxis.X);
+	}
+	
+	public double getLeftRampRearAdjust() {
+		return - operatorController.getAxis(TStick.RIGHT, TAxis.Y);
 	}
 	
 	public double getElevatorSpeed() {
@@ -178,6 +187,7 @@ public class OI {
 	public void updatePeriodic() {
 		pneumaticsToggle.updatePeriodic();
 		pidToggle.updatePeriodic();
+		rampRelease.updatePeriodic();
 	}
 
 

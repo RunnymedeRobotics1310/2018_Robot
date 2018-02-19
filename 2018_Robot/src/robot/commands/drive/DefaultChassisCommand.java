@@ -81,8 +81,8 @@ public class DefaultChassisCommand extends Command {
 
 		//straight turning
 		if (Math.abs(turn) > 0.1 && Math.abs(speed) < 0.1) {
-			leftSpeed = scaledTurn;
-			rightSpeed = -scaledTurn;
+			leftSpeed = scaledTurn * .6;
+			rightSpeed = -scaledTurn * .6;
 		}
 
 		// Blend speed and turn
