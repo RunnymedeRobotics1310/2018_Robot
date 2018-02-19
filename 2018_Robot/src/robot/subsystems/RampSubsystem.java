@@ -18,13 +18,13 @@ public class RampSubsystem extends TSubsystem {
 
 	// Speed Controllers
 	TSpeedController leftFrontRampMotor  = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_FRONT_RAMP_MOTOR_CAN_ADDRESS, RobotConst.INVERTED);
-//	TSpeedController leftRearRampMotor  = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
+	TSpeedController leftRearRampMotor  = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.LEFT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
 //	TSpeedController rightFrontRampMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_FRONT_RAMP_MOTOR_CAN_ADDRESS, RobotConst.INVERTED);
 //	TSpeedController rightRearRampMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS, RobotConst.NOT_INVERTED);
 
 	// Limit Switches
-	DigitalInput leftBottomLimit  = new DigitalInput(RobotMap.LEFT_BOTTOM_LIMIT_DIO_PORT);
-	DigitalInput rightBottomLimit = new DigitalInput(RobotMap.RIGHT_BOTTOM_LIMIT_DIO_PORT);
+	DigitalInput leftBottomLimit  = new DigitalInput(RobotMap.LEFT_RAMP_BOTTOM_LIMIT_DIO_PORT);
+	DigitalInput rightBottomLimit = new DigitalInput(RobotMap.RIGHT_RAMP_BOTTOM_LIMIT_DIO_PORT);
 	Solenoid rampRelease = new Solenoid(RobotMap.RAMP_RELEASE); 
 
 	@Override

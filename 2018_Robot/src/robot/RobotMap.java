@@ -41,8 +41,8 @@ public class RobotMap {
 	//******************************************
 	// DIO Ports
 	//******************************************
-	public static int LEFT_BOTTOM_LIMIT_DIO_PORT        = 0;
-	public static int RIGHT_BOTTOM_LIMIT_DIO_PORT       = 1;
+	public static int LEFT_RAMP_BOTTOM_LIMIT_DIO_PORT   = 0;
+	public static int RIGHT_RAMP_BOTTOM_LIMIT_DIO_PORT  = 1;
 	
 	public static int ELEVATOR_BOTTOM_LIMIT_DIO_PORT    = 2;
 	public static int ELEVATOR_TOP_LIMIT_DIO_PORT       = 3;

@@ -18,14 +18,14 @@ public class ElevatorSubsystem extends TSubsystem {
 	public static double MAX_LEVEL = 5;
 
 	
-	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS);
-	TEncoder encoder = elevatorMotor.getEncoder();
+//	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS);
+//	TEncoder encoder = elevatorMotor.getEncoder();
 
 	TLimitSwitch bottom = new TLimitSwitch(RobotMap.ELEVATOR_BOTTOM_LIMIT_DIO_PORT, DefaultState.TRUE);
 	TLimitSwitch top = new TLimitSwitch(RobotMap.ELEVATOR_TOP_LIMIT_DIO_PORT, DefaultState.TRUE);
 
 	public double getLevel(){
-		double encoderCount = encoder.get();
+		double encoderCount = 0; // encoder.get();
 		if (encoderCount <= 2) {//pickup level
 			return 0;
 		}
@@ -63,14 +63,16 @@ public class ElevatorSubsystem extends TSubsystem {
 		
 		return 5.5;
 	}
+	
 	public void resetEncoders() {
 
-		if (encoder == null) { return; } 
-
-		encoder.reset();
+//		if (encoder == null) { return; } 
+//
+//		encoder.reset();
 	}
+	
 	public double getElevatorEncoder() {
-		return encoder.get();
+		return 0; //encoder.get();
 	}
 
 	public void setSpeed(double speed) {
@@ -79,15 +81,15 @@ public class ElevatorSubsystem extends TSubsystem {
 		// speed is positive, then set the speed
 		// to zero.
 		if (top.atLimit() && speed > 0) {
-			elevatorMotor.set(0);
+//			elevatorMotor.set(0);
 		}
 		// If the elevator is at the bottom and the
 		// speed is negative, then do not go down
 		else if (bottom.atLimit() && speed < 0) {
-			elevatorMotor.set(0);
+//			elevatorMotor.set(0);
 		}
 		else {
-			elevatorMotor.set(speed);
+//			elevatorMotor.set(speed);
 		}
 	} 
 
@@ -101,8 +103,9 @@ public class ElevatorSubsystem extends TSubsystem {
 
 	@Override
 	public void init() {
-		encoder.setInverted(true);
+//		encoder.setInverted(true);
 	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated mthod stub
@@ -121,7 +124,7 @@ public class ElevatorSubsystem extends TSubsystem {
 		SmartDashboard.putNumber("Elevator Encoder Count", getElevatorEncoder());
 		SmartDashboard.putBoolean("Bottom Elevator Limit", getBottomProx());
 		SmartDashboard.putBoolean("Top Elevator Limit", getTopProx());
-		SmartDashboard.putNumber("Elevator Motor", elevatorMotor.get());
+//		SmartDashboard.putNumber("Elevator Motor", elevatorMotor.get());
 	}
 
 }
