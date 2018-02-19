@@ -121,31 +121,31 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	public void updatePeriodic() {
 
 		if (!super.speedPidsEnabled()) {
-			
+
 			double leftSpeed = leftMotor.get();
 			double rightSpeed = rightMotor.get();
 			
-			if (Math.abs(leftSpeedSetpoint - leftSpeed) < .025) {
+			if (Math.abs(leftSpeedSetpoint - leftSpeed) < .03) {
 				leftSpeed = leftSpeedSetpoint;
 			}
 			else {
 				if (leftSpeedSetpoint > leftSpeed) {
-					leftSpeed += .025;
+					leftSpeed += .03;
 				}
 				else {
-					leftSpeed -= .025;
+					leftSpeed -= .03;
 				}
 			}
 	
-			if (Math.abs(rightSpeedSetpoint - rightSpeed) < .025) {
-				leftSpeed = rightSpeedSetpoint;
+			if (Math.abs(rightSpeedSetpoint - rightSpeed) < .03) {
+				rightSpeed = rightSpeedSetpoint;
 			}
 			else {
 				if (rightSpeedSetpoint > rightSpeed) {
-					rightSpeed += .025;
+					rightSpeed += .03;
 				}
 				else {
-					rightSpeed -= .025;
+					rightSpeed -= .03;
 				}
 			}
 			
