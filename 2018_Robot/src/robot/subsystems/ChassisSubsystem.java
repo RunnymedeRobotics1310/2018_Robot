@@ -105,7 +105,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		if (Math.abs(leftSpeedSetpoint - leftSpeed) < .03) {
 			leftSpeed = leftSpeedSetpoint;
 		}
-		else if (Math.abs(leftSpeedSetpoint - leftSpeed) > .2) {
+		else if (Math.abs(leftSpeedSetpoint - leftSpeed) > .5) {
 			if (leftSpeedSetpoint > leftSpeed) {
 				leftSpeed += .05;
 			}
@@ -125,7 +125,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		if (Math.abs(rightSpeedSetpoint - rightSpeed) < .03) {
 			rightSpeed = rightSpeedSetpoint;
 		}
-		else if (Math.abs(rightSpeedSetpoint - rightSpeed) > .2) {
+		else if (Math.abs(rightSpeedSetpoint - rightSpeed) > .5) {
 			if (rightSpeedSetpoint > rightSpeed) {
 				rightSpeed += .05;
 			}
