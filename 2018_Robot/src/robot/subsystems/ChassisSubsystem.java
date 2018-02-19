@@ -21,7 +21,7 @@ import robot.commands.drive.DefaultChassisCommand;
  */
 public class ChassisSubsystem extends TGryoDriveSubsystem {
 
-	private DigitalInput frontLimitSwitch = new DigitalInput(4);
+	private DigitalInput frontLimitSwitch = new DigitalInput(8);
 
 	public TUltrasonicSensor ultrasonicSensor = new TUltrasonicSensor(RobotMap.ULTRASONIC_SENSOR_ANALOG_PORT);
 

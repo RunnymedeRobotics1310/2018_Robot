@@ -86,22 +86,22 @@ public class DefaultChassisCommand extends Command {
 		// Blend speed and turn
 		if ( speed > 0.1 && turn > 0.1) {
 			leftSpeed = scaledSpeed;
-			rightSpeed = scaledSpeed - (turn / 2);
+			rightSpeed = scaledSpeed - (turn * .65);
 		}
 		
 		if ( speed > 0.1 && turn < -0.1) {
-			leftSpeed = scaledSpeed + (turn / 2);
+			leftSpeed = scaledSpeed + (turn * .65);
 			rightSpeed = scaledSpeed;
 		}
 		
 		if ( speed < -0.1 && turn > 0.1) {
-			leftSpeed = scaledSpeed+ (turn /2);
+			leftSpeed = scaledSpeed+ (turn * .65);
 			rightSpeed = scaledSpeed ;
 		}
 		
 		if ( speed < -0.1 && turn < -0.1) {
 			leftSpeed = scaledSpeed ;
-			rightSpeed = scaledSpeed - (turn / 2);
+			rightSpeed = scaledSpeed - (turn * .65);
 		}
 		//System.out.println(speed);
 		//System.out.println(turn);
