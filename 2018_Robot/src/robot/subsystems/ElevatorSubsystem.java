@@ -7,7 +7,6 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TCanSpeedControllerType;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 import robot.commands.elevator.DefaultElevatorCommand;
@@ -18,7 +17,8 @@ public class ElevatorSubsystem extends TSubsystem {
 	public static double MAX_LEVEL = 5;
 
 	
-	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS);
+	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS,
+			TCanSpeedControllerType.VICTOR_SPX, RobotMap.ELEVATOR_MOTOR_FOLLOWER_CAN_ADDRESS);
 	TEncoder encoder = elevatorMotor.getEncoder();
 
 	TLimitSwitch bottom = new TLimitSwitch(RobotMap.ELEVATOR_BOTTOM_LIMIT_DIO_PORT, DefaultState.TRUE);
@@ -69,6 +69,7 @@ public class ElevatorSubsystem extends TSubsystem {
 
 		encoder.reset();
 	}
+
 	public double getElevatorEncoder() {
 		return encoder.get();
 	}
@@ -91,11 +92,11 @@ public class ElevatorSubsystem extends TSubsystem {
 		}
 	} 
 
-	public boolean getBottomProx() {
+	public boolean atLowerLimit() {
 		return bottom.atLimit(); // bottom prox. sensor value	
 	}
 
-	public boolean getTopProx() {
+	public boolean atUpperLimit() {
 		return top.atLimit(); // top prox. sensor value	
 	}
 
@@ -114,13 +115,20 @@ public class ElevatorSubsystem extends TSubsystem {
 
 		// Safety check the elevator speed every loop and
 		// stop if on a limit.
+		if (atLowerLimit() && elevatorMotor.get() < 0) {
+			setSpeed(0);
+			resetEncoders();
+		}
 
+		if (atUpperLimit() && elevatorMotor.get() > 0) {
+			setSpeed(0);
+		}
 
 		// TODO Auto-generated method stub
 		SmartDashboard.putNumber("Elevator Level", getLevel());
 		SmartDashboard.putNumber("Elevator Encoder Count", getElevatorEncoder());
-		SmartDashboard.putBoolean("Bottom Elevator Limit", getBottomProx());
-		SmartDashboard.putBoolean("Top Elevator Limit", getTopProx());
+		SmartDashboard.putBoolean("Bottom Elevator Limit", atLowerLimit());
+		SmartDashboard.putBoolean("Top Elevator Limit", atUpperLimit());
 		SmartDashboard.putNumber("Elevator Motor", elevatorMotor.get());
 	}
 
