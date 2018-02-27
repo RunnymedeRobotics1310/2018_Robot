@@ -126,6 +126,10 @@ public abstract class TDriveSubsystem extends TSubsystem {
 		}
 	}
 	
+	public boolean speedPidsEnabled() {
+		return speedPidsActive;
+	}
+	
 	/**
 	 * Get the raw distance covered since the last encoder reset
 	 * @return

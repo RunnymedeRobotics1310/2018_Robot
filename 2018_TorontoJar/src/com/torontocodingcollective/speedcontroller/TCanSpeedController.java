@@ -14,6 +14,8 @@ public class TCanSpeedController extends TSpeedController {
 	
 	private boolean isInverted = false;
 	
+	private double speedSetpoint = 0;
+	
 	public TCanSpeedController(TCanSpeedControllerType controllerType, int canAddress, boolean isInverted, int... followerCanAddresses) {
 		this.isInverted = isInverted;
 		canSpeedController = newController(controllerType, canAddress);
@@ -52,13 +54,14 @@ public class TCanSpeedController extends TSpeedController {
 	@Override
 	public double get() {
 		
-		double speed = canSpeedController.getMotorOutputPercent();
+		return speedSetpoint;
+/*		double speed = canSpeedController.getMotorOutputPercent();
 		
 		if (isInverted) {
 			speed = -speed;
 		}
 		return speed;
-	}
+*/	}
 	
 	/**
 	 * Return an encoder with the same inversion setting as the motor
@@ -88,6 +91,9 @@ public class TCanSpeedController extends TSpeedController {
 
 	@Override
 	public void set(double speed) {
+		
+		speedSetpoint = speed;
+		
 		if (isInverted) {
 			speed = -speed;
 		}

@@ -17,7 +17,7 @@ public class PneumaticsSubsystem extends TSubsystem {
 	
 	@Override
 	public void init() {
-		compressor.setClosedLoopControl(false);
+		compressor.setClosedLoopControl(true);
 	};
 
 	public void disableCompressor() {

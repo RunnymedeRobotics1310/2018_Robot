@@ -12,11 +12,11 @@ public class RobotMap {
 	//******************************************
 	// Speed Controllers (CAN addresses)
 	//******************************************
-	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 0;  // TALON_SRX
-	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 1;  // TALON_SRX
+	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 1;  // TALON_SRX
+	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 0;  // TALON_SRX
 
-	public static int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 2;  // VICTOR_SPX
-	public static int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 3;  // VICTOR_SPX
+	public static int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 3;  // VICTOR_SPX
+	public static int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 2;  // VICTOR_SPX
 	
 	public static int ELEVATOR_MOTOR_CAN_ADDRESS            = 4;  // TALON_SRX
 	
@@ -41,8 +41,8 @@ public class RobotMap {
 	//******************************************
 	// DIO Ports
 	//******************************************
-	public static int LEFT_BOTTOM_LIMIT_DIO_PORT        = 0;
-	public static int RIGHT_BOTTOM_LIMIT_DIO_PORT       = 1;
+	public static int LEFT_RAMP_BOTTOM_LIMIT_DIO_PORT   = 0;
+	public static int RIGHT_RAMP_BOTTOM_LIMIT_DIO_PORT  = 1;
 	
 	public static int ELEVATOR_BOTTOM_LIMIT_DIO_PORT    = 2;
 	public static int ELEVATOR_TOP_LIMIT_DIO_PORT       = 3;

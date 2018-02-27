@@ -5,7 +5,7 @@ public class RobotConst {
 	// The TorontoCodingCollective framework was developed to run on different
 	// robots.
 	// Supported robots are 1311 and 1321.
-	public static int robot = 1321;
+	public static int robot = 1311;
 
 	
 	public static final boolean INVERTED = true;
@@ -54,14 +54,14 @@ public class RobotConst {
 			RIGHT_ENCODER_ORIENTATION = NOT_INVERTED;
 			LEFT_ENCODER_ORIENTATION = INVERTED;
 			
-			MAX_LOW_GEAR_SPEED = 365.0;    // Encoder counts/sec
-			MAX_HIGH_GEAR_SPEED = 830.0;
+			MAX_LOW_GEAR_SPEED = 580.0;    // Encoder counts/sec
+			MAX_HIGH_GEAR_SPEED = 2000.0;
 			
 			DRIVE_GYRO_PID_KP = .1;
 			DRIVE_GYRO_PID_KI = 0;
 			
-			DRIVE_SPEED_PID_KP = 0.75;
-			ENCODER_COUNTS_PER_INCH = 51.5;
+			DRIVE_SPEED_PID_KP = 0.3;
+			ENCODER_COUNTS_PER_INCH = 55.6;
 			
 			 ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
 			break;
