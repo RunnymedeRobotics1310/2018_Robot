@@ -41,22 +41,18 @@ public class RampSubsystem extends TSubsystem {
 
 	public void setLeftRampSpeed(double speed) {
 
-		if (atLimit(leftBottomLimit))
-		{
-			if (speed>0) {
-				leftFrontRampMotor.set(0);
-				leftRearRampMotor.set(0);
-			}
-			else {
-				leftFrontRampMotor.set(speed);
-				leftRearRampMotor.set(speed+.1);
-			}
+		// If the speed is set to go up and at the 
+	    // limit, then stop driving.
+		if (   atLimit(leftBottomLimit)
+			&& speed > 0) { 
+			speed = 0;
+		}
 
-		}
-		else {
-			leftFrontRampMotor.set(speed);
-			leftRearRampMotor.set(speed-.1);
-		}
+		leftFrontRampMotor.set(speed);
+		
+		// For some unknown reason, the rear motor turns faster
+		// so scale the speed down.
+		leftRearRampMotor.set(speed * .97);
 	}
 
 	public void adjustRightRearRamp(double speed) {
@@ -90,7 +86,8 @@ public class RampSubsystem extends TSubsystem {
 	@Override
 	public void updatePeriodic() {
 		// TODO Auto-generated method stub
-		SmartDashboard.putNumber("left ramp motor", leftFrontRampMotor.get());
+		SmartDashboard.putNumber("left front ramp motor", leftFrontRampMotor.get());
+		SmartDashboard.putNumber("left rear ramp motor", leftRearRampMotor.get());
 //		SmartDashboard.putNumber("right ramp motor", rightFrontRampMotor.get());
 		SmartDashboard.putBoolean("left bottom limit switch", atLimit(leftBottomLimit));
 		SmartDashboard.putBoolean("right bottom limit switch", atLimit(rightBottomLimit));
