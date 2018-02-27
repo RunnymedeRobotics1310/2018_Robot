@@ -9,6 +9,7 @@ import robot.oi.GameData;
 import robot.oi.OI;
 import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ElevatorSubsystem;
+import robot.subsystems.IntakeSubsystem;
 import robot.subsystems.PneumaticsSubsystem;
 import robot.subsystems.RampSubsystem;
 
@@ -25,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static final PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
 	public static final RampSubsystem rampSubsystem = new RampSubsystem();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-//	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static OI oi;
 	
 	
@@ -44,7 +45,7 @@ public class Robot extends IterativeRobot {
 		pneumaticsSubsystem.init();
 		rampSubsystem.init();
 		elevatorSubsystem.init();
-//		intakeSubsystem.init();
+		intakeSubsystem.init();
 	}
 
 	/**
