@@ -60,6 +60,8 @@ public class OI {
 	private TGameController gameController = new TGameController_Logitech(0);
 	private TGameController operatorController = new TGameController_Logitech(1);
 
+	private TToggle intakeToggle = new TToggle(gameController, TButton.Y);
+	
 	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
 	private TToggle rampRelease = new TToggle(operatorController, TButton.X);
@@ -163,25 +165,27 @@ public class OI {
 	public boolean getRampRelease() {
 		return rampRelease.get();
 	}
+	
+	
 
 	/*
 	 * Intake Buttons
 	 */
-	public double getIntakeForeArm() {
-		return gameController.getAxis(TStick.LEFT, TAxis.Y);
-//		return gameController.getTrigger(TTrigger.LEFT);
+	
+	public boolean getIntakeCube() {
+		return intakeToggle.get();  // a toggle
 	}
 
-	public double getOuttakeForeArm() {
-		return gameController.getTrigger(TTrigger.RIGHT);
-	}
-
-	public boolean getIntakeEjectForward() {
-		return gameController.getButton(TButton.Y);
-	}
-
-	public boolean getIntakeEjectBackward() {
+	public boolean getOuttakeCube() {
 		return gameController.getButton(TButton.A);
+	}
+	
+	public boolean getLiftArmUp() {
+		return false; // TODO get a button
+	}
+	
+	public boolean getLiftArmDown() {
+		return false; //TODO: get a button
 	}
 
 	public void updatePeriodic() {

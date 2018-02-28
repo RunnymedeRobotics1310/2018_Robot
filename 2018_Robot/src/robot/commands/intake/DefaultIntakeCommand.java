@@ -35,30 +35,32 @@ public class DefaultIntakeCommand extends Command {
 	@Override
 	protected void execute() {
 
-		double speed = Robot.oi.getIntakeForeArm();
-		
-
-		SmartDashboard.putNumber("Intake speed", speed);
-		
-		if (speed > 0.1 || speed < 0.1) { // shouldn't this be math.abs?
-			Robot.intakeSubsystem.openForeArms(speed);
+		// Intake / outtake code
+		if (Robot.oi.getIntakeCube()) {
+			Robot.intakeSubsystem.intakeCube();
+		} else if (Robot.oi.getOuttakeCube()) {
+			Robot.intakeSubsystem.outtakeCube();
 		} else {
-			Robot.intakeSubsystem.stopClawMotors();
+			Robot.intakeSubsystem.intakeStop();
 		}
 
-		
-//		if (Robot.oi.getIntakeEjectForward()) {
-//			Robot.intakeSubsystem.intakeCube(1.0);
-//		} else {
-//			Robot.intakeSubsystem.stopIntake();
-//		}
-//		
-//		
-//		if (Robot.oi.getIntakeEjectBackward()) {
-//			Robot.intakeSubsystem._intakeCube(1.0);
-//		} else {
-//			Robot.intakeSubsystem.stopIntake();
-//		}
+		// Handle lift
+		if (Robot.oi.getLiftArmUp()) {
+			Robot.intakeSubsystem.liftIntakeArmUp();
+		} else if (Robot.oi.getLiftArmDown()) {
+			Robot.intakeSubsystem.liftIntakeArmDown();
+		}
+
+		// If the intake motor is running and the cube is detected... 
+		// it means we are trying to intake cube
+		// Close the clamp and stop the motors from running
+		// Lift the arm up
+		if (Robot.intakeSubsystem.isCubeDetected() && Robot.intakeSubsystem.isIntakeMotorRunning()) {
+			Robot.intakeSubsystem.intakeClampClose();
+			Robot.intakeSubsystem.intakeStop();
+			Robot.intakeSubsystem.liftIntakeArmUp();
+		}
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

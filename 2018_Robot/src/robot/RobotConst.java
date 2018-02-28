@@ -22,6 +22,11 @@ public class RobotConst {
 	public static final boolean RIGHT_ENCODER_ORIENTATION;
 	public static final boolean LEFT_ENCODER_ORIENTATION;
 	
+	// Forward for the elevator is counter-clockwise when looking 
+	// from the back of the robot towards the front
+	public static final boolean ELEVATOR_MOTOR_ORIENTATION;
+	public static final boolean ELEVATOR_ENCODER_ORIENTATION;
+
 	public static final double MAX_LOW_GEAR_SPEED;
 	public static final double MAX_HIGH_GEAR_SPEED;
 	
@@ -63,7 +68,10 @@ public class RobotConst {
 			DRIVE_SPEED_PID_KP = 0.3;
 			ENCODER_COUNTS_PER_INCH = 55.6;
 			
-			 ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
+			ELEVATOR_MOTOR_ORIENTATION = NOT_INVERTED;
+			ELEVATOR_ENCODER_ORIENTATION = INVERTED;
+
+			ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
 			break;
 			
 		case 1321:
@@ -83,6 +91,9 @@ public class RobotConst {
 			DRIVE_SPEED_PID_KP = 0.75;
 			ENCODER_COUNTS_PER_INCH = 51.5;
 			
+			ELEVATOR_MOTOR_ORIENTATION = NOT_INVERTED;
+			ELEVATOR_ENCODER_ORIENTATION = INVERTED;
+
 			ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
 		
 			break;
