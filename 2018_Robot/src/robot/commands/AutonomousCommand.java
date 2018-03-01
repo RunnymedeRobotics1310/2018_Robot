@@ -5,6 +5,7 @@ import robot.commands.drive.ArcCommand;
 import robot.commands.drive.DriveDistanceCommand;
 import robot.commands.drive.RotateToAngleCommand;
 import robot.commands.elevator.SetElevatorHeightCommand;
+import robot.commands.intake.AutoCubeReleaseCommand;
 import robot.oi.AutoSelector;
 import robot.oi.GameData;
 
@@ -202,6 +203,7 @@ public class AutonomousCommand extends CommandGroup {
 					addSequential(new ArcCommand(80, 0, 45, 0.7));
 					addSequential(new DriveDistanceCommand(3, 45, 0.7, 3.0, false));
 					addSequential(new ArcCommand(120, 45, 0, 0.7));
+					addSequential(new AutoCubeReleaseCommand());
 				}
 			}
 

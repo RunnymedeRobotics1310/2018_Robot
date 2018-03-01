@@ -85,17 +85,19 @@ public class IntakeSubsystem extends TSubsystem {
 	}
 	
 	public void tiltIntakeArmUp() {
-		if (getTiltEncoderCount() < LIFT_UP_ENCODER_COUNT) {
+//		if (getTiltEncoderCount() < LIFT_UP_ENCODER_COUNT) {
 			intakeTiltMotor.set(0.8);
-		}
+//		}
 	}
 	
 	public void tiltIntakeArmDown() {
-		if (getTiltEncoderCount() > LIFT_DOWN_ENCODER_COUNT) {
+//		if (getTiltEncoderCount() > LIFT_DOWN_ENCODER_COUNT) {
 			intakeTiltMotor.set(-0.8);
-		}
+//		}
 	}
 
+
+	
 	public void setIntakeTiltSpeed(double speed) {
 		intakeTiltMotor.set(speed);
 	}
