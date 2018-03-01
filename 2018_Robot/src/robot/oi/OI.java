@@ -27,7 +27,10 @@ import robot.RobotConst;
  * 		Start Button 		= Reset Encoders and Gyro 
  * 		Back Button 		= Cancel any Command
  * 	Bumpers/Triggers:
+ *      Right Bumper        = Intake Cube
+ *      Right Trigger       = Outtake Cube
  * 		Left Bumper			= High Gear
+ *      Left Trigger        = Intake Open
  * 
  * Operator Controller
  * 	Sticks:
@@ -57,13 +60,13 @@ public class OI {
 
 	public AutoSelector autoSelector = new AutoSelector();
 
-	private TGameController gameController = new TGameController_Logitech(0);
+	private TGameController driverController = new TGameController_Logitech(0);
 	private TGameController operatorController = new TGameController_Logitech(1);
 
-	private TToggle intakeToggle = new TToggle(gameController, TButton.Y);
+	private TToggle intakeToggle = new TToggle(driverController, TButton.Y);
 	
-	private TToggle pneumaticsToggle = new TToggle(gameController, TStick.LEFT);
-	private TToggle pidToggle = new TToggle(gameController, TStick.RIGHT);
+	private TToggle pneumaticsToggle = new TToggle(driverController, TStick.LEFT);
+	private TToggle pidToggle = new TToggle(driverController, TStick.RIGHT);
 	private TToggle rampRelease = new TToggle(operatorController, TButton.X);
 	
 	private TButtonPressDetector elevatorUpButtonPress = 
@@ -78,11 +81,11 @@ public class OI {
 	
 	//Driver Controller
 	public double getSpeed() {
-		return - gameController.getAxis(TStick.LEFT, TAxis.Y);
+		return - driverController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
 	public double getTurn() {
-		return gameController.getAxis(TStick.RIGHT, TAxis.X);
+		return driverController.getAxis(TStick.RIGHT, TAxis.X);
 	}
 
 	/*public boolean getForwardThrust() {
@@ -98,15 +101,15 @@ public class OI {
 	}*/
 
 	public boolean getCancelCommand() {
-		return gameController.getButton(TButton.BACK);
+		return driverController.getButton(TButton.BACK);
 	}
 
 	public boolean reset() {
-		return gameController.getButton(TButton.START);
+		return driverController.getButton(TButton.START);
 	}
 
 	public boolean getTurboOn() {
-		return gameController.getButton(TButton.LEFT_BUMPER);
+		return driverController.getButton(TButton.LEFT_BUMPER);
 	}
 
 	public boolean getCompressorEnabled() {
@@ -172,19 +175,28 @@ public class OI {
 	 * Intake Buttons
 	 */
 	
+	public boolean getClawOpen() {
+		return driverController.getButton(TTrigger.LEFT); 
+	}
+		
 	public boolean getIntakeCube() {
-		return intakeToggle.get();  // a toggle
+		return driverController.getButton(TButton.RIGHT_BUMPER); 
 	}
 
 	public boolean getOuttakeCube() {
-		return gameController.getButton(TButton.A);
+		return operatorController.getButton(TButton.A)
+				|| driverController.getButton(TTrigger.RIGHT);
 	}
 	
-	public boolean getLiftArmUp() {
+	public double getIntakeTiltSpeed() {
+		return - operatorController.getAxis(TStick.RIGHT, TAxis.Y);
+	}
+	
+	public boolean getTiltArmUp() {
 		return false; // TODO get a button
 	}
 	
-	public boolean getLiftArmDown() {
+	public boolean getTiltArmDown() {
 		return false; //TODO: get a button
 	}
 

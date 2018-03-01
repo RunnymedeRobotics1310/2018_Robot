@@ -24,10 +24,10 @@ public class RobotMap {
 	// Roller: 	to suck in the cube
 	// Lift: 	to lift the cube
 	public static int INTAKE_ROLLER_MOTOR_CAN_ADDRESS      =  6;  // VICTOR_SPX
-	public static int INTAKE_LIFT_MOTOR_CAN_ADDRESS        =  7;  // VICTOR_SPX
+	public static int INTAKE_TILT_MOTOR_CAN_ADDRESS        =  9;  // VICTOR_SPX
 	
 	public static int LEFT_FRONT_RAMP_MOTOR_CAN_ADDRESS    =  8;  // VICTOR_SPX
-	public static int LEFT_REAR_RAMP_MOTOR_CAN_ADDRESS     =  9;  // VICTOR_SPX
+	public static int LEFT_REAR_RAMP_MOTOR_CAN_ADDRESS     =  7;  // VICTOR_SPX
 	public static int RIGHT_FRONT_RAMP_MOTOR_CAN_ADDRESS   = 10;  // VICTOR_SPX
 	public static int RIGHT_REAR_RAMP_MOTOR_CAN_ADDRESS    = 11;  // VICTOR_SPX
 	
@@ -44,5 +44,5 @@ public class RobotMap {
 	// Pneumatics Ports
 	//******************************************
 	public static int SHIFTER_PNEUMATIC_PORT = 0;
-	public static int INTAKE_CLAMP_PNEUMATIC_PORT = 1;
+	public static int INTAKE_CLAW_PNEUMATIC_PORT = 1;
 }

@@ -1,7 +1,6 @@
 package robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Robot;
 
 /**
@@ -18,6 +17,7 @@ public class DefaultIntakeCommand extends Command {
 	@Override
 	protected void initialize() {
 
+		Robot.intakeSubsystem.intakeClawClose();
 		// Open the forearms and start intaking once the forearm is open
 		// if (Robot.oi.getIntakeForeArm() > 0.1) {
 		// Robot.intakeSubsystem.openForeArms();
@@ -35,6 +35,13 @@ public class DefaultIntakeCommand extends Command {
 	@Override
 	protected void execute() {
 
+		if (Robot.oi.getClawOpen()) {
+			Robot.intakeSubsystem.intakeClawOpen();
+		}
+		else {
+			Robot.intakeSubsystem.intakeClawClose();
+		}
+		
 		// Intake / outtake code
 		if (Robot.oi.getIntakeCube()) {
 			Robot.intakeSubsystem.intakeCube();
@@ -44,23 +51,30 @@ public class DefaultIntakeCommand extends Command {
 			Robot.intakeSubsystem.intakeStop();
 		}
 
-		// Handle lift
-		if (Robot.oi.getLiftArmUp()) {
-			Robot.intakeSubsystem.liftIntakeArmUp();
-		} else if (Robot.oi.getLiftArmDown()) {
-			Robot.intakeSubsystem.liftIntakeArmDown();
-		}
+//		// Handle lift
+//		if (Robot.oi.getLiftArmUp()) {
+//			Robot.intakeSubsystem.tiltIntakeArmUp();
+//		} else if (Robot.oi.getLiftArmDown()) {
+//			Robot.intakeSubsystem.tiltIntakeArmDown();
+//		}
 
 		// If the intake motor is running and the cube is detected... 
 		// it means we are trying to intake cube
 		// Close the clamp and stop the motors from running
 		// Lift the arm up
-		if (Robot.intakeSubsystem.isCubeDetected() && Robot.intakeSubsystem.isIntakeMotorRunning()) {
-			Robot.intakeSubsystem.intakeClampClose();
-			Robot.intakeSubsystem.intakeStop();
-			Robot.intakeSubsystem.liftIntakeArmUp();
+//		if (Robot.intakeSubsystem.isCubeDetected() && Robot.intakeSubsystem.isIntakeMotorRunning()) {
+//			Robot.intakeSubsystem.intakeClampClose();
+//			Robot.intakeSubsystem.intakeStop();
+//			Robot.intakeSubsystem.tiltIntakeArmUp();
+//		}
+		
+		double intakeTiltSpeed = Robot.oi.getIntakeTiltSpeed();
+		
+		if (Math.abs(intakeTiltSpeed) > 0.1) {
+			Robot.intakeSubsystem.setIntakeTiltSpeed(intakeTiltSpeed);
+		} else {
+			Robot.intakeSubsystem.setIntakeTiltSpeed(0);
 		}
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

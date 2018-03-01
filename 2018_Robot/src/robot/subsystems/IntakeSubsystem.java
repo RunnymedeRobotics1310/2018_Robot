@@ -23,13 +23,13 @@ public class IntakeSubsystem extends TSubsystem {
 	private TCanSpeedController intakeRollerMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
 			RobotMap.INTAKE_ROLLER_MOTOR_CAN_ADDRESS);
 	// Motor that moves the arm up and down
-	private TCanSpeedController intakeLiftMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
-			RobotMap.INTAKE_LIFT_MOTOR_CAN_ADDRESS);
+	private TCanSpeedController intakeTiltMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
+			RobotMap.INTAKE_TILT_MOTOR_CAN_ADDRESS);
 
-	private TEncoder intakeLiftEncoder = intakeLiftMotor.getEncoder();
+	private TEncoder intakeTiltEncoder = intakeTiltMotor.getEncoder();
 
 	// The intake clamp
-	private Solenoid intakeClamp = new Solenoid(RobotMap.INTAKE_CLAMP_PNEUMATIC_PORT);
+	private Solenoid intakeClaw = new Solenoid(RobotMap.INTAKE_CLAW_PNEUMATIC_PORT);
 	
 
 	// // The motors in the claw (arm) that "sucks" in the cube
@@ -64,15 +64,15 @@ public class IntakeSubsystem extends TSubsystem {
 		setDefaultCommand(new DefaultIntakeCommand());
 	}
 
-	public void intakeClampOpen() {
-		if (intakeClamp.get()) {
-			intakeClamp.set(true);
+	public void intakeClawOpen() {
+		if (!intakeClaw.get()) {
+			intakeClaw.set(true);
 		}
 	}
 
-	public void intakeClampClose() {
-		if (!intakeClamp.get()) {
-			intakeClamp.set(false);
+	public void intakeClawClose() {
+		if (intakeClaw.get()) {
+			intakeClaw.set(false);
 		}
 	}
 
@@ -84,16 +84,20 @@ public class IntakeSubsystem extends TSubsystem {
 		intakeRollerMotor.set(-1.0);
 	}
 	
-	public void liftIntakeArmUp() {
-		if (getLiftEncoderCount() < LIFT_UP_ENCODER_COUNT) {
-			intakeLiftMotor.set(0.8);
+	public void tiltIntakeArmUp() {
+		if (getTiltEncoderCount() < LIFT_UP_ENCODER_COUNT) {
+			intakeTiltMotor.set(0.8);
 		}
 	}
 	
-	public void liftIntakeArmDown() {
-		if (getLiftEncoderCount() > LIFT_DOWN_ENCODER_COUNT) {
-			intakeLiftMotor.set(-0.8);
+	public void tiltIntakeArmDown() {
+		if (getTiltEncoderCount() > LIFT_DOWN_ENCODER_COUNT) {
+			intakeTiltMotor.set(-0.8);
 		}
+	}
+
+	public void setIntakeTiltSpeed(double speed) {
+		intakeTiltMotor.set(speed);
 	}
 
 	public boolean isCubeDetected() {
@@ -110,37 +114,20 @@ public class IntakeSubsystem extends TSubsystem {
 		return intakeRollerMotor.get() > 0.1;
 	}
 
-	public int getLiftEncoderCount() {
-		return intakeLiftEncoder.get();
+	public int getTiltEncoderCount() {
+		return intakeTiltEncoder.get();
 	}
 
 	public void resetEncoders() {
-		intakeLiftEncoder.reset();
+		intakeTiltEncoder.reset();
 	}
 
 	// Periodically update the dashboard and any PIDs or sensors
 	@Override
 	public void updatePeriodic() {
-		SmartDashboard.putNumber("Intake lift Encoder", getLiftEncoderCount());
-		SmartDashboard.putBoolean("Intake Clamp Open", intakeClamp.get());
+		SmartDashboard.putNumber("Intake Tilt Encoder", getTiltEncoderCount());
+		SmartDashboard.putBoolean("Intake Claw Open", intakeClaw.get());
 		SmartDashboard.putBoolean("Intake Cube Detected", isCubeDetected());
-		// SmartDashboard.putNumber("Left Intake Wheels", leftIntakeMotor.get());
-		// SmartDashboard.putNumber("Right Intake Wheels", rightIntakeMotor.get());
-		// SmartDashboard.putNumber("Left Intake Arm", leftIntakeArmMotor.get());
-		// SmartDashboard.putNumber("Right Intake Arm", rightIntakeArmMotor.get());
-		// SmartDashboard.putNumber("Left Intake Encoder", leftIntakeArmEncoder.get());
-		// SmartDashboard.putNumber("Right Intake Encoder",
-		// rightIntakeArmEncoder.get());
-
-		// SmartDashboard.putNumber("Left Intake Claw Motor",
-		// leftIntakeClawMotor.get());
-		// SmartDashboard.putNumber("Right Intake Claw Motor",
-		// rightIntakeClawMotor.get());
-
-		//
-		// SmartDashboard.putBoolean("Cube Loaded", isCubeLoaded());
-		// SmartDashboard.putBoolean("Cube Detected", isCubeDetected());
-		// SmartDashboard.putBoolean("Cube Inside", isCubeInside());
 	}
 
 }

@@ -44,7 +44,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 						new TCanSpeedController(
 								TCanSpeedControllerType.TALON_SRX, 
 								RobotMap.RIGHT_DRIVE_MOTOR_CAN_ADDRESS, 
-								TCanSpeedControllerType.TALON_SRX,
+								TCanSpeedControllerType.VICTOR_SPX,
 								RobotMap.RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS,
 								RobotConst.RIGHT_MOTOR_ORIENTATION),
 						RobotConst.DRIVE_GYRO_PID_KP,
