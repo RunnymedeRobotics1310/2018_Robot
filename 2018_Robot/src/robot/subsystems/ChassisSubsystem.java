@@ -92,6 +92,12 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	
 	private void updateSpeed() {
 		
+		// If the PIDs are enabled, then bypass the soft drive code
+		if (speedPidsEnabled()) {
+			super.setSpeed(leftSpeedSetpoint, rightSpeedSetpoint);
+			return;
+		}
+		
 		double leftSpeed = leftMotor.get();
 		double rightSpeed = rightMotor.get();
 		
