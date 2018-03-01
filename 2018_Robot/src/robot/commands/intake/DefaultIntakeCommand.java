@@ -1,7 +1,9 @@
 package robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import robot.Robot;
+import robot.commands.elevator.SetElevatorHeightCommand;
 
 /**
  *
@@ -34,7 +36,11 @@ public class DefaultIntakeCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-
+		
+		if (Robot.oi.getAutomaticIntake()) {
+			Scheduler.getInstance().add(new TeleopAutomaticIntakeCommand());
+		}
+		
 		if (Robot.oi.getClawOpen()) {
 			Robot.intakeSubsystem.intakeClawOpen();
 		}
@@ -43,6 +49,7 @@ public class DefaultIntakeCommand extends Command {
 		}
 		
 		// Intake / outtake code
+		
 		if (Robot.oi.getIntakeCube()) {
 			Robot.intakeSubsystem.intakeCube();
 		} else if (Robot.oi.getOuttakeCube()) {

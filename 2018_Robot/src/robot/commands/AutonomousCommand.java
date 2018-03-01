@@ -1,11 +1,10 @@
 package robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import robot.Robot;
 import robot.commands.drive.ArcCommand;
 import robot.commands.drive.DriveDistanceCommand;
-import robot.commands.drive.DriveTankCommand;
 import robot.commands.drive.RotateToAngleCommand;
+import robot.commands.elevator.SetElevatorHeightCommand;
 import robot.oi.AutoSelector;
 import robot.oi.GameData;
 
@@ -66,6 +65,7 @@ public class AutonomousCommand extends CommandGroup {
 			if (firstAction.equals(SWITCH)) {
 				//switch action is selected
 				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+				addParallel(new SetElevatorHeightCommand(2));
 				addSequential(new RotateToAngleCommand(90, 0.5));
 			}
 
@@ -128,6 +128,7 @@ public class AutonomousCommand extends CommandGroup {
 				//switch action is selected
 
 				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+				addParallel(new SetElevatorHeightCommand(2));
 				addSequential(new RotateToAngleCommand(270, 0.5));
 			}
 
@@ -194,16 +195,16 @@ public class AutonomousCommand extends CommandGroup {
 				if (closeSwitch == LEFT){
 
 					//System.out.println("Executing left switch command");
-					//addSequential(new DriveTankCommand(50, 0.25, 1.0, 2, false));
 					addSequential(new ArcCommand(100, 0, 310, 1.0));
 					addSequential(new DriveDistanceCommand(20, 310, 1.0, 3.0, false));
-					//addSequential(new DriveTankCommand(50, 1.0, 0.25, 2, true));
+					addParallel(new SetElevatorHeightCommand(2));
 					addSequential(new ArcCommand(140, 310, 350, 1.0));
 				}
 				else{
 					//System.out.println("Executing right switch command");	
 					addSequential(new ArcCommand(80, 0, 45, 1.0));
 					addSequential(new DriveDistanceCommand(25, 310, 1.0, 3.0, false));
+					addParallel(new SetElevatorHeightCommand(2));
 					addSequential(new ArcCommand(120, 45, 0, 1.0));
 				}
 			}

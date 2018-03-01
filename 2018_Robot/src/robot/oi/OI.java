@@ -26,6 +26,7 @@ import robot.RobotConst;
  * 	Buttons:
  * 		Start Button 		= Reset Encoders and Gyro 
  * 		Back Button 		= Cancel any Command
+ * 		X Button			= Automatic intake
  * 	Bumpers/Triggers:
  *      Right Bumper        = Intake Cube
  *      Right Trigger       = Outtake Cube
@@ -87,7 +88,10 @@ public class OI {
 	public double getTurn() {
 		return driverController.getAxis(TStick.RIGHT, TAxis.X);
 	}
-
+	
+	public boolean getAutomaticIntake() {
+		return driverController.getButton(TButton.X);
+	}
 	/*public boolean getForwardThrust() {
 	//	return gameController.getButton(TButton.A);
 	//}
