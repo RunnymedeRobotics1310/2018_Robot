@@ -19,6 +19,7 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 	protected void initialize() {
 		Robot.intakeSubsystem.intakeCube();
 		Robot.intakeSubsystem.intakeClawOpen();
+		Robot.oi.driverRumble.rumbleOn();
 	}
 	
 	protected void execute() {
@@ -34,6 +35,7 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 			}
 			
 			if (Robot.intakeSubsystem.isCubeDetected()) {
+				Robot.oi.driverRumble.rumbleOff();
 				Robot.intakeSubsystem.intakeStop();
 				Robot.intakeSubsystem.intakeClawClose();
 				state = State.ELEVATE;
@@ -59,7 +61,14 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 		}
 	}
 	
+	protected void end(){
+		Robot.oi.driverRumble.rumbleOff();
+	}
+	
 	protected boolean isFinished() {
+		if (Robot.oi.getAutomaticIntakeCancel()){
+			return true;
+		}
 		if (super.isFinished()) {
 			return true;
 		}
