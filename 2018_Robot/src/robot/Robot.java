@@ -152,5 +152,6 @@ public class Robot extends IterativeRobot {
 		pneumaticsSubsystem.updatePeriodic();
 		elevatorSubsystem.updatePeriodic();
 		intakeSubsystem.updatePeriodic();
+		powerSubsystem.updatePeriodic();
 	}
 }
