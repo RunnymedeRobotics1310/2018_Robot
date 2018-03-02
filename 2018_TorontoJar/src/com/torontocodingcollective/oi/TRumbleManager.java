@@ -10,7 +10,7 @@ public class TRumbleManager {
 
 	private enum State { ON, OFF, PAUSE };
 	
-	private State state = State.ON;
+	private State state = State.OFF;
 	
 	public TRumbleManager(String name, TGameController gameController) {
 		this.gameController = gameController;

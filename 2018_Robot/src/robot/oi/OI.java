@@ -70,7 +70,6 @@ public class OI {
 	
 	public TRumbleManager driverRumble = new TRumbleManager("Driver", driverController);
 
-	private TToggle intakeToggle = new TToggle(driverController, TButton.Y);
 
 	private TToggle pneumaticsToggle = new TToggle(driverController, TStick.LEFT);
 	private TToggle pidToggle = new TToggle(driverController, TStick.RIGHT);

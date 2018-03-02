@@ -28,7 +28,7 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 		case FORWARD:
 			// If the motors go overcurrent then reverse the motors for 1 second
 			// and try again on the intake
-			if (Robot.powerSubsystem.getIntakeWheelMotorCurrent() > 30) {
+			if (Robot.powerSubsystem.getIntakeWheelMotorCurrent() > 2000) {
 				reverseStartTime = timeSinceInitialized();
 				state = State.REVERSE;
 				Robot.intakeSubsystem.outtakeCube();

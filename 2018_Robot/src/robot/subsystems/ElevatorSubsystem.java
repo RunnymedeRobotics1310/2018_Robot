@@ -30,34 +30,34 @@ public class ElevatorSubsystem extends TSubsystem {
 			return 0;
 		}
 
-		if (encoderCount < 1000) {
+		if (encoderCount < 4500) {
 			return 0.5;
 		}
-		if (encoderCount <= 1100) {// resting intake level
+		if (encoderCount <= 5000) {// resting intake level
 			return 1;
 		}
-		if (encoderCount < 3500) {
+		if (encoderCount < 11500) {
 			return 1.5;
 		}
-		if (encoderCount <= 3600) {//switch deposit level
+		if (encoderCount <= 12500) {//switch deposit level
 			return 2;
 		}
-		if (encoderCount < 8500) {
+		if (encoderCount < 32600) {
 			return 2.5;
 		}
-		if (encoderCount <=8600) {//low scale level
+		if (encoderCount <=33600) {//low scale level
 			return 3;
 		}
-		if (encoderCount < 11200) {
+		if (encoderCount < 41000) {
 			return 3.5;
 		}
-		if (encoderCount <=11300) {//normal scale level
+		if (encoderCount <=42000) {//normal scale level
 			return 4;
 		}
-		if (encoderCount < 13400) {
+		if (encoderCount < 49400) {
 			return 4.5;
 		}
-		if (encoderCount < 13500) {//high scale level
+		if (encoderCount < 50400) {//high scale level
 			return 5;
 		}
 		

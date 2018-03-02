@@ -9,7 +9,7 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 	private double setLevel;
 	
 	public SetElevatorHeightCommand(double setLevel) {
-		super(5);
+		super(15);
 		requires (Robot.elevatorSubsystem);
 		this.setLevel = setLevel;
 	}
