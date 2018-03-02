@@ -12,9 +12,11 @@ public class ArcCommand extends TSafeCommand {
 	private double rSpeed;
 	private double lSpeed;
 	private double speed;
+	private boolean brake;
 	
-	public ArcCommand(double dist, double startDirection, double endDirection, double speed) {
+	public ArcCommand(double dist, double startDirection, double endDirection, double speed, boolean brake) {
 		super(15);
+		this.brake = brake;
 		this.dist = dist;
 		this.startDirection = startDirection;
 		this.endDirection = endDirection;
@@ -57,9 +59,14 @@ public class ArcCommand extends TSafeCommand {
 		//System.out.println(this.lSpeed);
 		Robot.chassisSubsystem.setSpeed(lSpeed, rSpeed);
 	}
-
+	protected void end() {
+		if (brake) {
+			Robot.chassisSubsystem.setSpeed(0, 0);
+		}
+	}
+	
 	protected boolean isFinished() {
-
+		
 		if (super.isFinished()) {
 			return true;
 		}

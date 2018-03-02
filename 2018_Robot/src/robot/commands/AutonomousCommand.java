@@ -79,9 +79,9 @@ public class AutonomousCommand extends CommandGroup {
 				else{
 					System.out.println("scale is on the right side");
 					addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
-					addSequential(new ArcCommand(100, 0, 80, 1.0));
+					addSequential(new ArcCommand(100, 0, 80, 1.0, false));
 					addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
-					addSequential(new ArcCommand(100, 80, 10, 1.0));
+					addSequential(new ArcCommand(100, 80, 10, 1.0, true));
 				}
 			}
 
@@ -111,9 +111,9 @@ public class AutonomousCommand extends CommandGroup {
 				}
 				else{
 					//System.out.println("Executing right scale command");	
-					addSequential(new ArcCommand(100, 0, 80, 1.0));
+					addSequential(new ArcCommand(100, 0, 80, 1.0, false));
 					addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
-					addSequential(new ArcCommand(100, 80, 10, 1.0));
+					addSequential(new ArcCommand(100, 80, 10, 1.0, true));
 				}
 			}
 			else{
@@ -140,9 +140,9 @@ public class AutonomousCommand extends CommandGroup {
 				}
 				else{
 					//scale is on the left side
-					addSequential(new ArcCommand(100, 0, 280, 1.0));
+					addSequential(new ArcCommand(100, 0, 280, 1.0, false));
 					addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
-					addSequential(new ArcCommand(100, 280, 350, 1.0));
+					addSequential(new ArcCommand(100, 280, 350, 1.0, true));
 				}
 			}
 
@@ -171,9 +171,9 @@ public class AutonomousCommand extends CommandGroup {
 				}
 				else{
 					//System.out.println("Executing right scale command");	
-					addSequential(new ArcCommand(100, 0, 280, 1.0));
+					addSequential(new ArcCommand(100, 0, 280, 1.0, false));
 					addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
-					addSequential(new ArcCommand(100, 280, 350, 1.0));
+					addSequential(new ArcCommand(100, 280, 350, 1.0, true));
 				}
 			}
 			else{
@@ -194,15 +194,15 @@ public class AutonomousCommand extends CommandGroup {
 				if (closeSwitch == LEFT){
 
 					//System.out.println("Executing left switch command");
-					addSequential(new ArcCommand(100, 0, 310, 0.7));
+					addSequential(new ArcCommand(100, 0, 310, 0.7, false));
 					//addSequential(new DriveDistanceCommand(10, 310, 0.5, 3.0, false));
-					addSequential(new ArcCommand(140, 310, 0, 0.7));
+					addSequential(new ArcCommand(140, 310, 0, 0.7, true));
 				}
 				else{
 					//System.out.println("Executing right switch command");	
-					addSequential(new ArcCommand(80, 0, 45, 0.7));
+					addSequential(new ArcCommand(80, 0, 45, 0.7, false));
 					addSequential(new DriveDistanceCommand(3, 45, 0.7, 3.0, false));
-					addSequential(new ArcCommand(120, 45, 0, 0.7));
+					addSequential(new ArcCommand(120, 45, 0, 0.7, true));
 					addSequential(new AutoCubeReleaseCommand());
 				}
 			}
@@ -228,9 +228,9 @@ public class AutonomousCommand extends CommandGroup {
 						addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
 					}
 					else{
-						addSequential(new ArcCommand(100, 0, 280, 1.0));
+						addSequential(new ArcCommand(100, 0, 280, 1.0, false));
 						addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
-						addSequential(new ArcCommand(100, 280, 350, 1.0));
+						addSequential(new ArcCommand(100, 280, 350, 1.0, true));
 					}
 				}
 				else{
@@ -239,9 +239,9 @@ public class AutonomousCommand extends CommandGroup {
 						addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
 					}
 					else{
-						addSequential(new ArcCommand(100, 0, 80, 1.0));
+						addSequential(new ArcCommand(100, 0, 80, 1.0, false));
 						addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
-						addSequential(new ArcCommand(100, 80, 10, 1.0));
+						addSequential(new ArcCommand(100, 80, 10, 1.0, true));
 					}
 				}
 			}
