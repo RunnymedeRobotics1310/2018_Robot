@@ -114,10 +114,10 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		}
 		else {
 			if (leftSpeedSetpoint > leftSpeed) {
-				leftSpeed += .02;
+				leftSpeed += .03;//.02
 			}
 			else {
-				leftSpeed -= .02;
+				leftSpeed -= .03;
 			}
 		}
 
@@ -134,10 +134,10 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		}
 		else {
 			if (rightSpeedSetpoint > rightSpeed) {
-				rightSpeed += .02;
+				rightSpeed += .03;
 			}
 			else {
-				rightSpeed -= .02;
+				rightSpeed -= .03;
 			}
 		}
 		

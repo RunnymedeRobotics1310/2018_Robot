@@ -30,10 +30,10 @@ public class ElevatorSubsystem extends TSubsystem {
 			return 0;
 		}
 
-		if (encoderCount < 4500) {
+		if (encoderCount < 3000) {
 			return 0.5;
 		}
-		if (encoderCount <= 5000) {// resting intake level
+		if (encoderCount <= 3800) {// resting intake level
 			return 1;
 		}
 		if (encoderCount < 11500) {
@@ -115,9 +115,11 @@ public class ElevatorSubsystem extends TSubsystem {
 
 		// Safety check the elevator speed every loop and
 		// stop if on a limit.
-		if (atLowerLimit() && elevatorMotor.get() < 0) {
-			setSpeed(0);
+		if (atLowerLimit()) {
 			resetEncoders();
+			if (elevatorMotor.get() < 0) {
+				setSpeed(0);
+			}
 		}
 
 		if (atUpperLimit() && elevatorMotor.get() > 0) {
