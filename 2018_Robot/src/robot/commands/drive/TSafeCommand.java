@@ -7,6 +7,10 @@ public class TSafeCommand extends Command {
 
 	private final double maxTimeSec;
 	
+	public TSafeCommand() {
+		this.maxTimeSec = 0;
+	}
+	
 	public TSafeCommand(double maxTimeSec) {
 		this.maxTimeSec = maxTimeSec;
 	}
@@ -26,7 +30,9 @@ public class TSafeCommand extends Command {
     }
     
     public boolean isTimedOut() {
-    	if (timeSinceInitialized() >= maxTimeSec) {
+    	// max time of zero is an infinite timeout
+    	if (   maxTimeSec > 0
+    		&& timeSinceInitialized() >= maxTimeSec) {
     		return true;
     	}
     	return false;

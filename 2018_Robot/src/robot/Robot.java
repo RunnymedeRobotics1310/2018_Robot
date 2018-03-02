@@ -11,6 +11,7 @@ import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ElevatorSubsystem;
 import robot.subsystems.IntakeSubsystem;
 import robot.subsystems.PneumaticsSubsystem;
+import robot.subsystems.PowerSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static final PneumaticsSubsystem pneumaticsSubsystem = new PneumaticsSubsystem();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	public static final PowerSubsystem powerSubsystem = new PowerSubsystem();
 	public static OI oi;
 	
 	
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
 		pneumaticsSubsystem.init();
 		elevatorSubsystem.init();
 		intakeSubsystem.init();
+		powerSubsystem.init();
 	}
 
 	/**
