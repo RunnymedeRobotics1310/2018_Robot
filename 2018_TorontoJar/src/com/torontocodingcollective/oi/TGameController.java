@@ -17,5 +17,10 @@ public abstract class TGameController extends Joystick {
 		return getTrigger(trigger) > 0.3;
 	};
 
+	public void setRumble(double volume) {
+		super.setRumble(RumbleType.kLeftRumble, volume);
+		super.setRumble(RumbleType.kRightRumble, volume);
+	}
+	
 	public abstract double getTrigger(TTrigger trigger);
 }
