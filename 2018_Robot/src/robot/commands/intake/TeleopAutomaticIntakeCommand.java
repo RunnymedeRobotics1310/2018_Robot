@@ -14,6 +14,10 @@ public class TeleopAutomaticIntakeCommand extends Command {
 		Robot.intakeSubsystem.intakeClawOpen();
 	}
 	
+	protected void execute() {
+		
+	}
+	
 	protected boolean isFinished() {
 		if (Robot.intakeSubsystem.isCubeDetected()) {
 			Robot.intakeSubsystem.intakeStop();
