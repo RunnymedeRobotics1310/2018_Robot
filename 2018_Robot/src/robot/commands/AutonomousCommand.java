@@ -67,6 +67,7 @@ public class AutonomousCommand extends CommandGroup {
 				//switch action is selected
 				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
 				addSequential(new RotateToAngleCommand(90, 0.5));
+				addSequential(new AutoCubeReleaseCommand());
 			}
 
 			else if (firstAction.equals(SCALE)) {
@@ -129,6 +130,7 @@ public class AutonomousCommand extends CommandGroup {
 
 				addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
 				addSequential(new RotateToAngleCommand(270, 0.5));
+				addSequential(new AutoCubeReleaseCommand());
 			}
 
 			else if (firstAction.equals(SCALE)) {
@@ -194,9 +196,10 @@ public class AutonomousCommand extends CommandGroup {
 				if (closeSwitch == LEFT){
 
 					//System.out.println("Executing left switch command");
-					addSequential(new ArcCommand(100, 0, 310, 0.7, false));
+					addSequential(new ArcCommand(90, 0, 310, 0.7, false));
 					//addSequential(new DriveDistanceCommand(10, 310, 0.5, 3.0, false));
 					addSequential(new ArcCommand(140, 310, 0, 0.7, true));
+					addSequential(new AutoCubeReleaseCommand());
 				}
 				else{
 					//System.out.println("Executing right switch command");	
