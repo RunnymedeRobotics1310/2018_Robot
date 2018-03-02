@@ -18,7 +18,7 @@ public class DefaultIntakeCommand extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-
+		
 		Robot.intakeSubsystem.intakeClawClose();
 		// Open the forearms and start intaking once the forearm is open
 		// if (Robot.oi.getIntakeForeArm() > 0.1) {
