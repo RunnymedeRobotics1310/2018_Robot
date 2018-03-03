@@ -51,7 +51,7 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 			
 		case ELEVATE:
 			if (Robot.elevatorSubsystem.getLevel() <= 1) {
-				Scheduler.getInstance().add(new SetElevatorHeightCommand(1));
+//				Scheduler.getInstance().add(new SetElevatorHeightCommand(1));
 			}
 			state = State.FINISH;
 			break;
