@@ -6,7 +6,8 @@ import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TCanSpeedControllerType;
 import com.torontocodingcollective.subsystem.TSubsystem;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.RobotMap;
 import robot.commands.intake.DefaultIntakeCommand;
@@ -29,9 +30,8 @@ public class IntakeSubsystem extends TSubsystem {
 	private TEncoder intakeTiltEncoder = intakeTiltMotor.getEncoder();
 
 	// The intake clamp
-	private Solenoid intakeClaw = new Solenoid(RobotMap.INTAKE_CLAW_PNEUMATIC_PORT);
+	private DoubleSolenoid intakeClaw = new DoubleSolenoid(RobotMap.INTAKE_CLAW_PNEUMATIC_PORT, RobotMap.INTAKE_CLAW_PNEUMATIC_PORT2);
 	
-
 	// // The motors in the claw (arm) that "sucks" in the cube
 	// private TCanSpeedController rightIntakeClawMotor = new
 	// TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
@@ -56,7 +56,7 @@ public class IntakeSubsystem extends TSubsystem {
 
 	@Override
 	public void init() {
-
+		intakeClawClose();
 	}
 
 	@Override
@@ -65,15 +65,11 @@ public class IntakeSubsystem extends TSubsystem {
 	}
 
 	public void intakeClawOpen() {
-		if (!intakeClaw.get()) {
-			intakeClaw.set(true);
-		}
+		intakeClaw.set(Value.kForward);
 	}
 
 	public void intakeClawClose() {
-		if (intakeClaw.get()) {
-			intakeClaw.set(false);
-		}
+		intakeClaw.set(Value.kReverse);
 	}
 
 	public void intakeCube() {
@@ -128,7 +124,7 @@ public class IntakeSubsystem extends TSubsystem {
 	@Override
 	public void updatePeriodic() {
 		SmartDashboard.putNumber("Intake Tilt Encoder", getTiltEncoderCount());
-		SmartDashboard.putBoolean("Intake Claw Open", intakeClaw.get());
+		SmartDashboard.putBoolean("Intake Claw Open", intakeClaw.get() == Value.kForward);
 		SmartDashboard.putBoolean("Intake Cube Detected", isCubeDetected());
 	}
 

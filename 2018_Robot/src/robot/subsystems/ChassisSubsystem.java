@@ -33,7 +33,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		// Uncomment this block to use CAN based speed controllers
 				// Uncomment this constructor to use PWM based Speed controllers
 				super(	
-						(RobotConst.robot == 1311 ? new TNavXGyro() : new TAnalogGyro(0)),
+						((RobotConst.robot == 1311 || RobotConst.robot == 1310) ? new TNavXGyro() : new TAnalogGyro(0)),
 						//			new TAnalogGyro(0),
 						new TCanSpeedController(
 								TCanSpeedControllerType.TALON_SRX, 
@@ -149,12 +149,14 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	// ********************************************************************************************************************
 	public void enableTurbo() {
 		turboEnabled = true;
+		//System.out.println("Turbo enabled");
 		setMaxEncoderSpeed(RobotConst.MAX_HIGH_GEAR_SPEED);
 		shifter.set(HIGH_GEAR);
 	}
 
 	public void disableTurbo() {
 		turboEnabled = false;
+		//System.out.println("Turbo disabled");
 		setMaxEncoderSpeed(RobotConst.MAX_LOW_GEAR_SPEED);
 		shifter.set(LOW_GEAR);
 	}
@@ -172,7 +174,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 
 		super.updatePeriodic();
 
-		SmartDashboard.putBoolean("Turbo Enabled", turboEnabled);
+		SmartDashboard.putBoolean("Turbo Enabled", isTurboEnabled());
 	}
 
 }

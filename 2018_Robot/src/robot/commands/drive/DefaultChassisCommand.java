@@ -45,6 +45,10 @@ public class DefaultChassisCommand extends Command {
 			Robot.chassisSubsystem.disableSpeedPids();
 		}
 
+		
+		if (Robot.oi.getPov() != -1) {
+			Scheduler.getInstance().add(new DriveDistanceCommand(50, Robot.oi.getPov(), 0.5, 10, true));
+		}
 
 
 		/*if (Robot.oi.getForwardThrust()) {

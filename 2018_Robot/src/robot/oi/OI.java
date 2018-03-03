@@ -120,6 +120,10 @@ public class OI {
 	public boolean reset() {
 		return driverController.getButton(TButton.START);
 	}
+	
+	public int getPov() {
+		return driverController.getPOV();
+	}
 
 	public boolean getTurboOn() {
 		return driverController.getButton(TButton.LEFT_BUMPER);
