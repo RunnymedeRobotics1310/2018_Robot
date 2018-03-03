@@ -25,15 +25,16 @@ public class AutoCubeReleaseCommand extends Command {
 	@Override
 	protected void execute() {
 		
-		// If it's been 0.5 seconds, put the arm down
-		if (timeSinceInitialized() < 0.1) {
+		// If it's been 0.1 seconds, put the arm down
+		if (timeSinceInitialized() < 0.15) {
 			Robot.intakeSubsystem.intakeClawOpen();
-		} else {
-			Robot.intakeSubsystem.intakeClawClose();
 		}
+//		else {
+//			Robot.intakeSubsystem.intakeClawClose();
+//		}
 
 		
-		if (timeSinceInitialized() > 0.1 && timeSinceInitialized() < 1.2) {
+		if (timeSinceInitialized() > 0.15 && timeSinceInitialized() < 1.2) {
 			Robot.intakeSubsystem.outtakeCube();
 		} else {
 			Robot.intakeSubsystem.intakeStop();

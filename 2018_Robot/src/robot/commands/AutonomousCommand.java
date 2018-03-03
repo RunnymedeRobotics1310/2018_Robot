@@ -230,16 +230,15 @@ public class AutonomousCommand extends CommandGroup {
 
 	private void centerAuto(char scale, char closeSwitch, String firstAction, String secondAction) {
 		//System.out.println("Starting first action");
-		if (firstAction.equals(SWITCH)) {
-			//System.out.println("Switch action selected");
-			if (closeSwitch == LEFT){
-				//System.out.println("Executing left switch command");
-				centerSwitchLeft1();
-			}
-			else{
-				//System.out.println("Executing right switch command");	
-				centerSwitchRight1();
-			}
+
+		//System.out.println("Switch action selected");
+		if (closeSwitch == LEFT){
+			//System.out.println("Executing left switch command");
+			centerSwitchLeft1();
+		}
+		else{
+			//System.out.println("Executing right switch command");	
+			centerSwitchRight1();
 		}
 
 		//System.out.println("Starting second action");
@@ -341,14 +340,14 @@ public class AutonomousCommand extends CommandGroup {
 
 	//center start
 	private void centerSwitchLeft1(){
-		addSequential(new ArcCommand(90, 0, 310, 0.7, false));
-		addSequential(new ArcCommand(140, 310, 0, 0.7, true));
+		addSequential(new ArcCommand(85, 0, 310, 0.8, false));
+		addSequential(new ArcCommand(105, 310, 0, 0.8, true));
 		addSequential(new AutoCubeReleaseCommand());
 	}
 	private void centerSwitchRight1(){
-		addSequential(new ArcCommand(80, 0, 45, 0.7, false));
-		addSequential(new DriveDistanceCommand(3, 45, 0.7, 3.0, false));
-		addSequential(new ArcCommand(120, 45, 0, 0.7, true));
+		addSequential(new ArcCommand(80, 0, 45,0.8, false));
+		addSequential(new DriveDistanceCommand(3, 45, 0.8, 3.0, false));
+		addSequential(new ArcCommand(110, 45, 0, 0.8, true));
 		addSequential(new AutoCubeReleaseCommand());
 	}
 
