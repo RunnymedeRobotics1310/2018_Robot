@@ -63,6 +63,8 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 	
 	protected void end(){
 		Robot.oi.driverRumble.rumbleOff();
+		Robot.intakeSubsystem.intakeClawClose();
+		Robot.intakeSubsystem.intakeStop();
 	}
 	
 	protected boolean isFinished() {
