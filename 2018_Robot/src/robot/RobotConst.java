@@ -63,7 +63,7 @@ public class RobotConst {
 			MAX_LOW_GEAR_SPEED = 580.0;    // Encoder counts/sec
 			MAX_HIGH_GEAR_SPEED = 2000.0;
 			
-			DRIVE_GYRO_PID_KP = .1;
+			DRIVE_GYRO_PID_KP = .05;
 			DRIVE_GYRO_PID_KI = 0;
 			
 			DRIVE_SPEED_PID_KP = 0.3;

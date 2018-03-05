@@ -22,6 +22,7 @@ public class DriveDistanceCommand extends DriveDirectionCommand {
 	}
 	
 	protected void initialize() {
+		super.initialize();
 		//System.out.println("starting drive");
 		Robot.chassisSubsystem.resetEncoders();
 	}

@@ -47,7 +47,7 @@ public class DefaultChassisCommand extends Command {
 
 		
 		if (Robot.oi.getPov() != -1) {
-			Scheduler.getInstance().add(new DriveDistanceCommand(50, Robot.oi.getPov(), 0.5, 10, true));
+			Scheduler.getInstance().add(new RotateToAngleCommand(Robot.oi.getPov(), 0.5));
 		}
 
 

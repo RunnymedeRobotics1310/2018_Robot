@@ -300,15 +300,17 @@ public class AutonomousCommand extends CommandGroup {
 		addSequential(new RotateToAngleCommand(0, 0.5));
 	}
 	private void leftScaleLeft1(){
-		addSequential(new DriveDistanceCommand(320, 0, 1.0, 3.0, false));
-		addSequential(new AutoCubeReleaseCommand());
+		addSequential(new DriveDistanceCommand(220, 0, 0.7, 5.0, false));
+		addSequential(new SetElevatorHeightCommand(4));
+
 	}
 	private void leftScaleRight1(){
-		addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
-		addSequential(new ArcCommand(100, 0, 80, 1.0, false));
-		addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
-		addSequential(new ArcCommand(100, 80, 10, 1.0, true));
-		addSequential(new AutoCubeReleaseCommand());
+		addSequential(new DriveDistanceCommand(200, 0, 0.7, 5.0, false));;
+//		addSequential(new DriveDistanceCommand(160, 0, 1.0, 3.0, false));
+//		addSequential(new ArcCommand(100, 0, 80, 1.0, false));
+//		addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
+//		addSequential(new ArcCommand(100, 80, 10, 1.0, true));
+//		addSequential(new AutoCubeReleaseCommand());
 	}
 
 	//right side start
