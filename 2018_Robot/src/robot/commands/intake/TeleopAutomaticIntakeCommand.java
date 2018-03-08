@@ -1,16 +1,15 @@
 package robot.commands.intake;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
 import robot.Robot;
 import robot.commands.drive.TSafeCommand;
-import robot.commands.elevator.SetElevatorHeightCommand;
 
 public class TeleopAutomaticIntakeCommand extends TSafeCommand {	
 	
-	private enum State { FORWARD, REVERSE, ELEVATE, FINISH };
+	private enum State { FORWARD, INTAKE_DELAY, REVERSE, ELEVATE, FINISH };
 	
 	State state = State.FORWARD;
 	double reverseStartTime = 0;
+	double intakeStopDelayStartTime = 0;
 
 	public TeleopAutomaticIntakeCommand() {
 		requires(Robot.intakeSubsystem);
@@ -36,12 +35,19 @@ public class TeleopAutomaticIntakeCommand extends TSafeCommand {
 			
 			if (Robot.intakeSubsystem.isCubeDetected()) {
 				Robot.oi.driverRumble.rumbleOff();
-				Robot.intakeSubsystem.intakeStop();
 				Robot.intakeSubsystem.intakeClawClose();
-				state = State.ELEVATE;
+				intakeStopDelayStartTime = timeSinceInitialized(); 
+				state = State.INTAKE_DELAY;
 			}
 			break;
-
+			
+		case INTAKE_DELAY:
+			if (timeSinceInitialized() > intakeStopDelayStartTime + .5) {
+				Robot.intakeSubsystem.intakeStop();
+				state = State.FINISH;
+			}
+			break;
+			
 		case REVERSE:
 			if (timeSinceInitialized() > reverseStartTime + 2.0) {
 				state = State.FORWARD;

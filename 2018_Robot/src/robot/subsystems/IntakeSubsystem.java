@@ -100,7 +100,7 @@ public class IntakeSubsystem extends TSubsystem {
 
 	public boolean isCubeDetected() {
 		// Cube is detected if both limit switches have detected something, aka a cube
-		return leftCubeDetectedSwitch.atLimit() && rightCubeDetectedSwitch.atLimit();
+		return leftCubeDetectedSwitch.atLimit() || rightCubeDetectedSwitch.atLimit();
 	}
 
 

@@ -12,11 +12,11 @@ public class RobotMap {
 	//******************************************
 	// Speed Controllers (CAN addresses)
 	//******************************************
-	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 0;  // TALON_SRX
-	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 1;  // TALON_SRX
+	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 1;  // TALON_SRX
+	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 0;  // TALON_SRX
 
-	public static int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 2;  // VICTOR_SPX
-	public static int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 3;  // VICTOR_SPX
+	public static int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 3;  // VICTOR_SPX
+	public static int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 2;  // VICTOR_SPX
 	
 	public static int ELEVATOR_MOTOR_CAN_ADDRESS            = 4;  // TALON_SRX
 	public static int ELEVATOR_MOTOR_FOLLOWER_CAN_ADDRESS  =  5;  // VICTOR_SPX
@@ -42,4 +42,16 @@ public class RobotMap {
 	public static int SHIFTER_PNEUMATIC_PORT = 0;
 	public static int INTAKE_CLAW_PNEUMATIC_PORT = 3;
 	public static int INTAKE_CLAW_PNEUMATIC_PORT2 = 4;
+	
+	
+	static {
+		
+		switch (RobotConst.robot) {
+
+		case 1311:
+		case 1310:
+			break;
+
+		}
+	}
 }
