@@ -35,6 +35,10 @@ public class DriveDirectionCommand extends TSafeCommand {
     	
     }
 
+    protected void setSpeed(double speed) {
+    	this.speed = speed;
+    }
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
