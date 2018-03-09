@@ -4,10 +4,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import robot.Robot;
 import robot.commands.drive.AccelerateDistanceCommand;
 import robot.commands.drive.ArcCommand;
+import robot.commands.drive.BackupCommand;
 import robot.commands.drive.DriveDistanceCommand;
 import robot.commands.drive.RotateToAngleCommand;
 import robot.commands.elevator.SetElevatorHeightCommand;
 import robot.commands.intake.AutoCubeReleaseCommand;
+import robot.commands.intake.TeleopAutomaticIntakeCommand;
 import robot.oi.AutoSelector;
 import robot.oi.GameData;
 
@@ -306,7 +308,10 @@ public class AutonomousCommand extends CommandGroup {
 		addParallel(new SetElevatorHeightCommand(4));
 		addSequential(new ArcCommand(120, 0, 40, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
-		addSequential(new RotateToAngleCommand(130, 0.5));
+		addSequential(new BackupCommand(25));
+		addParallel(new SetElevatorHeightCommand(0));
+		addSequential(new RotateToAngleCommand(160, 0.5));
+		addSequential(new DriveDistanceCommand(50, 160, 0.3, 7.0, false));
 	}
 	private void leftScaleRight1(){
 		addSequential(new DriveDistanceCommand(200, 0, 0.7, 5.0, false));;
@@ -343,6 +348,8 @@ public class AutonomousCommand extends CommandGroup {
 		addParallel(new SetElevatorHeightCommand(4));
 		addSequential(new ArcCommand(100, 0, 320, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
+		addSequential(new RotateToAngleCommand(150, 0.5));
+		addSequential(new DriveDistanceCommand(45, 150, 0.3, 7.0, false));
 	}
 
 	//center start

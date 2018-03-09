@@ -1,14 +1,16 @@
 package robot.commands.intake;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Robot;
+import robot.commands.drive.TSafeCommand;
 
 /**
  *
  */
-public class AutoCubeReleaseCommand extends Command {
+public class AutoCubeReleaseCommand extends TSafeCommand {
 
+	private enum Step { OUTTAKE, OPEN, FINISH }
+	
+	private Step curStep = Step.OUTTAKE;
 
 	public AutoCubeReleaseCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -18,26 +20,29 @@ public class AutoCubeReleaseCommand extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-
+		curStep = Step.OUTTAKE;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		
-		// If it's been 0.1 seconds, put the arm down
-		if (timeSinceInitialized() < 0.15) {
-			Robot.intakeSubsystem.intakeClawOpen();
-		}
-//		else {
-//			Robot.intakeSubsystem.intakeClawClose();
-//		}
-
-		
-		if (timeSinceInitialized() > 0.15 && timeSinceInitialized() < 1.2) {
+		switch (curStep) {
+		case OUTTAKE:
 			Robot.intakeSubsystem.outtakeCube();
-		} else {
-			Robot.intakeSubsystem.intakeStop();
+			if (timeSinceInitialized() > .25) {
+				curStep = Step.OPEN;
+			}
+			break;
+			
+		case OPEN:
+			Robot.intakeSubsystem.intakeClawOpen();
+			if (timeSinceInitialized() > .75) {
+				curStep = Step.FINISH;
+			}
+			
+		case FINISH:
+			break;
 		}
 		
 	}
@@ -45,12 +50,19 @@ public class AutoCubeReleaseCommand extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
+		if (super.isFinished()) {
+			return true;
+		}
+		if (curStep == Step.FINISH) {
+			return true;
+		}
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.intakeSubsystem.intakeStop();
 	}
 
 	// Called when another command which requires one or more of the same

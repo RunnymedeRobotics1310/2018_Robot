@@ -23,7 +23,10 @@ public class RotateToAngleCommand extends TSafeCommand {
 		this(endDirection, speed, 15);
 	}
 
-	public void initialize() {
+	protected void initialize() {
+
+		System.out.println("Initializing rotate to angle " + endDirection);
+		
 		this.startDirection = Robot.chassisSubsystem.getGryoAngle();
 		this.turnangle = (this.endDirection - this.startDirection);
 
@@ -33,7 +36,8 @@ public class RotateToAngleCommand extends TSafeCommand {
 			this.turnangle += 360;
 		}
 
-		SmartDashboard.putNumber("turn angle", turnangle);
+		SmartDashboard.putNumber("Turn Angle", turnangle);
+		System.out.println("Turn Angle: " + turnangle);
 
 		if (isFinished()) { return; }  // If already at the end angle
 		
@@ -42,6 +46,8 @@ public class RotateToAngleCommand extends TSafeCommand {
 		} else {
 			Robot.chassisSubsystem.setSpeed(speed, -speed);
 		}
+		
+		System.out.println("Rotating " + turnangle);
 	}
 	
 	protected void execute(){
@@ -76,7 +82,7 @@ public class RotateToAngleCommand extends TSafeCommand {
 			error += 360;
 		}
 
-		if (Math.abs(error) <= 10) {
+		if (Math.abs(error) <= 5) {
 			return true;
 		}
 		
