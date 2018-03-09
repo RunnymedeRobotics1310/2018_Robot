@@ -23,7 +23,7 @@ public class AccelerateDistanceCommand extends DriveDirectionCommand {
 		this.stopDistanceEncoderCounts = 
 				distance * RobotConst.ENCODER_COUNTS_PER_INCH - STOPPING_ENCODER_COUNTS;
 		this.slowDistanceEncoderCounts = 
-				(distance-30) * RobotConst.ENCODER_COUNTS_PER_INCH - STOPPING_ENCODER_COUNTS;
+				(distance-35) * RobotConst.ENCODER_COUNTS_PER_INCH - STOPPING_ENCODER_COUNTS;
 	}
 	
 	protected void initialize() {
@@ -35,8 +35,8 @@ public class AccelerateDistanceCommand extends DriveDirectionCommand {
 	
 	protected void execute() {
 		if (Robot.chassisSubsystem.getEncoderDistance() > slowDistanceEncoderCounts) {
-			if (curSpeed > speed/2) {
-				curSpeed = Math.max(curSpeed-.02, speed/2);
+			if (curSpeed > speed*.4) {
+				curSpeed = Math.max(curSpeed-.02, speed*.4);
 			}
 		}
 		else {
