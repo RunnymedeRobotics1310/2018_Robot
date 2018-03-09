@@ -33,7 +33,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		// Uncomment this block to use CAN based speed controllers
 				// Uncomment this constructor to use PWM based Speed controllers
 				super(	
-						((RobotConst.robot == 1311 || RobotConst.robot == 1310) ? new TNavXGyro(true) : new TAnalogGyro(0)),
+						((RobotConst.robot == 1311 || RobotConst.robot == 1310) ? new TNavXGyro(false) : new TAnalogGyro(0)),
 						//			new TAnalogGyro(0),
 						new TCanSpeedController(
 								TCanSpeedControllerType.TALON_SRX, 

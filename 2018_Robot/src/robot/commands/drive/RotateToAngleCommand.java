@@ -11,12 +11,12 @@ public class RotateToAngleCommand extends TSafeCommand {
 
 	public RotateToAngleCommand(double endDirection, double speed, double timeout) {
 		super(timeout);
+		requires(Robot.chassisSubsystem);
 		this.endDirection = endDirection;
 		if (this.endDirection < 0) {
 			this.endDirection += 360;
 		}
 		this.speed = speed;
-		requires(Robot.chassisSubsystem);
 	}
 	
 	public RotateToAngleCommand(double endDirection, double speed) {
@@ -43,7 +43,19 @@ public class RotateToAngleCommand extends TSafeCommand {
 			Robot.chassisSubsystem.setSpeed(speed, -speed);
 		}
 	}
-
+	
+	protected void execute(){
+		if (this.turnangle < 0) {
+			Robot.chassisSubsystem.setSpeed(-speed, speed);
+		} else {
+			Robot.chassisSubsystem.setSpeed(speed, -speed);
+		}
+	}
+	
+	protected void end(){
+		Robot.chassisSubsystem.setSpeed(0,0);
+	}
+	
 	protected boolean isFinished() {
 
 		if (super.isFinished()) {
@@ -64,7 +76,7 @@ public class RotateToAngleCommand extends TSafeCommand {
 			error += 360;
 		}
 
-		if (Math.abs(error) <= 5) {
+		if (Math.abs(error) <= 10) {
 			return true;
 		}
 		

@@ -18,7 +18,7 @@ public class DefaultElevatorCommand extends Command {
 		// Read the joystick 
 		// If the joystick is pressed, then 
 		// override the elevator movement.
-		if (Math.abs(Robot.oi.getElevatorSpeed()) > 0.1) {
+		if (Math.abs(Robot.oi.getElevatorSpeed()) > 0.2) {
 			Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevatorSpeed());
 		}
 		else {

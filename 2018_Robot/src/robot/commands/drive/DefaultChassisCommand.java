@@ -65,7 +65,7 @@ public class DefaultChassisCommand extends Command {
 			Scheduler.getInstance().add(new ArcCommand(200, Robot.chassisSubsystem.getGryoAngle(), Robot.chassisSubsystem.getGryoAngle() - 90, 1));
 		}*/
 
-		double speed = Robot.oi.getSpeed();
+		double speed = Robot.oi.getSpeed();		
 		double turn  = Robot.oi.getTurn();
 
 		// Reduce the scale of the speed and turn at low 
@@ -116,11 +116,11 @@ public class DefaultChassisCommand extends Command {
 		if (Robot.oi.getTurboOn()) {
 
 			//System.out.println(leftSpeed + " " + rightSpeed + " " + getEncoderSpeed()); 
-			if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) >= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.4 
+/*			if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) >= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.4 
 				&& (   (leftSpeed >= 0 && rightSpeed >= 0) 
-					|| (leftSpeed <= 0 && rightSpeed <= 0) ) ) { 
+					|| (leftSpeed <= 0 && rightSpeed <= 0) ) ) { */
 				Robot.chassisSubsystem.enableTurbo();
-			}
+		/*	}
 			 
 
 			if (Math.abs(Robot.chassisSubsystem.getEncoderSpeed()) <= robot.RobotConst.MAX_LOW_GEAR_SPEED * 0.2) {
@@ -131,7 +131,7 @@ public class DefaultChassisCommand extends Command {
 				|| (leftSpeed <= 0 && rightSpeed <= 0))) { 
 				Robot.chassisSubsystem.disableTurbo();
 				//System.out.println("disable turbo 3"); 
-			}
+			}*/
 
 		}
 		else {
