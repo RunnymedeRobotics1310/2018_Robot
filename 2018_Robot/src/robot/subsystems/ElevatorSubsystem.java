@@ -36,10 +36,10 @@ public class ElevatorSubsystem extends TSubsystem {
 		if (encoderCount <= 1000) {// resting intake level
 			return 1;
 		}
-		if (encoderCount < 2300) {
+		if (encoderCount < 2400) {
 			return 1.5;
 		}
-		if (encoderCount <=2600) {//switch deposit level
+		if (encoderCount <=2700) {//switch deposit level
 			return 2;
 		}
 		if (encoderCount < 5900) {
