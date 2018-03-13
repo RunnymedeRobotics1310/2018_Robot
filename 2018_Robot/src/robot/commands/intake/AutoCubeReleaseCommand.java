@@ -7,44 +7,67 @@ import robot.commands.drive.TSafeCommand;
  *
  */
 public class AutoCubeReleaseCommand extends TSafeCommand {
+	private boolean release;
+	private enum Step { OUTTAKE, OPEN, FINISH, RELEASE, CATCH }
 
-	private enum Step { OUTTAKE, OPEN, FINISH }
-	
 	private Step curStep = Step.OUTTAKE;
 
-	public AutoCubeReleaseCommand() {
+	public AutoCubeReleaseCommand(boolean release) {
 		// Use requires() here to declare subsystem dependencies
+		this.release = release;
 		requires(Robot.intakeSubsystem);
+	}
+	public AutoCubeReleaseCommand() {
+		this(false);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		curStep = Step.OUTTAKE;
+		if (release) {
+			curStep = Step.RELEASE;
+		}
+		else {
+			curStep = Step.OUTTAKE;
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		
+
 		switch (curStep) {
+		case RELEASE: {
+			Robot.intakeSubsystem.intakeClawOpen();
+			if (timeSinceInitialized() > .1) {
+				curStep = Step.CATCH;
+			}
+			break;
+		}
+		case CATCH: {
+			Robot.intakeSubsystem.intakeClawClose();
+			if (timeSinceInitialized() > .3) {
+				curStep = Step.OUTTAKE;
+			}
+			break;
+		}
 		case OUTTAKE:
 			Robot.intakeSubsystem.outtakeCube();
-			if (timeSinceInitialized() > .25) {
+			if (timeSinceInitialized() > .75) {
 				curStep = Step.OPEN;
 			}
 			break;
-			
+
 		case OPEN:
 			Robot.intakeSubsystem.intakeClawOpen();
-			if (timeSinceInitialized() > .75) {
+			if (timeSinceInitialized() > 1.0) {
 				curStep = Step.FINISH;
 			}
-			
+
 		case FINISH:
 			break;
 		}
-		
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

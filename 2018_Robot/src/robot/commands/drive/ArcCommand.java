@@ -85,7 +85,7 @@ public class ArcCommand extends TSafeCommand {
 		if (stopAtDistance) {
 			double encoderDistance = Robot.chassisSubsystem.getEncoderDistance();
 			// Note: this command runs in centimeters instead of inches?
-			if (encoderDistance * RobotConst.ELEVATOR_ENCODER_COUNTS_PER_INCH * 2.54 > this.dist) {
+			if ((encoderDistance / RobotConst.ELEVATOR_ENCODER_COUNTS_PER_INCH) * 2.54 > this.dist) {
 				return true;
 			}
 		}

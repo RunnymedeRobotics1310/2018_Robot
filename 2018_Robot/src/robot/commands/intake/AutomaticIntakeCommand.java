@@ -40,7 +40,7 @@ public class AutomaticIntakeCommand extends TSafeCommand {
 			break;
 			
 		case INTAKE_DELAY:
-			if (timeSinceInitialized() > intakeStopDelayStartTime + .5) {
+			if (timeSinceInitialized() > intakeStopDelayStartTime + 1) {
 				Robot.intakeSubsystem.intakeStop();
 				state = State.FINISH;
 			}
