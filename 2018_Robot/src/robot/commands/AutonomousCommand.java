@@ -353,14 +353,18 @@ public class AutonomousCommand extends CommandGroup {
 
 	//center start
 	private void centerSwitchLeft1(){
+		addParallel(new SetElevatorHeightCommand(2));
 		addSequential(new ArcCommand(85, 0, 310, 0.8, false));
-		addSequential(new ArcCommand(105, 310, 0, 0.8, true));
+		addSequential(new ArcCommand(105, 310, 0, 0.8, false));
+		addSequential(new DriveDistanceCommand(20, 0, 0.8, 7.0, false));
 		addSequential(new AutoCubeReleaseCommand());
 	}
 	private void centerSwitchRight1(){
+		addParallel(new SetElevatorHeightCommand(2));
 		addSequential(new ArcCommand(80, 0, 45,0.8, false));
 		addSequential(new DriveDistanceCommand(3, 45, 0.8, 3.0, false));
-		addSequential(new ArcCommand(110, 45, 0, 0.8, true));
+		addSequential(new ArcCommand(110, 45, 0, 0.8, false));
+		addSequential(new DriveDistanceCommand(20, 0, 0.8, 7.0, false));
 		addSequential(new AutoCubeReleaseCommand());
 	}
 
