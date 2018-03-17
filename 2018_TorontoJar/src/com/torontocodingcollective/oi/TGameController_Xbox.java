@@ -49,23 +49,23 @@ public class TGameController_Xbox extends TGameController {
 		
 		switch (button) {
 		case A:
-			return getRawButton(0);
-		case B:
 			return getRawButton(1);
-		case X:
+		case B:
 			return getRawButton(2);
-		case Y:
+		case X:
 			return getRawButton(3);
+		case Y:
+			return getRawButton(4);
 			
 		case BACK:
-			return getRawButton(6);
-		case START:
 			return getRawButton(7);
+		case START:
+			return getRawButton(8);
 
 		case LEFT_BUMPER:
-			return getRawButton(4);
-		case RIGHT_BUMPER:
 			return getRawButton(5);
+		case RIGHT_BUMPER:
+			return getRawButton(6);
 	
 		default: return false;
 		}
