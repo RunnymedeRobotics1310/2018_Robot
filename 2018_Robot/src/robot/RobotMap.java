@@ -12,11 +12,11 @@ public class RobotMap {
 	//******************************************
 	// Speed Controllers (CAN addresses)
 	//******************************************
-	public static int LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 1;  // TALON_SRX
-	public static int RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 0;  // TALON_SRX
+	public static final int LEFT_DRIVE_MOTOR_CAN_ADDRESS;          // TALON_SRX
+	public static final int RIGHT_DRIVE_MOTOR_CAN_ADDRESS;         // TALON_SRX
 
-	public static int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 3;  // VICTOR_SPX
-	public static int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 2;  // VICTOR_SPX
+	public static final int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS;       // VICTOR_SPX
+	public static final int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS;      // VICTOR_SPX
 	
 	public static int ELEVATOR_MOTOR_CAN_ADDRESS            = 4;  // TALON_SRX
 	public static int ELEVATOR_MOTOR_FOLLOWER_CAN_ADDRESS  =  5;  // VICTOR_SPX
@@ -48,8 +48,20 @@ public class RobotMap {
 		
 		switch (RobotConst.robot) {
 
-		case 1311:
 		case 1310:
+			LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 1;  // TALON_SRX
+			RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 0;  // TALON_SRX
+
+			LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 3;  // VICTOR_SPX
+			RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 2;  // VICTOR_SPX
+			break;
+			
+		default:
+			LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 0;  // TALON_SRX
+			RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 1;  // TALON_SRX
+
+			LEFT_DRIVE_FOLLOWER_CAN_ADDRESS       = 2;  // VICTOR_SPX
+			RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS      = 3;  // VICTOR_SPX
 			break;
 
 		}
