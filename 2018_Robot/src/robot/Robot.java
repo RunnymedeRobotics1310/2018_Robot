@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import robot.commands.AutonomousCommand;
 import robot.oi.GameData;
 import robot.oi.OI;
+import robot.subsystems.CameraSubsystem;
 import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ElevatorSubsystem;
 import robot.subsystems.IntakeSubsystem;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static final PowerSubsystem powerSubsystem = new PowerSubsystem();
+	public static final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 	public static OI oi;
 	
 	
@@ -46,6 +48,7 @@ public class Robot extends IterativeRobot {
 		elevatorSubsystem.init();
 		intakeSubsystem.init();
 		powerSubsystem.init();
+		cameraSubsystem.init();
 	}
 
 	/**
@@ -153,5 +156,6 @@ public class Robot extends IterativeRobot {
 		elevatorSubsystem.updatePeriodic();
 		intakeSubsystem.updatePeriodic();
 		powerSubsystem.updatePeriodic();
+		cameraSubsystem.updatePeriodic();
 	}
 }
