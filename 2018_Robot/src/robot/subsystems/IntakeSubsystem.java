@@ -22,7 +22,7 @@ public class IntakeSubsystem extends TSubsystem {
 
 	// Motor that moves the roller to suck in the cube
 	private TCanSpeedController intakeRollerMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
-			RobotMap.INTAKE_ROLLER_MOTOR_CAN_ADDRESS, true);
+			RobotMap.INTAKE_ROLLER_MOTOR_CAN_ADDRESS);
 	// Motor that moves the arm up and down
 	private TCanSpeedController intakeTiltMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
 			RobotMap.INTAKE_TILT_MOTOR_CAN_ADDRESS);

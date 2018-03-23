@@ -49,6 +49,7 @@ public class RobotMap {
 		switch (RobotConst.robot) {
 
 		case 1310:
+		case 1311:
 			LEFT_DRIVE_MOTOR_CAN_ADDRESS          = 1;  // TALON_SRX
 			RIGHT_DRIVE_MOTOR_CAN_ADDRESS         = 0;  // TALON_SRX
 
