@@ -19,13 +19,13 @@ public class ElevatorSubsystem extends TSubsystem {
 	
 	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS,
 			TCanSpeedControllerType.VICTOR_SPX, RobotMap.ELEVATOR_MOTOR_FOLLOWER_CAN_ADDRESS);
-	TEncoder encoder = elevatorMotor.getEncoder();
+	TEncoder elevatorEncoder = elevatorMotor.getEncoder();
 
 	TLimitSwitch bottom = new TLimitSwitch(RobotMap.ELEVATOR_BOTTOM_LIMIT_DIO_PORT, DefaultState.TRUE);
 	TLimitSwitch top = new TLimitSwitch(RobotMap.ELEVATOR_TOP_LIMIT_DIO_PORT, DefaultState.TRUE);
 
 	public double getLevel(){
-		double encoderCount = encoder.get();
+		double encoderCount = elevatorEncoder.get();
 		if (encoderCount <= 2) {//pickup level
 			return 0;
 		}
@@ -65,13 +65,13 @@ public class ElevatorSubsystem extends TSubsystem {
 	}
 	public void resetEncoders() {
 
-		if (encoder == null) { return; } 
+		if (elevatorEncoder == null) { return; } 
 
-		encoder.reset();
+		elevatorEncoder.reset();
 	}
 
 	public double getElevatorEncoder() {
-		return encoder.get();
+		return elevatorEncoder.get();
 	}
 
 	public void setSpeed(double speed) {
@@ -102,7 +102,7 @@ public class ElevatorSubsystem extends TSubsystem {
 
 	@Override
 	public void init() {
-		encoder.setInverted(true);
+		elevatorEncoder.setInverted(true);
 	}
 	@Override
 	protected void initDefaultCommand() {

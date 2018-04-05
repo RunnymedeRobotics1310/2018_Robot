@@ -37,6 +37,10 @@ public class DefaultIntakeCommand extends Command {
 	@Override
 	protected void execute() {
 
+		if (Robot.oi.reset()){
+			Robot.intakeSubsystem.resetEncoders();
+		}
+
 		if (Robot.oi.getAutomaticIntake()) {
 			Scheduler.getInstance().add(new TeleopAutomaticIntakeCommand());
 		}
@@ -49,37 +53,34 @@ public class DefaultIntakeCommand extends Command {
 		} else {
 			Robot.intakeSubsystem.intakeClawClose();
 		}
-		
-		
-			
 
 		// Intake / outtake code
 
-		if (Robot.oi.getIntakeCube()) {
+		if (Robot.oi.getIntakeCube() > 0.1) {
 			Robot.intakeSubsystem.intakeCube();
-		} else if (Robot.oi.getOuttakeCube()) {
-			Robot.intakeSubsystem.outtakeCube();
+		} else if (Robot.oi.getOuttakeCube() > 0.1) {
+			Robot.intakeSubsystem.outtakeCube(Robot.oi.getOuttakeCube());
 		} else {
 			Robot.intakeSubsystem.intakeStop();
 		}
 
 		// if the intake is jammed, then release it slightly and pull it back
-//		double voltage = 0.0;
-//
-//		if (!cubeJammed) {
-//			if (voltage > 1) {
-//				cubeJammed = true;
-//				intakeJammedTime = System.currentTimeMillis();
-//			}
-//		}
-//
-//		if (cubeJammed) {
-//			Robot.intakeSubsystem.outtakeCube();
-//			if (System.currentTimeMillis() - intakeJammedTime < 500) {
-//				Robot.intakeSubsystem.intakeCube();
-//				cubeJammed = false;
-//			}
-//		}
+		//		double voltage = 0.0;
+		//
+		//		if (!cubeJammed) {
+		//			if (voltage > 1) {
+		//				cubeJammed = true;
+		//				intakeJammedTime = System.currentTimeMillis();
+		//			}
+		//		}
+		//
+		//		if (cubeJammed) {
+		//			Robot.intakeSubsystem.outtakeCube();
+		//			if (System.currentTimeMillis() - intakeJammedTime < 500) {
+		//				Robot.intakeSubsystem.intakeCube();
+		//				cubeJammed = false;
+		//			}
+		//		}
 
 		// // Handle lift
 		// if (Robot.oi.getLiftArmUp()) {
@@ -103,10 +104,24 @@ public class DefaultIntakeCommand extends Command {
 
 		if (Math.abs(intakeTiltSpeed) > 0.1) {
 			Robot.intakeSubsystem.setIntakeTiltSpeed(intakeTiltSpeed);
-		} else {
+		} 
+		else {
 			Robot.intakeSubsystem.setIntakeTiltSpeed(0);
 		}
-	}
+
+		if (Robot.oi.getTiltArmDown()) {
+			if (Robot.intakeSubsystem.getTiltEncoderCount() < Robot.intakeSubsystem.LIFT_UP_ENCODER_COUNT) {
+				Robot.intakeSubsystem.setIntakeTiltSpeed(0.8);
+			}
+		}
+		if (Robot.oi.getTiltArmUp()) {
+			if (Robot.intakeSubsystem.getTiltEncoderCount() > Robot.intakeSubsystem.LIFT_DOWN_ENCODER_COUNT) {
+				Robot.intakeSubsystem.intakeClawOpen();
+				//timer
+				Robot.intakeSubsystem.intakeClawClose();
+			}
+		}
+	} 
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override

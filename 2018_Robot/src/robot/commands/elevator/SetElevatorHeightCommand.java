@@ -34,9 +34,11 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 			if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 				setLevel = ElevatorSubsystem.MIN_LEVEL;
 			}
-			if (setLevel == ElevatorSubsystem.MIN_LEVEL /* &&  !Robot.intakeSubsystem.isIntakeExtended() */) {
+			/*
+			if (setLevel == ElevatorSubsystem.MIN_LEVEL /* &&  !Robot.intakeSubsystem.isIntakeExtended() ) {
 				setLevel = ElevatorSubsystem.MIN_LEVEL +1;
-			}
+			}*/
+			
 		}
 
 		if (Robot.elevatorSubsystem.getLevel() > setLevel) {

@@ -40,24 +40,19 @@ import robot.RobotConst;
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
- * 		Right Stick X    	= Right Ramp Rear Adjust
- * 		Right Stick Y    	= Left Ramp Rear Adjust
- * 		Right Stick Press  	= 
- * 		Left Stick Press 	= 
+ * 		Right Stick Y-Axis  = Manual Intake Tilt Control
  * 	Buttons:
- * 		Y Button 			= Eject Cube out Front of the Robot
- * 		A Button 			= Eject Cube out Back of the Robot
- * 		X Button			= Deploy Ramps
+ * 		Y Button 			= Move Elevator to Switch Level
+ * 		A Button 			= Set Intake Tilt Angle to 0
+ * 		X Button			= Set Intake Tilt Angle to 45
+ * 		B Button			= Set Intake Tilt Angle to 90
  * 	Bumpers/Triggers:
- * 		Right Bumper		= Move Elevator Up One Level
- * 		Left Bumper			= Move Elevator Down One Level		
- * 		Right Trigger		= Move Intake Forearms to Inner Position 
- * 		Left Trigger 		= Move Intake Forearms to Outer Position 
+ * 		Right Bumper		= Open Intake
+ * 		Right Trigger		= Eject Cube
+ * 		Left Trigger 		= Intake Cube
  *	POV
- *		45					= Raise Right Ramp
- *		315					= Raise Left Ramp
- *		135					= Lower Right Ramp
- *		225					= Lower Left Ramp
+ *		0					= Move Elevator Up One Level
+ *		180					= Move Elevator Down One Level
  *
  *
  */
@@ -67,7 +62,7 @@ public class OI {
 
 	private TGameController driverController = new TGameController_Logitech(0);
 	private TGameController operatorController = new TGameController_Logitech(1);
-	
+
 	public TRumbleManager driverRumble = new TRumbleManager("Driver", driverController);
 
 
@@ -100,7 +95,7 @@ public class OI {
 	public boolean getAutomaticIntakeCancel() {
 		return driverController.getButton(TButton.B);
 	}
-	
+
 	/*public boolean getForwardThrust() {
 	//	return gameController.getButton(TButton.A);
 	//}
@@ -120,7 +115,7 @@ public class OI {
 	public boolean reset() {
 		return driverController.getButton(TButton.START);
 	}
-	
+
 	public int getPov() {
 		return driverController.getPOV();
 	}
@@ -142,67 +137,39 @@ public class OI {
 	}
 
 	//Operator Controller
-	public boolean getRampUp(char side) {
-		if (side == RobotConst.LEFT && operatorController.getPOV() == 315) {
-			return true;
-		}
-		if (side == RobotConst.RIGHT && operatorController.getPOV() == 45) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean getRampDown(char side) {
-		if (side == RobotConst.LEFT && operatorController.getPOV() == 225) {
-			return true;
-		}
-		if (side == RobotConst.RIGHT && operatorController.getPOV() == 135) {
-			return true;
-		}
-		return false;
-	}
-
-	public double getRightRampRearAdjust() {
-		return operatorController.getAxis(TStick.RIGHT, TAxis.X);
-	}
-
-	public double getLeftRampRearAdjust() {
-		return - operatorController.getAxis(TStick.RIGHT, TAxis.Y);
-	}
 
 	public double getElevatorSpeed() {
 		return - operatorController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
 	public boolean getElevatorUp() {
-		return elevatorUpButtonPress.get();
+		if (operatorController.getPOV() == 0) {
+			return true;
+		}
+		return false;
 	}
 
 	public boolean getElevatorDown() {
-		return elevatorDownButtonPress.get();
+		if (operatorController.getPOV() == 180) {
+			return true;
+		}
+		return false;
 	}
-	//ramp release
-	public boolean getRampRelease() {
-		return rampRelease.get();
+
+	public boolean getElevatorSwitch() {
+		return operatorController.getButton(TButton.Y);
 	}
-
-
-
-	/*
-	 * Intake Buttons
-	 */
 
 	public boolean getClawOpen() {
-		return driverController.getButton(TTrigger.LEFT); 
-	}
-
-	public boolean getIntakeCube() {
 		return driverController.getButton(TButton.RIGHT_BUMPER); 
 	}
 
-	public boolean getOuttakeCube() {
-		return operatorController.getButton(TButton.A)
-				|| driverController.getButton(TTrigger.RIGHT);
+	public double getIntakeCube() {
+		return driverController.getTrigger(TTrigger.LEFT);
+	}
+
+	public double getOuttakeCube() {
+		return driverController.getTrigger(TTrigger.RIGHT);
 	}
 
 	public double getIntakeTiltSpeed() {
@@ -210,11 +177,15 @@ public class OI {
 	}
 
 	public boolean getTiltArmUp() {
-		return false; // TODO get a button
+		return operatorController.getButton(TButton.B);
+	}
+
+	public boolean getTiltArm45() {
+		return operatorController.getButton(TButton.X);
 	}
 
 	public boolean getTiltArmDown() {
-		return false; //TODO: get a button
+		return operatorController.getButton(TButton.A);
 	}
 
 	public void updatePeriodic() {

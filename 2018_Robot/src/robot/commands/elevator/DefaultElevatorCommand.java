@@ -10,7 +10,7 @@ public class DefaultElevatorCommand extends Command {
 	public DefaultElevatorCommand() {
 		requires(Robot.elevatorSubsystem);
 	}
-	
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
@@ -24,8 +24,8 @@ public class DefaultElevatorCommand extends Command {
 		else {
 			Robot.elevatorSubsystem.setSpeed(0);
 		}
-			
-		
+
+
 		// Increment and decrement.
 		if (Robot.oi.getElevatorUp()) {
 			addHeight();
@@ -34,27 +34,32 @@ public class DefaultElevatorCommand extends Command {
 		if (Robot.oi.getElevatorDown()) {
 			subtractHeight();
 		}
+
+		if (Robot.oi.getElevatorSwitch()) {
+			Scheduler.getInstance().add(new SetElevatorHeightCommand(2));		
+		}
+
 		if (Robot.oi.reset()){
 			Robot.elevatorSubsystem.resetEncoders();
 		}
-		
+
 	}
-	
+
 	public void addHeight() {
-		
+
 		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel() + 1);
-		
+
 		if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
 			setLevel = ElevatorSubsystem.MAX_LEVEL;
 		}
-		
+
 		Scheduler.getInstance().add(
 				new SetElevatorHeightCommand(setLevel));
 	}
-	
-	
+
+
 	public void subtractHeight() {
-		
+
 		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel() - 1);
 
 		if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
@@ -67,7 +72,7 @@ public class DefaultElevatorCommand extends Command {
 		Scheduler.getInstance().add(
 				new SetElevatorHeightCommand(setLevel));
 	}
-	
+
 
 	@Override
 	protected boolean isFinished() {
