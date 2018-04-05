@@ -15,7 +15,10 @@ public class AutoSelector {
 	public static final String SWITCH = "Switch";
 	public static final String SCALE = "Scale";
 	public static final String CROSS = "Cross";
+	public static final String CUBE = "Cube";
 	public static final String NONE = "None";
+	public static final String CLOSE_SCALE_ONLY = "Close Scale";
+
 
 	static {
 		
@@ -34,6 +37,8 @@ public class AutoSelector {
 		robotFirstAction.addDefault(SWITCH, SWITCH);
 		robotFirstAction.addObject(SCALE, SCALE);
 		robotFirstAction.addObject(CROSS, CROSS);
+		robotFirstAction.addObject(CLOSE_SCALE_ONLY, CLOSE_SCALE_ONLY);
+
 
 		SmartDashboard.putData("First Action", robotFirstAction);
 
@@ -41,6 +46,7 @@ public class AutoSelector {
 		robotSecondAction = new SendableChooser<String>();
 		robotSecondAction.addObject(SWITCH, SWITCH);
 		robotSecondAction.addObject(SCALE, SCALE);
+		robotSecondAction.addObject(CUBE, CUBE);
 		robotSecondAction.addDefault(NONE, NONE);
 
 		SmartDashboard.putData("Second Action", robotSecondAction);

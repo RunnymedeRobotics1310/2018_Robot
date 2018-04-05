@@ -102,10 +102,13 @@ public class DefaultIntakeCommand extends Command {
 
 		double intakeTiltSpeed = Robot.oi.getIntakeTiltSpeed();
 
-		if (Math.abs(intakeTiltSpeed) > 0.1) {
-			Robot.intakeSubsystem.setIntakeTiltSpeed(intakeTiltSpeed);
-		} 
-		else {
+		if (intakeTiltSpeed > 0.1 && intakeTiltSpeed < 0.93) {
+			Robot.intakeSubsystem.setIntakeTiltSpeed(0.4 * intakeTiltSpeed + 0.5);
+		} else if (intakeTiltSpeed < -0.1 && intakeTiltSpeed > -0.93) {
+				Robot.intakeSubsystem.setIntakeTiltSpeed(0.3 * intakeTiltSpeed);
+		} else if (Math.abs(intakeTiltSpeed) > 0.93) {
+			Robot.intakeSubsystem.setIntakeTiltSpeed(1.0 * Math.signum(intakeTiltSpeed));
+		} else {
 			Robot.intakeSubsystem.setIntakeTiltSpeed(0);
 		}
 
