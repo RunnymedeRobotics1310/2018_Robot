@@ -161,15 +161,15 @@ public class OI {
 	}
 
 	public boolean getClawOpen() {
-		return driverController.getButton(TButton.RIGHT_BUMPER); 
+		return driverController.getButton(TTrigger.LEFT); 
 	}
 
-	public double getIntakeCube() {
-		return driverController.getTrigger(TTrigger.LEFT);
+	public boolean getIntakeCube() {
+		return driverController.getButton(TButton.RIGHT_BUMPER);
 	}
 
-	public double getOuttakeCube() {
-		return driverController.getTrigger(TTrigger.RIGHT);
+	public boolean getOuttakeCube() {
+		return driverController.getButton(TTrigger.RIGHT);
 	}
 
 	public double getIntakeTiltSpeed() {

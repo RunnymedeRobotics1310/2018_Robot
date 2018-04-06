@@ -56,10 +56,11 @@ public class DefaultIntakeCommand extends Command {
 
 		// Intake / outtake code
 
-		if (Robot.oi.getIntakeCube() > 0.1) {
+		if (Robot.oi.getIntakeCube()) {
 			Robot.intakeSubsystem.intakeCube();
-		} else if (Robot.oi.getOuttakeCube() > 0.1) {
-			Robot.intakeSubsystem.outtakeCube(Robot.oi.getOuttakeCube());
+		} else if (Robot.oi.getOuttakeCube()) {
+//			Robot.intakeSubsystem.outtakeCube(Robot.oi.getOuttakeCube());
+			Robot.intakeSubsystem.outtakeCube();
 		} else {
 			Robot.intakeSubsystem.intakeStop();
 		}

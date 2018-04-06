@@ -5,7 +5,7 @@ public class RobotConst {
 	// The TorontoCodingCollective framework was developed to run on different
 	// robots.
 	// Supported robots are 1311 and 1321.
-	public static int robot = 1310;
+	public static int robot = 1311;
 
 	
 	public static final boolean INVERTED = true;

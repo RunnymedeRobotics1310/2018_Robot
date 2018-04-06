@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 public class CameraSubsystem extends TSubsystem {
 
 	public CameraSubsystem() {
-		CameraServer.getInstance().startAutomaticCapture();
+//		CameraServer.getInstance().startAutomaticCapture();
 	}
 	
 	@Override
