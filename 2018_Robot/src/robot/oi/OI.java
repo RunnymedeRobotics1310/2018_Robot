@@ -137,15 +137,15 @@ public class OI {
 	}
 
 	public boolean getIntakeCube() {
-		return driverController.getButton(TButton.RIGHT_BUMPER);
+		return driverController.getButton(TButton.RIGHT_BUMPER) || operatorController.getButton(TButton.LEFT_BUMPER);
 	}
 
 	public double getOuttakeCube() {
-		return driverController.getTrigger(TTrigger.RIGHT);
+		return Math.max(driverController.getTrigger(TTrigger.RIGHT), operatorController.getTrigger(TTrigger.RIGHT));
 	}
 
 	public boolean getClawOpen() {
-		return driverController.getButton(TTrigger.LEFT); 
+		return operatorController.getButton(TButton.RIGHT_BUMPER) || driverController.getButton(TTrigger.LEFT); 
 	}
 
 	//Operator Controller
