@@ -5,12 +5,11 @@ import com.torontocodingcollective.oi.TButton;
 import com.torontocodingcollective.oi.TButtonPressDetector;
 import com.torontocodingcollective.oi.TGameController;
 import com.torontocodingcollective.oi.TGameController_Logitech;
+import com.torontocodingcollective.oi.TPOVPressDetector;
 import com.torontocodingcollective.oi.TRumbleManager;
 import com.torontocodingcollective.oi.TStick;
 import com.torontocodingcollective.oi.TToggle;
 import com.torontocodingcollective.oi.TTrigger;
-
-import robot.RobotConst;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -70,11 +69,8 @@ public class OI {
 	private TToggle pidToggle = new TToggle(driverController, TStick.RIGHT);
 	private TToggle rampRelease = new TToggle(operatorController, TButton.X);
 
-	private TButtonPressDetector elevatorUpButtonPress = 
-			new TButtonPressDetector(operatorController,TButton.RIGHT_BUMPER);
-
-	private TButtonPressDetector elevatorDownButtonPress = 
-			new TButtonPressDetector(operatorController,TButton.LEFT_BUMPER);
+	private TPOVPressDetector elevatorButtonPress = 
+			new TPOVPressDetector(operatorController);
 
 	public void init() {
 		pneumaticsToggle.set(true);
@@ -155,14 +151,14 @@ public class OI {
 	}
 
 	public boolean getElevatorUp() {
-		if (operatorController.getPOV() == 0) {
+		if (elevatorButtonPress.get() == 0) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean getElevatorDown() {
-		if (operatorController.getPOV() == 180) {
+		if (elevatorButtonPress.get() == 180) {
 			return true;
 		}
 		return false;
