@@ -21,7 +21,7 @@ public class TPOVPressDetector {
 	 * <br>
 	 * @param gameController object
 	 */
-	public TPOVPressDetector(TGameController gameController, TButton button) {
+	public TPOVPressDetector(TGameController gameController) {
 		this.gameController = gameController;
 		this.previousPOVValue = gameController.getPOV();
 	}
