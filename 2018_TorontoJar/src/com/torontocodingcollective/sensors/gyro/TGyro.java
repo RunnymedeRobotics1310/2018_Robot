@@ -11,16 +11,16 @@ public abstract class TGyro extends GyroBase {
 		this.isInverted = inverted;
 	}
 	
-	protected boolean isInverted() {
-		return isInverted;
-	}
+	public abstract double getAngle();
 	
-	public void resetGyroAngle() {
-		setGyroAngle(0);
+	public double getPitch() {
+		return 0;
 	}
 	
 	public abstract double getRate();
-	public abstract double getAngle();
+	public void resetGyroAngle() {
+		setGyroAngle(0);
+	}
 
 	public void setGyroAngle(double angle) {
 		
@@ -36,13 +36,20 @@ public abstract class TGyro extends GyroBase {
 		// to make the desired angle
 		offset += angle;
 	}
+
+	public boolean supportsPitch() {
+		return false;
+	}
 	
-	protected double getRate(double rawRate) {
-		if (isInverted) {
-			return -rawRate;
+	private double getNormalizedAngle(double rawAngle) {
+		
+		double angle = rawAngle % 360.0;
+		
+		if (angle < 0) {
+			angle += 360.0;
 		}
 		
-		return rawRate;
+		return angle;
 	}
 	
 	protected double getAngle(double rawAngle) {
@@ -55,15 +62,16 @@ public abstract class TGyro extends GyroBase {
 		return getNormalizedAngle(rawAngle + offset);
 	}
 	
-	private double getNormalizedAngle(double rawAngle) {
-		
-		double angle = rawAngle % 360.0;
-		
-		if (angle < 0) {
-			angle += 360.0;
+	protected double getRate(double rawRate) {
+		if (isInverted) {
+			return -rawRate;
 		}
 		
-		return angle;
+		return rawRate;
+	}
+	
+	protected boolean isInverted() {
+		return isInverted;
 	}
 	
 }

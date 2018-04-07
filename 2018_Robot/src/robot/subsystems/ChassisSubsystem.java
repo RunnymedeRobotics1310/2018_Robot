@@ -65,11 +65,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 
 	@Override
 	public void init() {
-
-		if (RobotConst.robot == 1321) {
-			TAnalogGyro gyro = (TAnalogGyro) super.gyro;
-			gyro.setSensitivity(0.0017);
-		}
 		disableTurbo();
 	};
 

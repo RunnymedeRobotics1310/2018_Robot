@@ -136,6 +136,18 @@ public class OI {
 		pidToggle.set(state);
 	}
 
+	public boolean getIntakeCube() {
+		return driverController.getButton(TButton.RIGHT_BUMPER);
+	}
+
+	public double getOuttakeCube() {
+		return driverController.getTrigger(TTrigger.RIGHT);
+	}
+
+	public boolean getClawOpen() {
+		return driverController.getButton(TTrigger.LEFT); 
+	}
+
 	//Operator Controller
 
 	public double getElevatorSpeed() {
@@ -158,18 +170,6 @@ public class OI {
 
 	public boolean getElevatorSwitch() {
 		return operatorController.getButton(TButton.Y);
-	}
-
-	public boolean getClawOpen() {
-		return driverController.getButton(TTrigger.LEFT); 
-	}
-
-	public boolean getIntakeCube() {
-		return driverController.getButton(TButton.RIGHT_BUMPER);
-	}
-
-	public boolean getOuttakeCube() {
-		return driverController.getButton(TTrigger.RIGHT);
 	}
 
 	public double getIntakeTiltSpeed() {

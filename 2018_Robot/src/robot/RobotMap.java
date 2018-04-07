@@ -24,7 +24,7 @@ public class RobotMap {
 	// Roller: 	to suck in the cube
 	// Lift: 	to lift the cube
 	public static int INTAKE_ROLLER_MOTOR_CAN_ADDRESS      =  6;  // VICTOR_SPX
-	public static int INTAKE_TILT_MOTOR_CAN_ADDRESS        =  7;  // VICTOR_SPX
+	public static int INTAKE_TILT_MOTOR_CAN_ADDRESS        =  7;  // TALON_SRX
 	
 	
 	//******************************************
