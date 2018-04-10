@@ -41,7 +41,7 @@ public class TCanSpeedController extends TSpeedController {
 		canSpeedController = newController(controllerType, canAddress);
 		
 		BaseMotorController follower = newController(followerControllerType, followerCanAddress);
-		follower.follow(canSpeedController);
+		follower.follow(canSpeedController); 
 		
 		this.isInverted = isInverted;
 	}
