@@ -1,6 +1,7 @@
 package robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import robot.Robot;
 import robot.commands.drive.AccelerateDistanceCommand;
 import robot.commands.drive.ArcCommand;
 import robot.commands.drive.BackupCommand;
@@ -9,6 +10,7 @@ import robot.commands.drive.RotateToAngleCommand;
 import robot.commands.elevator.SetElevatorHeightCommand;
 import robot.commands.intake.AutoCubeReleaseCommand;
 import robot.commands.intake.AutomaticIntakeCommand;
+import robot.commands.intake.IntakeRotatetoAngleCommand;
 import robot.oi.AutoSelector;
 import robot.oi.GameData;
 
@@ -73,6 +75,7 @@ public class AutonomousCommand extends CommandGroup {
 	}
 
 	private void leftAuto(char scale, char closeSwitch, String firstAction, String secondAction) {
+
 		//first action
 		if (firstAction.equals(SCALE)) {
 			//scale action is selected
@@ -241,11 +244,12 @@ public class AutonomousCommand extends CommandGroup {
 	}
 
 	private void rightScaleRight1(){
-		addParallel(new SetElevatorHeightCommand(1));
+		addParallel(new SetElevatorHeightCommand(2));
+		addParallel(new IntakeRotatetoAngleCommand(0));
 		addSequential(new AccelerateDistanceCommand(200, 0, 1.0, 5.0, false));
 		addParallel(new SetElevatorHeightCommand(5));
 		addSequential(new ArcCommand(100, 0, 320, 0.4, true));
-		addSequential(new AutoCubeReleaseCommand(true));
+		addSequential(new AutoCubeReleaseCommand());
 		addSequential(new BackupCommand(25));
 		addParallel(new SetElevatorHeightCommand(0));
 		addSequential(new RotateToAngleCommand(230, 0.5));
@@ -322,6 +326,7 @@ public class AutonomousCommand extends CommandGroup {
 //		addSequential(new AutoCubeReleaseCommand());
 	}
 	public void rightScaleRight2(){	
+		addSequential(new BackupCommand(10));
 		addSequential(new RotateToAngleCommand(45, 0.5));
 		addSequential(new SetElevatorHeightCommand(5));
 		addSequential(new ArcCommand(150, 45, 350, 0.4, true));

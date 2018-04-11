@@ -91,6 +91,7 @@ public class Robot extends IterativeRobot {
 		// Reset the gyro and the encoders
 		Robot.chassisSubsystem.setGyroAngle(0);
 		Robot.chassisSubsystem.resetEncoders();
+		Robot.intakeSubsystem.setTiltAngle(90);
 				
 		// Initialize the robot command after initializing the game data
 		// because the game data will be used in the auto command.

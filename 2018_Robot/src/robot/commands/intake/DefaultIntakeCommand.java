@@ -113,16 +113,13 @@ public class DefaultIntakeCommand extends Command {
 		}
 
 		if (Robot.oi.getTiltArmDown()) {
-			if (Robot.intakeSubsystem.getTiltEncoderCount() < Robot.intakeSubsystem.LIFT_UP_ENCODER_COUNT) {
-				Robot.intakeSubsystem.setIntakeTiltSpeed(0.8);
-			}
+			Scheduler.getInstance().add(new IntakeRotatetoAngleCommand(0));
 		}
+		if (Robot.oi.getTiltArm45()) {
+			Scheduler.getInstance().add(new IntakeRotatetoAngleCommand(45));
+		}	
 		if (Robot.oi.getTiltArmUp()) {
-			if (Robot.intakeSubsystem.getTiltEncoderCount() > Robot.intakeSubsystem.LIFT_DOWN_ENCODER_COUNT) {
-				Robot.intakeSubsystem.intakeClawOpen();
-				//timer
-				Robot.intakeSubsystem.intakeClawClose();
-			}
+			Scheduler.getInstance().add(new IntakeRotatetoAngleCommand(90));
 		}
 	} 
 

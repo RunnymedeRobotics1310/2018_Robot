@@ -26,6 +26,12 @@ public abstract class TEncoder {
 		// in order to zero the output.
 		offset = -get();
 	}
+	public void set(int encoderCount) {
+		offset = 0;
+		offset = -get() + encoderCount;
+
+	}
+
 	
 	/** 
 	 * Set the encoder to the passed in inversion value;
