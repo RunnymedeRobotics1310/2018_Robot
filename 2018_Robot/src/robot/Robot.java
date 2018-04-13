@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 	
+
 	private Command autoCommand;
 	
 	/**

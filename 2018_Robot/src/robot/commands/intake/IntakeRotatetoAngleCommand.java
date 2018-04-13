@@ -7,16 +7,16 @@ import robot.commands.drive.TSafeCommand;
 public class IntakeRotatetoAngleCommand extends TSafeCommand {
 
 	int targetAngle;
-	int currentAngle;
-	int turnAngle;
+	double currentAngle;
+	double turnAngle;
 
 	public IntakeRotatetoAngleCommand(int targetAngle){
-		super(1.25);
+		super(5);
 		this.targetAngle = targetAngle;
 		requires(Robot.intakeSubsystem);
 	}
 	public void initialize() {
-		currentAngle = (int) (Robot.intakeSubsystem.getTiltEncoderCount()/RobotConst.INTAKE_TILT_COUNTS_PER_DEGREE);
+		currentAngle = Robot.intakeSubsystem.getTiltEncoderCount()/RobotConst.INTAKE_TILT_COUNTS_PER_DEGREE;
 		turnAngle = targetAngle - currentAngle;
 		if (turnAngle > 0) {
 			Robot.intakeSubsystem.setIntakeTiltSpeed(0.7);
@@ -30,18 +30,24 @@ public class IntakeRotatetoAngleCommand extends TSafeCommand {
 		if (super.isFinished()) {
 			return true;
 		}
-		currentAngle = (int) (Robot.intakeSubsystem.getTiltEncoderCount()/RobotConst.INTAKE_TILT_COUNTS_PER_DEGREE);
-		if (turnAngle > 0 && currentAngle >= targetAngle) {
+		
+		currentAngle = Robot.intakeSubsystem.getTiltEncoderCount()/RobotConst.INTAKE_TILT_COUNTS_PER_DEGREE;
+
+		// Allow for a 3 degree overshoot
+		if (turnAngle > 0 && currentAngle >= targetAngle-3) {
 			return true;
 		}
-		else if (turnAngle < 0 && currentAngle <= targetAngle) {
+		else if (turnAngle < 0 && currentAngle <= targetAngle+3) {
 			return true;
 		}
+		
 		return false;
 	}
+	
 	protected void end() {
 		Robot.intakeSubsystem.setIntakeTiltSpeed(0);
 	}
+	
 	protected void interrupted() {
 	}
 }

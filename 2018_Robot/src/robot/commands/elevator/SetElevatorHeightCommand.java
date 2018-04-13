@@ -21,25 +21,22 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 	
 		// In Teleop you can adjust the setpoint within this command
 		
-		// Increment and decrement.
-		if (Robot.oi.getElevatorUp()) {
+		int elevatorMove = Robot.oi.getElevatorMove();
+		
+		if (elevatorMove == 0) {
 			setLevel++;
 			if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
 				setLevel = ElevatorSubsystem.MAX_LEVEL;
 			}
 		}
 
-		if (Robot.oi.getElevatorDown()) {
+		if (elevatorMove == 180) {
 			setLevel--;
 			if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 				setLevel = ElevatorSubsystem.MIN_LEVEL;
 			}
-			/*
-			if (setLevel == ElevatorSubsystem.MIN_LEVEL /* &&  !Robot.intakeSubsystem.isIntakeExtended() ) {
-				setLevel = ElevatorSubsystem.MIN_LEVEL +1;
-			}*/
-			
 		}
+		
 
 		if (Robot.elevatorSubsystem.getLevel() > setLevel) {
 			Robot.elevatorSubsystem.setSpeed(-1.0);

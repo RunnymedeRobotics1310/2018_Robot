@@ -150,18 +150,8 @@ public class OI {
 		return - operatorController.getAxis(TStick.LEFT, TAxis.Y);
 	}
 
-	public boolean getElevatorUp() {
-		if (elevatorButtonPress.get() == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean getElevatorDown() {
-		if (elevatorButtonPress.get() == 180) {
-			return true;
-		}
-		return false;
+	public int getElevatorMove() {
+		return elevatorButtonPress.get();
 	}
 
 	public boolean getElevatorSwitch() {

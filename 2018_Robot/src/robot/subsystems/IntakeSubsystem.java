@@ -51,7 +51,7 @@ public class IntakeSubsystem extends TSubsystem {
 	// RobotMap.RIGHT_INTAKE_RAIL_WHEELS_CAN_ADDRESS);
 
 	// Encoder count for when the lift motors are at the highest and the lowest
-	public final double LIFT_UP_ENCODER_COUNT = 41500;
+	public final double LIFT_UP_ENCODER_COUNT = 39500;
 	public final double LIFT_MID_ENCODER_COUNT = 20750;
 	public final double LIFT_DOWN_ENCODER_COUNT = 0;
 
@@ -83,10 +83,10 @@ public class IntakeSubsystem extends TSubsystem {
 		intakeRollerMotor.set(1.0);
 	}
 	public void outtakeCube() {
-		intakeRollerMotor.set(-1.0);
+		intakeRollerMotor.set(-0.5);
 	}
 	public void outtakeCube(double power) {
-		intakeRollerMotor.set(-power);
+		intakeRollerMotor.set(-power * 0.8);
 	}
 	
 

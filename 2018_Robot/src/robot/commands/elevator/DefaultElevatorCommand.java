@@ -27,11 +27,13 @@ public class DefaultElevatorCommand extends Command {
 
 
 		// Increment and decrement.
-		if (Robot.oi.getElevatorUp()) {
+		int elevatorMove = Robot.oi.getElevatorMove();
+		
+		if (elevatorMove == 0) {
 			addHeight();
 		}
 
-		if (Robot.oi.getElevatorDown()) {
+		if (elevatorMove == 180) {
 			subtractHeight();
 		}
 
@@ -65,9 +67,6 @@ public class DefaultElevatorCommand extends Command {
 		if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 			setLevel = ElevatorSubsystem.MIN_LEVEL;
 		}	
-		else if (setLevel == ElevatorSubsystem.MIN_LEVEL) {
-			setLevel = ElevatorSubsystem.MIN_LEVEL + 1;
-		}
 
 		Scheduler.getInstance().add(
 				new SetElevatorHeightCommand(setLevel));
