@@ -88,6 +88,9 @@ public class IntakeSubsystem extends TSubsystem {
 	public void outtakeCube(double power) {
 		intakeRollerMotor.set(-power * 0.8);
 	}
+	public void outtakeCubeOP(double power) {
+		intakeRollerMotor.set(-power);
+	}
 	
 
 

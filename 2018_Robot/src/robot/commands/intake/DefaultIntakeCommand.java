@@ -54,14 +54,18 @@ public class DefaultIntakeCommand extends Command {
 			Robot.intakeSubsystem.intakeClawClose();
 		}
 
-		// Intake / outtake code
 
+		
 		if (Robot.oi.getIntakeCube()) {
 			Robot.intakeSubsystem.intakeCube();
 		} else if (Robot.oi.getOuttakeCube() > 0.1) {
 			Robot.intakeSubsystem.outtakeCube(Robot.oi.getOuttakeCube());
+		} else if (Robot.oi.getOuttakeCubeOP() > 0.1) {
+			Robot.intakeSubsystem.outtakeCubeOP(0.4);
+
 		} else {
 			Robot.intakeSubsystem.intakeStop();
+		
 		}
 
 		// if the intake is jammed, then release it slightly and pull it back

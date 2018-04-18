@@ -48,7 +48,7 @@ import com.torontocodingcollective.oi.TTrigger;
  * 	Bumpers/Triggers:
  * 		Right Bumper		= Open Intake
  * 		Right Trigger		= Eject Cube
- * 		Left Trigger 		= Intake Cube
+ * 		Left Bumper 		= Intake Cube
  *	POV
  *		0					= Move Elevator Up One Level
  *		180					= Move Elevator Down One Level
@@ -140,6 +140,9 @@ public class OI {
 		return Math.max(driverController.getTrigger(TTrigger.RIGHT), operatorController.getTrigger(TTrigger.RIGHT));
 	}
 
+	public double getOuttakeCubeOP() {
+		return operatorController.getTrigger(TTrigger.LEFT);
+	}
 	public boolean getClawOpen() {
 		return operatorController.getButton(TButton.RIGHT_BUMPER) || driverController.getButton(TTrigger.LEFT); 
 	}
