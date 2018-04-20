@@ -18,7 +18,7 @@ public class RobotMap {
 	public static final int LEFT_DRIVE_FOLLOWER_CAN_ADDRESS;       // VICTOR_SPX
 	public static final int RIGHT_DRIVE_FOLLOWER_CAN_ADDRESS;      // VICTOR_SPX
 	
-	public static int ELEVATOR_MOTOR_CAN_ADDRESS            = 4;  // TALON_SRX
+	public static int ELEVATOR_MOTOR_CAN_ADDRESS           =  4;  // TALON_SRX
 	public static int ELEVATOR_MOTOR_FOLLOWER_CAN_ADDRESS  =  5;  // VICTOR_SPX
 	
 	// Roller: 	to suck in the cube
@@ -26,6 +26,9 @@ public class RobotMap {
 	public static int INTAKE_ROLLER_MOTOR_CAN_ADDRESS      =  6;  // VICTOR_SPX
 	public static int INTAKE_TILT_MOTOR_CAN_ADDRESS        =  7;  // TALON_SRX
 	
+	public static int CLIMB_ARM_MOTOR_CAN_ADDRESS          =  8;  // TALON_SRX
+	public static int CLIMB_WINCH_MOTOR_CAN_ADDRESS        =  9;  // TALON_SRX
+
 	
 	//******************************************
 	// DIO Ports

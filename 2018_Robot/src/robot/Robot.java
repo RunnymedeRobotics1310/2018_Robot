@@ -9,6 +9,7 @@ import robot.oi.GameData;
 import robot.oi.OI;
 import robot.subsystems.CameraSubsystem;
 import robot.subsystems.ChassisSubsystem;
+import robot.subsystems.ClimbSubsystem;
 import robot.subsystems.ElevatorSubsystem;
 import robot.subsystems.IntakeSubsystem;
 import robot.subsystems.PneumaticsSubsystem;
@@ -29,6 +30,8 @@ public class Robot extends IterativeRobot {
 	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static final PowerSubsystem powerSubsystem = new PowerSubsystem();
 	public static final CameraSubsystem cameraSubsystem = new CameraSubsystem();
+	public static final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
+
 	public static OI oi;
 	
 	
@@ -50,6 +53,7 @@ public class Robot extends IterativeRobot {
 		intakeSubsystem.init();
 		powerSubsystem.init();
 		cameraSubsystem.init();
+		climbSubsystem.init();
 	}
 
 	/**
@@ -159,5 +163,6 @@ public class Robot extends IterativeRobot {
 		intakeSubsystem.updatePeriodic();
 		powerSubsystem.updatePeriodic();
 		cameraSubsystem.updatePeriodic();
+		climbSubsystem.updatePeriodic();
 	}
 }

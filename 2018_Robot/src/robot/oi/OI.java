@@ -27,24 +27,33 @@ import com.torontocodingcollective.oi.TTrigger;
  * 		Start Button 		= Reset Encoders and Gyro 
  * 		Back Button 		= Cancel any Command
  * 		X Button			= Automatic intake
- * 		Y Button			= intake Toggle
  * 		B Button			= Automatic intake cancel
+ * 		A Button			= Climb arm up
+ * 		Y Button			= Climb arm down
  * 
  * 	Bumpers/Triggers:
  *      Right Bumper        = Intake Cube
  *      Right Trigger       = Outtake Cube
  * 		Left Bumper			= High Gear
  *      Left Trigger        = Intake Open
+ *  
+ *  POV:
+ *  	Any Angle			= Rotate to the Pressed Angle
  * 
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
  * 		Right Stick Y-Axis  = Manual Intake Tilt Control
+ * 
  * 	Buttons:
  * 		Y Button 			= Move Elevator to Switch Level
  * 		A Button 			= Set Intake Tilt Angle to 0
  * 		X Button			= Set Intake Tilt Angle to 45
  * 		B Button			= Set Intake Tilt Angle to 90
+ * 		start button		= Winch up
+ * 		back button			= Winch down
+ * 
+ * 
  * 	Bumpers/Triggers:
  * 		Right Bumper		= Open Intake
  * 		Right Trigger		= Eject Cube
@@ -91,18 +100,12 @@ public class OI {
 	public boolean getAutomaticIntakeCancel() {
 		return driverController.getButton(TButton.B);
 	}
-
-	/*public boolean getForwardThrust() {
-	//	return gameController.getButton(TButton.A);
-	//}
-
-	public boolean getStartDriveDirection() {
-		return gameController.getButton(TButton.B);
+	public boolean getClimbArmUp() {
+		return driverController.getButton(TButton.A);
 	}
-
-	public int getArcCommand() {
-		return gameController.getPOV();
-	}*/
+	public boolean getClimbArmDown() {
+		return driverController.getButton(TButton.Y);
+	}
 
 	public boolean getCancelCommand() {
 		return driverController.getButton(TButton.BACK);
@@ -175,6 +178,14 @@ public class OI {
 
 	public boolean getTiltArmDown() {
 		return operatorController.getButton(TButton.A);
+	}
+	
+	public boolean getWinchUp() {
+		return operatorController.getButton(TButton.START);
+	}
+	
+	public boolean getWinchDown() {
+		return operatorController.getButton(TButton.BACK);
 	}
 
 	public void updatePeriodic() {
