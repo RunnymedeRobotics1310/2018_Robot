@@ -13,11 +13,11 @@ public class ClimbSubsystem extends TSubsystem{
 	TCanSpeedController climbArmMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX, RobotMap.CLIMB_ARM_MOTOR_CAN_ADDRESS);
 
 
-	public void setSpeed(double speed){
+	public void setArmSpeed(double speed){
 		climbArmMotor.set(speed);
 	}
 
-	public void setWinch(double speed){
+	public void setWinchSpeed(double speed){
 		winchMotor.set(speed);
 	}
 
