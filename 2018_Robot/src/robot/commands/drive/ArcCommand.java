@@ -67,6 +67,8 @@ public class ArcCommand extends TSafeCommand {
 		}
 		//System.out.println(this.rSpeed); 
 		//System.out.println(this.lSpeed);
+		System.out.println("Rotate to angle current " + Robot.chassisSubsystem.getGryoAngle() +
+				" start " + startDirection + " end " + endDirection);
 		Robot.chassisSubsystem.setSpeed(lSpeed, rSpeed);
 	}
 	protected void end() {

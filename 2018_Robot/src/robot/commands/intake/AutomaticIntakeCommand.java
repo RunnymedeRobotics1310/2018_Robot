@@ -22,20 +22,6 @@ public class AutomaticIntakeCommand extends TSafeCommand {
 	
 	protected void execute() {
 
-		// Allow the operator to adjust the tilt speed when the automatic intake\
-		// command is running
-		double intakeTiltSpeed = - Robot.oi.getIntakeTiltSpeed();
-
-		if (intakeTiltSpeed > 0.1 && intakeTiltSpeed < 0.93) {
-			Robot.intakeSubsystem.setIntakeTiltSpeed(0.4 * intakeTiltSpeed + 0.2);
-		} else if (intakeTiltSpeed < -0.1 && intakeTiltSpeed > -0.93) {
-				Robot.intakeSubsystem.setIntakeTiltSpeed(0.4 * intakeTiltSpeed - 0.2);
-		} else if (Math.abs(intakeTiltSpeed) > 0.93) {
-			Robot.intakeSubsystem.setIntakeTiltSpeed(1.0 * Math.signum(intakeTiltSpeed));
-		} else {
-			Robot.intakeSubsystem.setIntakeTiltSpeed(0);
-		}
-
 		switch (state) {
 		case FORWARD:
 			// If the motors go overcurrent then reverse the motors for 1 second

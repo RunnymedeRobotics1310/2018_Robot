@@ -1,11 +1,11 @@
 package robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import robot.Robot;
 import robot.commands.drive.AccelerateDistanceCommand;
 import robot.commands.drive.ArcCommand;
 import robot.commands.drive.BackupCommand;
 import robot.commands.drive.DriveDistanceCommand;
+import robot.commands.drive.DriveToCubeCommand;
 import robot.commands.drive.RotateToAngleCommand;
 import robot.commands.elevator.SetElevatorHeightCommand;
 import robot.commands.intake.AutoCubeReleaseCommand;
@@ -209,17 +209,20 @@ public class AutonomousCommand extends CommandGroup {
 	//left side start
 
 	private void leftScaleLeft1(){
-		addParallel(new SetElevatorHeightCommand(3));		
 		addParallel(new IntakeRotatetoAngleCommand(0));
+		addParallel(new SetElevatorHeightCommand(3));		
 		addSequential(new AccelerateDistanceCommand(200, 0, 1.0, 5.0, false));
 		addParallel(new SetElevatorHeightCommand(5));
 		addSequential(new ArcCommand(120, 0, 40, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
 		addSequential(new BackupCommand(15));
+		// Go for second cube
 		addParallel(new SetElevatorHeightCommand(0));
 		addSequential(new RotateToAngleCommand(140, 0.5)); //150
-		addParallel(new DriveDistanceCommand(50, 150, 0.5, 7.0, false)); //54 og dist
+		addParallel(new DriveToCubeCommand(50, 150, 0.5, 7.0)); //54 og dist
 		addSequential(new AutomaticIntakeCommand());
+		// Reintake when backing up to not drop cube
+		addParallel(new AutomaticIntakeCommand());
 		addSequential(new BackupCommand(5));
 
 	}
@@ -251,19 +254,13 @@ public class AutonomousCommand extends CommandGroup {
 	}
 
 	private void rightScaleRight1(){
+		addSequential(new IntakeRotatetoAngleCommand(0));
 		addParallel(new SetElevatorHeightCommand(3));
-		addParallel(new IntakeRotatetoAngleCommand(0));
 		addSequential(new AccelerateDistanceCommand(200, 0, 1.0, 5.0, false));
 		addParallel(new SetElevatorHeightCommand(5));
 		addSequential(new ArcCommand(100, 0, 320, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
 		addSequential(new BackupCommand(10));
-		addParallel(new SetElevatorHeightCommand(0));
-		addSequential(new RotateToAngleCommand(230, 0.5));
-		addSequential(new DriveDistanceCommand(22, 230, 0.4, 7.0, false));
-		addParallel(new ArcCommand(85, 230, 180, 0.4, true));
-		addSequential(new AutomaticIntakeCommand());
-		addSequential(new BackupCommand(5));
 	}
 
 	//center start
@@ -336,10 +333,20 @@ public class AutonomousCommand extends CommandGroup {
 //		addSequential(new AutoCubeReleaseCommand());
 	}
 	public void rightScaleRight2(){	
-		addSequential(new BackupCommand(10));
-		addSequential(new RotateToAngleCommand(45, 0.5));
+		// Go for second cube
+		addParallel(new SetElevatorHeightCommand(0));
+		addSequential(new RotateToAngleCommand(240, 0.6));
+		addParallel(new DriveToCubeCommand(40, 220, 0.6, 7.0));
+		addSequential(new AutomaticIntakeCommand());
+		// Re-intake when backing up
+		addParallel(new AutomaticIntakeCommand());
+		addParallel(new SetElevatorHeightCommand(5));
+		addSequential(new BackupCommand(25, .5));
 		addSequential(new SetElevatorHeightCommand(5));
-		addSequential(new ArcCommand(150, 45, 350, 0.4, true));
+		addParallel(new SetElevatorHeightCommand(5));
+		addSequential(new RotateToAngleCommand(330, 0.3
+				));
+//		addSequential(new ArcCommand(150, 15, 350, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
 	}
 	public void rightScaleLeft2(){

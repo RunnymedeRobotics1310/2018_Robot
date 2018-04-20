@@ -92,9 +92,6 @@ public class IntakeSubsystem extends TSubsystem {
 		intakeRollerMotor.set(-power);
 	}
 	
-
-
-	
 	public void setIntakeTiltSpeed(double speed) {
 		intakeTiltMotor.set(speed);
 	}

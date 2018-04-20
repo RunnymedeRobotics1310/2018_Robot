@@ -82,7 +82,7 @@ public class RotateToAngleCommand extends TSafeCommand {
 			error += 360;
 		}
 
-		if (Math.abs(error) <= 5) {
+		if (Math.abs(error) <= 8) {
 			return true;
 		}
 		
