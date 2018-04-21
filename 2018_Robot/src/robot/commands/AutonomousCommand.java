@@ -254,7 +254,7 @@ public class AutonomousCommand extends CommandGroup {
 	}
 
 	private void rightScaleRight1(){
-		addSequential(new IntakeRotatetoAngleCommand(0));
+		addParallel(new IntakeRotatetoAngleCommand(0));
 		addParallel(new SetElevatorHeightCommand(3));
 		addSequential(new AccelerateDistanceCommand(200, 0, 1.0, 5.0, false));
 		addParallel(new SetElevatorHeightCommand(5));
@@ -344,7 +344,7 @@ public class AutonomousCommand extends CommandGroup {
 		addSequential(new BackupCommand(25, .5));
 		addSequential(new SetElevatorHeightCommand(5));
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new RotateToAngleCommand(330, 0.3
+		addSequential(new RotateToAngleCommand(290, 0.3
 				));
 //		addSequential(new ArcCommand(150, 15, 350, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
