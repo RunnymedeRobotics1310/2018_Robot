@@ -22,7 +22,17 @@ public class DefaultElevatorCommand extends Command {
 			Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevatorSpeed());
 		}
 		else {
-			Robot.elevatorSubsystem.setSpeed(0);
+			// if the robot is not at the bottom, then set the motor
+			// speed to 0.15 to lock the elevator from falling by gravity
+			if (Robot.elevatorSubsystem.getLevel() >= 1.0) {
+				if (Robot.intakeSubsystem.isCubeDetected()) {
+					Robot.elevatorSubsystem.setSpeed(0.2);
+				} else {
+					Robot.elevatorSubsystem.setSpeed(0.15);
+				}
+			} else {
+				Robot.elevatorSubsystem.setSpeed(0);
+			}
 		}
 
 
