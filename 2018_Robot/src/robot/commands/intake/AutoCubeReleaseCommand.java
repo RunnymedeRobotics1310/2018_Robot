@@ -54,7 +54,7 @@ public class AutoCubeReleaseCommand extends TSafeCommand {
 		case OUTTAKE:
 			Robot.intakeSubsystem.outtakeCube();
 			if (timeSinceInitialized() > .75) {
-				curStep = Step.OPEN;
+				curStep = Step.FINISH;
 			}
 			break;
 

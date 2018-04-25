@@ -1,6 +1,7 @@
 package robot.commands.elevator;
 
 import robot.Robot;
+import robot.RobotConst;
 import robot.commands.drive.TSafeCommand;
 import robot.subsystems.ElevatorSubsystem;
 
@@ -52,6 +53,8 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 			return true;
 		}
 		
+		// If the operator is trying to move the elevator manually, then 
+		// this command is done.
 		if (Math.abs(Robot.oi.getElevatorSpeed()) > 0.1) {
 			return true;
 		}
@@ -63,6 +66,17 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 	}
 	
 	protected void end() {
+		
+		// Lock intake
+		if (Robot.elevatorSubsystem.getLevel() > 0) {
+			if (Robot.intakeSubsystem.isCubeDetected()) {
+				Robot.elevatorSubsystem.setSpeed(RobotConst.ELEVATOR_LOCK_SPEED_WITH_CUBE);
+			}
+			else {
+				Robot.elevatorSubsystem.setSpeed(RobotConst.ELEVATOR_LOCK_SPEED);
+			}
+		}
+			
 		Robot.elevatorSubsystem.setSpeed(0);
 	}
 }

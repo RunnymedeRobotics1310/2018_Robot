@@ -25,6 +25,10 @@ public class BackupCommand extends TSafeCommand {
 		Robot.chassisSubsystem.setSpeed(speed, speed);
 	}
 	
+	protected void end() {
+		Robot.chassisSubsystem.setSpeed(0, 0);
+	}
+	
 	protected boolean isFinished() {
 
 		if (super.isFinished()) {

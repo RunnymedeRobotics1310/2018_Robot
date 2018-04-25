@@ -35,13 +35,13 @@ public class AccelerateDistanceCommand extends DriveDirectionCommand {
 	
 	protected void execute() {
 		if (Robot.chassisSubsystem.getEncoderDistance() > slowDistanceEncoderCounts) {
-			if (curSpeed > speed*.4) {
-				curSpeed = Math.max(curSpeed-.02, speed*.4);
+			if (curSpeed > speed*.5) {
+				curSpeed = Math.max(curSpeed-.02, speed*.5);
 			}
 		}
 		else {
 			if (curSpeed < speed) {
-				curSpeed = Math.min(curSpeed + .02, speed);
+				curSpeed = Math.min(curSpeed + .03, speed);
 			}
 		}
 		super.setSpeed(curSpeed);

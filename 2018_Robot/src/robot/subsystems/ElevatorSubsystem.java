@@ -54,7 +54,7 @@ public class ElevatorSubsystem extends TSubsystem {
 		if (encoderCount <= 4800) {//normal scale level
 			return 4;
 		}
-		if (encoderCount < 5200) {
+		if (encoderCount < 5100) {
 			return 4.5;
 		}
 		if (encoderCount <= 5300) {//high scale level

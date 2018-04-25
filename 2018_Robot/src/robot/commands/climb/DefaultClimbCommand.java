@@ -11,20 +11,20 @@ public class DefaultClimbCommand extends Command{
 
 	protected void execute() {
 		if (Robot.oi.getClimbArmUp()) {
-			Robot.climbSubsystem.setArmSpeed(0.5);
+			Robot.climbSubsystem.setArmSpeed(0.2);
 		}
 		else if (Robot.oi.getClimbArmDown()) {
-			Robot.climbSubsystem.setArmSpeed(-0.5);
+			Robot.climbSubsystem.setArmSpeed(-0.2);
 		}
 		else {
 			Robot.climbSubsystem.setArmSpeed(0);
 		}
 		
 		if (Robot.oi.getWinchUp()){
-			Robot.climbSubsystem.setWinchSpeed(0.5);
+			Robot.climbSubsystem.setWinchSpeed(-1);
 		}
 		else if (Robot.oi.getWinchDown()){
-			Robot.climbSubsystem.setWinchSpeed(-0.5);
+			Robot.climbSubsystem.setWinchSpeed(1);
 		}
 		else {
 			Robot.climbSubsystem.setWinchSpeed(0);

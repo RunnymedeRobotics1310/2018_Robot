@@ -118,6 +118,11 @@ public class AutonomousCommand extends CommandGroup {
 					leftScaleLeft2();
 				}
 			}
+			else {
+				if (firstAction.equals(SCALE)) {
+					leftScaleRight2();
+				}
+			}
 		}
 
 		else{
@@ -169,6 +174,9 @@ public class AutonomousCommand extends CommandGroup {
 			if (scale == RIGHT){
 				rightScaleRight2();
 			}
+			else {
+				rightScaleLeft2();
+			}
 		}
 		else{
 			//System.out.println("No second action");
@@ -209,47 +217,51 @@ public class AutonomousCommand extends CommandGroup {
 	//left side start
 
 	private void leftScaleLeft1(){
-		addParallel(new IntakeRotatetoAngleCommand(0));
-		addParallel(new SetElevatorHeightCommand(3));		
+		addParallel(new IntakeRotatetoAngleCommand(25));
+		addParallel(new SetElevatorHeightCommand(3));
 		addSequential(new AccelerateDistanceCommand(200, 0, 1.0, 5.0, false));
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new ArcCommand(120, 0, 40, 0.4, true));
+		addSequential(new ArcCommand(100, 0, 40, 0.45, true));
 		addSequential(new AutoCubeReleaseCommand());
-		addSequential(new BackupCommand(15));
+		addSequential(new BackupCommand(10));
 	}
 
 	private void leftScaleRight1(){
-		addParallel(new SetElevatorHeightCommand(2));
-		addParallel(new IntakeRotatetoAngleCommand(0));
-		addSequential(new AccelerateDistanceCommand(175, 0, 1.0, 3.0, false));
-		addSequential(new ArcCommand(100, 0, 85, 0.5, false));
-		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new DriveDistanceCommand(110, 90, 1.0, 5.0, false));
-		addSequential(new ArcCommand(100, 90, 5, 0.5, true));
-		addSequential(new DriveDistanceCommand(10, 0, 0.5, 5.0, false));
+		addParallel(new IntakeRotatetoAngleCommand(25));
+		addParallel(new SetElevatorHeightCommand(1));
+		addSequential(new AccelerateDistanceCommand(180, 0, 1.0, 3.0, false));
+		addSequential(new ArcCommand(100, 0, 90, 0.8, false));
+		addParallel(new SetElevatorHeightCommand(1));
+		addSequential(new DriveDistanceCommand(130, 90, 1.0, 5.0, false));
+		addParallel(new DriveDistanceCommand(10, 90, 0.2, 5.0, false));
+		addSequential(new SetElevatorHeightCommand(5));
+		addParallel(new IntakeRotatetoAngleCommand(30));
+		addSequential(new ArcCommand(90, 90, 350, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
+		addSequential(new BackupCommand(10));
 	}
 
 	//right side start
 	private void rightScaleLeft1(){
-		addParallel(new SetElevatorHeightCommand(2));
-		addParallel(new IntakeRotatetoAngleCommand(0));
-		addSequential(new AccelerateDistanceCommand(175, 0, 1.0, 3.0, false));
-		addSequential(new ArcCommand(100, 0, 275, 0.5, false));
+		addParallel(new IntakeRotatetoAngleCommand(25));
+		addParallel(new SetElevatorHeightCommand(1));
+		addSequential(new AccelerateDistanceCommand(190, 0, 1.0, 3.0, false));
+		addSequential(new ArcCommand(100, 0, 275, 0.8, false));
+		addParallel(new SetElevatorHeightCommand(1));
+		addSequential(new DriveDistanceCommand(130, 270, 1.0, 5.0, false));
+		addParallel(new IntakeRotatetoAngleCommand(30));
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new DriveDistanceCommand(110, 270, 1.0, 5.0, false));
-		addSequential(new ArcCommand(100, 270, 5, 0.5, true));
-		addSequential(new DriveDistanceCommand(10, 0, 0.5, 5.0, false));
+		addSequential(new ArcCommand(90, 270, 10, 0.6, true));
 		addSequential(new AutoCubeReleaseCommand());
-
+		addSequential(new BackupCommand(10));
 	}
 
 	private void rightScaleRight1(){
-		addParallel(new IntakeRotatetoAngleCommand(0));
+		addParallel(new IntakeRotatetoAngleCommand(25));
 		addParallel(new SetElevatorHeightCommand(3));
-		addSequential(new AccelerateDistanceCommand(200, 0, 1.0, 5.0, false));
+		addSequential(new AccelerateDistanceCommand(210, 0, 1.0, 5.0, false));
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new ArcCommand(100, 0, 320, 0.4, true));
+		addSequential(new ArcCommand(100, 0, 320, 0.45, true));
 		addSequential(new AutoCubeReleaseCommand());
 		addSequential(new BackupCommand(10));
 	}
@@ -296,24 +308,55 @@ public class AutonomousCommand extends CommandGroup {
 		addSequential(new AutoCubeReleaseCommand());
 	}
 	public void leftScaleRight2(){
-		addSequential(new ArcCommand(100, 0, 80, 1.0, false));
-		addSequential(new DriveDistanceCommand(180, 80, 1.0, 5.0, false));
+		// Go for second cube
+		addParallel(new SetElevatorHeightCommand(0));
+		addParallel(new IntakeRotatetoAngleCommand(0));
+		addSequential(new RotateToAngleCommand(210, 0.3));
+		addSequential(new SetElevatorHeightCommand(0));
+		addParallel(new DriveToCubeCommand(60, 200, 0.7, 2.0));
+		addSequential(new AutomaticIntakeCommand());
+
+		// Re-intake when backing up
+		addSequential(new RotateToAngleCommand(210, 0.6));
+		addParallel(new AutomaticIntakeCommand());
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new ArcCommand(100, 80, 10, 1.0, true));
+		addSequential(new BackupCommand(60, .8));
+		addParallel(new IntakeRotatetoAngleCommand(30));
+		addSequential(new SetElevatorHeightCommand(5));
+		addSequential(new RotateToAngleCommand(300, 0.3));
 		addSequential(new AutoCubeReleaseCommand());
+
+		// Back up and put the arm down
+		addSequential(new BackupCommand(10, .5));
+		addSequential(new SetElevatorHeightCommand(0));
 	}
 	public void leftScaleLeft2(){
 		// Go for second cube
 		addParallel(new SetElevatorHeightCommand(0));
-		addSequential(new RotateToAngleCommand(140, 0.5)); //150
-		addParallel(new DriveToCubeCommand(50, 150, 0.5, 7.0)); //54 og dist
+		addParallel(new IntakeRotatetoAngleCommand(0));
+		addSequential(new RotateToAngleCommand(90, 0.3));
+		addSequential(new SetElevatorHeightCommand(0));
+		addParallel(new DriveToCubeCommand(80, 140, 0.6, 3.0));
 		addSequential(new AutomaticIntakeCommand());
-		// Re-intake when backing up to not drop cube
+		
+		// Re-intake when backing up
 		addParallel(new AutomaticIntakeCommand());
-		addSequential(new BackupCommand(5));
-		addSequential(new RotateToAngleCommand(0, 0.5));
-		addParallel(new ArcCommand(50, 0, 15, 0.5, true));
+		addParallel(new SetElevatorHeightCommand(1));
+		addSequential(new BackupCommand(5, .3));
+		addSequential(new RotateToAngleCommand(160, 0.3));
+		addParallel(new SetElevatorHeightCommand(5));
+		addSequential(new BackupCommand(65, .7));
+		addSequential(new SetElevatorHeightCommand(5));
+		addParallel(new IntakeRotatetoAngleCommand(25));
+		addSequential(new RotateToAngleCommand(70, 0.3
+				));
+//		addSequential(new ArcCommand(150, 15, 350, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
+		
+		// Back up and put the arm down
+		addParallel(new BackupCommand(10, .5));
+		addSequential(new SetElevatorHeightCommand(0));
+
 	}
 
 	//right side
@@ -333,26 +376,69 @@ public class AutonomousCommand extends CommandGroup {
 	public void rightScaleRight2(){	
 		// Go for second cube
 		addParallel(new SetElevatorHeightCommand(0));
-		addSequential(new RotateToAngleCommand(240, 0.6));
-		addParallel(new DriveToCubeCommand(40, 220, 0.6, 7.0));
+		addParallel(new IntakeRotatetoAngleCommand(0));
+		addSequential(new RotateToAngleCommand(270, 0.6));
+		addSequential(new SetElevatorHeightCommand(0));
+		addParallel(new DriveToCubeCommand(60, 220, 0.7, 7.0));
 		addSequential(new AutomaticIntakeCommand());
 		// Re-intake when backing up
 		addParallel(new AutomaticIntakeCommand());
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new BackupCommand(25, .5));
-		addSequential(new SetElevatorHeightCommand(5));
+		addSequential(new BackupCommand(60, .7));
+		addSequential(new SetElevatorHeightCommand(4));
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new RotateToAngleCommand(290, 0.3
+		addParallel(new IntakeRotatetoAngleCommand(25));
+		addSequential(new RotateToAngleCommand(290, 0.4
 				));
-		//		addSequential(new ArcCommand(150, 15, 350, 0.4, true));
+//		addSequential(new ArcCommand(150, 15, 350, 0.4, true));
 		addSequential(new AutoCubeReleaseCommand());
+		
+		// Back up and put the arm down
+		addParallel(new BackupCommand(10, .5));
+		addSequential(new SetElevatorHeightCommand(0));
+
+		// Go for third cube
+//		addParallel(new IntakeRotatetoAngleCommand(0));
+//		addSequential(new BackupCommand(10, .3));
+//		addParallel(new SetElevatorHeightCommand(0));
+//		addSequential(new RotateToAngleCommand(290, 0.5));
+//		addParallel(new SetElevatorHeightCommand(0));
+//		addParallel(new DriveToCubeCommand(1200, 210, 0.7, 7.0));
+//		addSequential(new AutomaticIntakeCommand());
+//		// Re-intake when backing up
+//		addParallel(new AutomaticIntakeCommand());
+//		addParallel(new SetElevatorHeightCommand(5));
+//		addSequential(new BackupCommand(60, .7));
+//		addParallel(new SetElevatorHeightCommand(5));
+//		addParallel(new IntakeRotatetoAngleCommand(15));
+//		addSequential(new RotateToAngleCommand(290, 0.4
+//				));
+//		//		addSequential(new ArcCommand(150, 15, 350, 0.4, true));
+//		addSequential(new AutoCubeReleaseCommand());
 	}
 	public void rightScaleLeft2(){
 
-		addSequential(new ArcCommand(100, 0, 280, 1.0, false));
-		addSequential(new DriveDistanceCommand(180, 280, 1.0, 5.0, false));
+		// Go for second cube
+		addParallel(new SetElevatorHeightCommand(0));
+		addParallel(new IntakeRotatetoAngleCommand(0));
+		addSequential(new RotateToAngleCommand(150, 0.3));
+		addSequential(new SetElevatorHeightCommand(0));
+		addParallel(new DriveToCubeCommand(60, 160, 0.7, 2.0));
+		addSequential(new AutomaticIntakeCommand());
+
+		// Re-intake when backing up
+		addSequential(new RotateToAngleCommand(150, 0.6));
+		addParallel(new AutomaticIntakeCommand());
 		addParallel(new SetElevatorHeightCommand(5));
-		addSequential(new ArcCommand(100, 280, 350, 1.0, true));
+		addSequential(new BackupCommand(60, .8));
+		addParallel(new IntakeRotatetoAngleCommand(30));
+		addSequential(new SetElevatorHeightCommand(5));
+		addSequential(new RotateToAngleCommand(60, 0.3));
+		addSequential(new AutoCubeReleaseCommand());
+
+		// Back up and put the arm down
+		addSequential(new BackupCommand(20, .5));
+		addSequential(new SetElevatorHeightCommand(0));
 	}
 
 	//Center
