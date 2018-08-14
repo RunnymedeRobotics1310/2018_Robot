@@ -26,6 +26,8 @@ public class RobotConst {
 	// from the back of the robot towards the front
 	public static final boolean ELEVATOR_MOTOR_ORIENTATION;
 	public static final boolean ELEVATOR_ENCODER_ORIENTATION;
+	public static final double ELEVATOR_LOCK_SPEED_WITH_CUBE = 0.25;
+	public static final double ELEVATOR_LOCK_SPEED = 0.15;
 
 	public static final double MAX_LOW_GEAR_SPEED;
 	public static final double MAX_HIGH_GEAR_SPEED;
