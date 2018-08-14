@@ -1,6 +1,7 @@
 package robot.commands.elevator;
 
 import robot.Robot;
+import robot.RobotConst;
 import robot.commands.drive.TSafeCommand;
 import robot.subsystems.ElevatorSubsystem;
 
@@ -21,26 +22,25 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 	
 		// In Teleop you can adjust the setpoint within this command
 		
-		// Increment and decrement.
-		if (Robot.oi.getElevatorUp()) {
+		int elevatorMove = Robot.oi.getElevatorMove();
+		
+		if (elevatorMove == 0) {
 			setLevel++;
 			if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
 				setLevel = ElevatorSubsystem.MAX_LEVEL;
 			}
 		}
 
-		if (Robot.oi.getElevatorDown()) {
+		if (elevatorMove == 180) {
 			setLevel--;
 			if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 				setLevel = ElevatorSubsystem.MIN_LEVEL;
 			}
-			if (setLevel == ElevatorSubsystem.MIN_LEVEL /* &&  !Robot.intakeSubsystem.isIntakeExtended() */) {
-				setLevel = ElevatorSubsystem.MIN_LEVEL +1;
-			}
 		}
+		
 
 		if (Robot.elevatorSubsystem.getLevel() > setLevel) {
-			Robot.elevatorSubsystem.setSpeed(-1.0);
+			Robot.elevatorSubsystem.setSpeed(-0.8);
 		}
 		if (Robot.elevatorSubsystem.getLevel() < setLevel) {
 			Robot.elevatorSubsystem.setSpeed(1.0);
@@ -53,6 +53,8 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 			return true;
 		}
 		
+		// If the operator is trying to move the elevator manually, then 
+		// this command is done.
 		if (Math.abs(Robot.oi.getElevatorSpeed()) > 0.1) {
 			return true;
 		}
@@ -64,6 +66,17 @@ public class SetElevatorHeightCommand extends TSafeCommand {
 	}
 	
 	protected void end() {
+		
+		// Lock intake
+		if (Robot.elevatorSubsystem.getLevel() > 0) {
+			if (Robot.intakeSubsystem.isCubeDetected()) {
+				Robot.elevatorSubsystem.setSpeed(RobotConst.ELEVATOR_LOCK_SPEED_WITH_CUBE);
+			}
+			else {
+				Robot.elevatorSubsystem.setSpeed(RobotConst.ELEVATOR_LOCK_SPEED);
+			}
+		}
+			
 		Robot.elevatorSubsystem.setSpeed(0);
 	}
 }

@@ -37,6 +37,10 @@ public class DefaultIntakeCommand extends Command {
 	@Override
 	protected void execute() {
 
+		if (Robot.oi.reset()){
+			Robot.intakeSubsystem.resetEncoders();
+		}
+
 		if (Robot.oi.getAutomaticIntake()) {
 			Scheduler.getInstance().add(new TeleopAutomaticIntakeCommand());
 		}
@@ -49,37 +53,38 @@ public class DefaultIntakeCommand extends Command {
 		} else {
 			Robot.intakeSubsystem.intakeClawClose();
 		}
-		
-		
-			
 
-		// Intake / outtake code
 
+		
 		if (Robot.oi.getIntakeCube()) {
 			Robot.intakeSubsystem.intakeCube();
-		} else if (Robot.oi.getOuttakeCube()) {
-			Robot.intakeSubsystem.outtakeCube();
+		} else if (Robot.oi.getOuttakeCube() > 0.1) {
+			Robot.intakeSubsystem.outtakeCube(Robot.oi.getOuttakeCube());
+		} else if (Robot.oi.getOuttakeCubeOP() > 0.1) {
+			Robot.intakeSubsystem.outtakeCubeOP(0.4);
+
 		} else {
 			Robot.intakeSubsystem.intakeStop();
+		
 		}
 
 		// if the intake is jammed, then release it slightly and pull it back
-//		double voltage = 0.0;
-//
-//		if (!cubeJammed) {
-//			if (voltage > 1) {
-//				cubeJammed = true;
-//				intakeJammedTime = System.currentTimeMillis();
-//			}
-//		}
-//
-//		if (cubeJammed) {
-//			Robot.intakeSubsystem.outtakeCube();
-//			if (System.currentTimeMillis() - intakeJammedTime < 500) {
-//				Robot.intakeSubsystem.intakeCube();
-//				cubeJammed = false;
-//			}
-//		}
+		//		double voltage = 0.0;
+		//
+		//		if (!cubeJammed) {
+		//			if (voltage > 1) {
+		//				cubeJammed = true;
+		//				intakeJammedTime = System.currentTimeMillis();
+		//			}
+		//		}
+		//
+		//		if (cubeJammed) {
+		//			Robot.intakeSubsystem.outtakeCube();
+		//			if (System.currentTimeMillis() - intakeJammedTime < 500) {
+		//				Robot.intakeSubsystem.intakeCube();
+		//				cubeJammed = false;
+		//			}
+		//		}
 
 		// // Handle lift
 		// if (Robot.oi.getLiftArmUp()) {
@@ -99,14 +104,28 @@ public class DefaultIntakeCommand extends Command {
 		// Robot.intakeSubsystem.tiltIntakeArmUp();
 		// }
 
-		double intakeTiltSpeed = Robot.oi.getIntakeTiltSpeed();
+		double intakeTiltSpeed = - Robot.oi.getIntakeTiltSpeed();
 
-		if (Math.abs(intakeTiltSpeed) > 0.1) {
-			Robot.intakeSubsystem.setIntakeTiltSpeed(intakeTiltSpeed);
+		if (intakeTiltSpeed > 0.1 && intakeTiltSpeed < 0.93) {
+			Robot.intakeSubsystem.setIntakeTiltSpeed(0.4 * intakeTiltSpeed + 0.2);
+		} else if (intakeTiltSpeed < -0.1 && intakeTiltSpeed > -0.93) {
+				Robot.intakeSubsystem.setIntakeTiltSpeed(0.4 * intakeTiltSpeed - 0.2);
+		} else if (Math.abs(intakeTiltSpeed) > 0.93) {
+			Robot.intakeSubsystem.setIntakeTiltSpeed(1.0 * Math.signum(intakeTiltSpeed));
 		} else {
 			Robot.intakeSubsystem.setIntakeTiltSpeed(0);
 		}
-	}
+
+		if (Robot.oi.getTiltArmDown()) {
+			Scheduler.getInstance().add(new IntakeRotatetoAngleCommand(0));
+		}
+		if (Robot.oi.getTiltArm45()) {
+			Scheduler.getInstance().add(new IntakeRotatetoAngleCommand(45));
+		}	
+		if (Robot.oi.getTiltArmUp()) {
+			Scheduler.getInstance().add(new IntakeRotatetoAngleCommand(90));
+		}
+	} 
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override

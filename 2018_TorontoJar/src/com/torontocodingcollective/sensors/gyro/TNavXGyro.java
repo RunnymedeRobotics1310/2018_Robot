@@ -27,14 +27,23 @@ public class TNavXGyro extends TGyro {
 		return super.getAngle(navXGyro.getAngle());
 	}
 
+	public double getPitch() {
+		return navXGyro.getRoll();
+	}
+
 	@Override
 	public double getRate() {
 		return super.getRate(navXGyro.getRate());
 	}
-
+	
 	@Override
 	public void reset() {
 		super.setGyroAngle(0);
+	}
+	
+	@Override 
+	public boolean supportsPitch() {
+		return true;
 	}
 	
 }

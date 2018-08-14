@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public abstract class TDriveSubsystem extends TSubsystem {
 	
-	protected final TSpeedController leftMotor;
+	public final TSpeedController leftMotor;
 	protected final TSpeedController rightMotor;
 	
 	private TEncoder leftEncoder = null;

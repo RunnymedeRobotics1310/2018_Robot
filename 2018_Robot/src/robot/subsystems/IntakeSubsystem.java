@@ -9,6 +9,7 @@ import com.torontocodingcollective.subsystem.TSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.RobotConst;
 import robot.RobotMap;
 import robot.commands.intake.DefaultIntakeCommand;
 
@@ -22,10 +23,10 @@ public class IntakeSubsystem extends TSubsystem {
 
 	// Motor that moves the roller to suck in the cube
 	private TCanSpeedController intakeRollerMotor = new TCanSpeedController(TCanSpeedControllerType.VICTOR_SPX,
-			RobotMap.INTAKE_ROLLER_MOTOR_CAN_ADDRESS);
+			RobotMap.INTAKE_ROLLER_MOTOR_CAN_ADDRESS, true);
 	// Motor that moves the arm up and down
 	private TCanSpeedController intakeTiltMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX,
-			RobotMap.INTAKE_TILT_MOTOR_CAN_ADDRESS);
+			RobotMap.INTAKE_TILT_MOTOR_CAN_ADDRESS, true);
 
 	private TEncoder intakeTiltEncoder = intakeTiltMotor.getEncoder();
 
@@ -50,13 +51,19 @@ public class IntakeSubsystem extends TSubsystem {
 	// RobotMap.RIGHT_INTAKE_RAIL_WHEELS_CAN_ADDRESS);
 
 	// Encoder count for when the lift motors are at the highest and the lowest
-	private final double LIFT_UP_ENCODER_COUNT = 100;
-	private final double LIFT_DOWN_ENCODER_COUNT = 0;
+	public final double LIFT_UP_ENCODER_COUNT = 39500;
+	public final double LIFT_MID_ENCODER_COUNT = 20750;
+	public final double LIFT_DOWN_ENCODER_COUNT = 0;
 
 
 	@Override
 	public void init() {
+		intakeTiltEncoder.setInverted(true);
 		intakeClawClose();
+	}
+	
+	public void setTiltAngle(int angle) {
+		intakeTiltEncoder.set((int) (angle * RobotConst.INTAKE_TILT_COUNTS_PER_DEGREE));
 	}
 
 	@Override
@@ -75,24 +82,15 @@ public class IntakeSubsystem extends TSubsystem {
 	public void intakeCube() {
 		intakeRollerMotor.set(1.0);
 	}
-
 	public void outtakeCube() {
-		intakeRollerMotor.set(-1.0);
+		intakeRollerMotor.set(-0.5);
 	}
-	
-	public void tiltIntakeArmUp() {
-//		if (getTiltEncoderCount() < LIFT_UP_ENCODER_COUNT) {
-			intakeTiltMotor.set(0.8);
-//		}
+	public void outtakeCube(double power) {
+		intakeRollerMotor.set(-power * 0.8);
 	}
-	
-	public void tiltIntakeArmDown() {
-//		if (getTiltEncoderCount() > LIFT_DOWN_ENCODER_COUNT) {
-			intakeTiltMotor.set(-0.8);
-//		}
+	public void outtakeCubeOP(double power) {
+		intakeRollerMotor.set(-power);
 	}
-
-
 	
 	public void setIntakeTiltSpeed(double speed) {
 		intakeTiltMotor.set(speed);
@@ -126,6 +124,7 @@ public class IntakeSubsystem extends TSubsystem {
 		SmartDashboard.putNumber("Intake Tilt Encoder", getTiltEncoderCount());
 		SmartDashboard.putBoolean("Intake Claw Open", intakeClaw.get() == Value.kForward);
 		SmartDashboard.putBoolean("Intake Cube Detected", isCubeDetected());
+		SmartDashboard.putNumber("intake Tilt Motor", intakeTiltMotor.get());
 	}
 
 }

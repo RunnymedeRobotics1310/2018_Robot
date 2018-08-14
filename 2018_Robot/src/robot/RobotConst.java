@@ -5,7 +5,7 @@ public class RobotConst {
 	// The TorontoCodingCollective framework was developed to run on different
 	// robots.
 	// Supported robots are 1311 and 1321.
-	public static int robot = 1311;
+	public static int robot = 1310;
 
 	
 	public static final boolean INVERTED = true;
@@ -36,6 +36,9 @@ public class RobotConst {
 	public static final double DRIVE_SPEED_PID_KP;
 	public static final double ENCODER_COUNTS_PER_INCH;
 	public static final double ELEVATOR_ENCODER_COUNTS_PER_INCH;
+	
+	public static final double INTAKE_TILT_COUNTS_PER_DEGREE;
+
 
 	
 	//*********************************************************
@@ -73,6 +76,7 @@ public class RobotConst {
 			ELEVATOR_ENCODER_ORIENTATION = INVERTED;
 
 			ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
+			INTAKE_TILT_COUNTS_PER_DEGREE = 438;
 			break;
 			
 		case 1321:
@@ -96,7 +100,7 @@ public class RobotConst {
 			ELEVATOR_ENCODER_ORIENTATION = INVERTED;
 
 			ELEVATOR_ENCODER_COUNTS_PER_INCH = 186.67;
-		
+			INTAKE_TILT_COUNTS_PER_DEGREE = 461.11;
 			break;
 		}
 	}

@@ -10,7 +10,7 @@ public class DefaultElevatorCommand extends Command {
 	public DefaultElevatorCommand() {
 		requires(Robot.elevatorSubsystem);
 	}
-	
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
@@ -22,52 +22,66 @@ public class DefaultElevatorCommand extends Command {
 			Robot.elevatorSubsystem.setSpeed(Robot.oi.getElevatorSpeed());
 		}
 		else {
-			Robot.elevatorSubsystem.setSpeed(0);
+			// if the robot is not at the bottom, then set the motor
+			// speed to 0.15 to lock the elevator from falling by gravity
+			if (Robot.elevatorSubsystem.getLevel() >= 1.0) {
+				if (Robot.intakeSubsystem.isCubeDetected()) {
+					Robot.elevatorSubsystem.setSpeed(0.2);
+				} else {
+					Robot.elevatorSubsystem.setSpeed(0.15);
+				}
+			} else {
+				Robot.elevatorSubsystem.setSpeed(0);
+			}
 		}
-			
-		
+
+
 		// Increment and decrement.
-		if (Robot.oi.getElevatorUp()) {
+		int elevatorMove = Robot.oi.getElevatorMove();
+		
+		if (elevatorMove == 0) {
 			addHeight();
 		}
 
-		if (Robot.oi.getElevatorDown()) {
+		if (elevatorMove == 180) {
 			subtractHeight();
 		}
+
+		if (Robot.oi.getElevatorSwitch()) {
+			Scheduler.getInstance().add(new SetElevatorHeightCommand(2));		
+		}
+
 		if (Robot.oi.reset()){
 			Robot.elevatorSubsystem.resetEncoders();
 		}
-		
+
 	}
-	
+
 	public void addHeight() {
-		
+
 		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel() + 1);
-		
+
 		if (setLevel > ElevatorSubsystem.MAX_LEVEL) {
 			setLevel = ElevatorSubsystem.MAX_LEVEL;
 		}
-		
+
 		Scheduler.getInstance().add(
 				new SetElevatorHeightCommand(setLevel));
 	}
-	
-	
+
+
 	public void subtractHeight() {
-		
+
 		double setLevel = Math.round(Robot.elevatorSubsystem.getLevel() - 1);
 
 		if (setLevel < ElevatorSubsystem.MIN_LEVEL) {
 			setLevel = ElevatorSubsystem.MIN_LEVEL;
 		}	
-		else if (setLevel == ElevatorSubsystem.MIN_LEVEL) {
-			setLevel = ElevatorSubsystem.MIN_LEVEL + 1;
-		}
 
 		Scheduler.getInstance().add(
 				new SetElevatorHeightCommand(setLevel));
 	}
-	
+
 
 	@Override
 	protected boolean isFinished() {

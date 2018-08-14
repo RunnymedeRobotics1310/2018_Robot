@@ -19,13 +19,13 @@ public class ElevatorSubsystem extends TSubsystem {
 	
 	TCanSpeedController elevatorMotor = new TCanSpeedController(TCanSpeedControllerType.TALON_SRX, RobotMap.ELEVATOR_MOTOR_CAN_ADDRESS,
 			TCanSpeedControllerType.VICTOR_SPX, RobotMap.ELEVATOR_MOTOR_FOLLOWER_CAN_ADDRESS);
-	TEncoder encoder = elevatorMotor.getEncoder();
+	TEncoder elevatorEncoder = elevatorMotor.getEncoder();
 
 	TLimitSwitch bottom = new TLimitSwitch(RobotMap.ELEVATOR_BOTTOM_LIMIT_DIO_PORT, DefaultState.TRUE);
 	TLimitSwitch top = new TLimitSwitch(RobotMap.ELEVATOR_TOP_LIMIT_DIO_PORT, DefaultState.TRUE);
 
 	public double getLevel(){
-		double encoderCount = encoder.get();
+		double encoderCount = elevatorEncoder.get();
 		if (encoderCount <= 2) {//pickup level
 			return 0;
 		}
@@ -33,31 +33,31 @@ public class ElevatorSubsystem extends TSubsystem {
 		if (encoderCount < 700) {
 			return 0.5;
 		}
-		if (encoderCount <= 1000) {// resting intake level
+		if (encoderCount <= 800) {// resting intake level
 			return 1;
 		}
-		if (encoderCount < 2400) {
+		if (encoderCount < 1900) {
 			return 1.5;
 		}
-		if (encoderCount <=2700) {//switch deposit level
+		if (encoderCount <= 2000) {//switch deposit level
 			return 2;
 		}
-		if (encoderCount < 5900) {
+		if (encoderCount < 3900) {
 			return 2.5;
 		}
-		if (encoderCount <=6200) {//low scale level
+		if (encoderCount <= 4000) {//low scale level
 			return 3;
 		}
-		if (encoderCount < 7300) {
+		if (encoderCount < 4700) {
 			return 3.5;
 		}
-		if (encoderCount <= 7700) {//normal scale level
+		if (encoderCount <= 4800) {//normal scale level
 			return 4;
 		}
-		if (encoderCount < 8500) {
+		if (encoderCount < 5100) {
 			return 4.5;
 		}
-		if (encoderCount < 8700) {//high scale level
+		if (encoderCount <= 5300) {//high scale level
 			return 5;
 		}
 		
@@ -65,13 +65,13 @@ public class ElevatorSubsystem extends TSubsystem {
 	}
 	public void resetEncoders() {
 
-		if (encoder == null) { return; } 
+		if (elevatorEncoder == null) { return; } 
 
-		encoder.reset();
+		elevatorEncoder.reset();
 	}
 
 	public double getElevatorEncoder() {
-		return encoder.get();
+		return elevatorEncoder.get();
 	}
 
 	public void setSpeed(double speed) {
@@ -102,7 +102,7 @@ public class ElevatorSubsystem extends TSubsystem {
 
 	@Override
 	public void init() {
-		encoder.setInverted(true);
+		elevatorEncoder.setInverted(true);
 	}
 	@Override
 	protected void initDefaultCommand() {

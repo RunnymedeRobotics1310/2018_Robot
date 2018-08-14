@@ -39,7 +39,7 @@ public class AutoCubeReleaseCommand extends TSafeCommand {
 		switch (curStep) {
 		case RELEASE: {
 			Robot.intakeSubsystem.intakeClawOpen();
-			if (timeSinceInitialized() > .1) {
+			if (timeSinceInitialized() > .2) {
 				curStep = Step.CATCH;
 			}
 			break;
@@ -54,7 +54,7 @@ public class AutoCubeReleaseCommand extends TSafeCommand {
 		case OUTTAKE:
 			Robot.intakeSubsystem.outtakeCube();
 			if (timeSinceInitialized() > .75) {
-				curStep = Step.OPEN;
+				curStep = Step.FINISH;
 			}
 			break;
 

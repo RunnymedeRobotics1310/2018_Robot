@@ -1,8 +1,8 @@
 package robot.subsystems;
 
 import com.torontocodingcollective.sensors.encoder.TEncoder;
-import com.torontocodingcollective.sensors.gyro.TAnalogGyro;
 import com.torontocodingcollective.sensors.gyro.TNavXGyro;
+import com.torontocodingcollective.sensors.gyro.TSpiGyro;
 import com.torontocodingcollective.speedcontroller.TCanSpeedController;
 import com.torontocodingcollective.speedcontroller.TCanSpeedControllerType;
 import com.torontocodingcollective.subsystem.TGryoDriveSubsystem;
@@ -33,7 +33,7 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 		// Uncomment this block to use CAN based speed controllers
 				// Uncomment this constructor to use PWM based Speed controllers
 				super(	
-						((RobotConst.robot == 1311 || RobotConst.robot == 1310) ? new TNavXGyro(false) : new TAnalogGyro(0)),
+						((RobotConst.robot == 1310) ? new TSpiGyro() : new TNavXGyro()),
 						//			new TAnalogGyro(0),
 						new TCanSpeedController(
 								TCanSpeedControllerType.TALON_SRX, 
@@ -64,11 +64,6 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 
 	@Override
 	public void init() {
-
-		if (RobotConst.robot == 1321) {
-			TAnalogGyro gyro = (TAnalogGyro) super.gyro;
-			gyro.setSensitivity(0.0017);
-		}
 		disableTurbo();
 	};
 
@@ -83,11 +78,11 @@ public class ChassisSubsystem extends TGryoDriveSubsystem {
 	// ********************************************************************************************************************
 	@Override
 	public void setSpeed(double leftSpeedSetpoint, double rightSpeedSetpoint) {
-
-		this.leftSpeedSetpoint = leftSpeedSetpoint;
-		this.rightSpeedSetpoint = rightSpeedSetpoint;
+		super.setSpeed(leftSpeedSetpoint, rightSpeedSetpoint);
+	//	this.leftSpeedSetpoint = leftSpeedSetpoint;
+	//	this.rightSpeedSetpoint = rightSpeedSetpoint;
 		
-		updateSpeed();
+	//	updateSpeed();
 	}
 	
 	private void updateSpeed() {
